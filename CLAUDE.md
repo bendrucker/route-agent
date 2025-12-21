@@ -13,8 +13,8 @@ This is a deep research agent for cycling route planning. It integrates 5-10+ da
 | [docs/tools.md](docs/tools.md) | Data sources (Strava, GraphHopper, WeatherKit, PJAMM, OSM) |
 | [docs/agents.md](docs/agents.md) | Sub-agents (Nutrition Facts, etc.) |
 | [docs/evals.md](docs/evals.md) | Evaluation framework with Promptfoo, test structure |
-| [specs/milestones.md](specs/milestones.md) | Development roadmap with dependencies |
-| [specs/issues/](specs/issues/) | Individual GitHub issue files |
+| [GitHub Milestones](https://github.com/bendrucker/route-agent/milestones) | Development roadmap |
+| [GitHub Issues](https://github.com/bendrucker/route-agent/issues) | Task tracking with dependencies |
 
 ## Key Design Decisions
 
