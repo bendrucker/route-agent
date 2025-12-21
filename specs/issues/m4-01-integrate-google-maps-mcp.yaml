@@ -1,0 +1,13 @@
+title: Integrate Google Maps MCP
+milestone: "M4: Place Search"
+labels:
+  - tool
+
+body: |
+  Integrate Google Maps MCP for place search.
+
+  ## Acceptance Criteria
+
+  - [ ] Search cafes/stores along corridor
+  - [ ] Get hours, ratings, photos
+  - [ ] Filter by currently open

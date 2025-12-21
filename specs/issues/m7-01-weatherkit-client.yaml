@@ -1,0 +1,16 @@
+title: Implement WeatherKit client
+milestone: "M7: Weather Integration"
+labels:
+  - tool
+
+body: |
+  Client for Apple WeatherKit API.
+
+  ## Requirements
+
+  - [ ] JWT authentication with Apple Developer credentials
+  - [ ] Query weather at arbitrary coordinates
+  - [ ] Hourly forecasts
+  - [ ] Wind speed and direction
+  - [ ] Precipitation probability
+  - [ ] On-disk caching

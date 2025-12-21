@@ -1,0 +1,16 @@
+title: Implement Food Stop Planning skill
+milestone: "M4: Place Search"
+labels:
+  - skill
+depends_on:
+  - Integrate Google Maps MCP
+
+body: |
+  Find and optimize food stops along routes.
+
+  ## Capabilities
+
+  - [ ] Find cafes/restaurants along route
+  - [ ] Check hours (critical for early/late rides)
+  - [ ] Optimize placement timing
+  - [ ] Cyclist-friendly assessment

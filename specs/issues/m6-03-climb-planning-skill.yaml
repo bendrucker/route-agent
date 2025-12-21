@@ -1,0 +1,18 @@
+title: Implement Climb Planning skill
+milestone: "M6: Climb Integration"
+labels:
+  - skill
+depends_on:
+  - Implement PJAMM client
+
+body: |
+  Research and select climbs for routes.
+
+  ## Capabilities
+
+  - [ ] Discover climbs in target area
+  - [ ] Analyze climb profiles
+  - [ ] Compare difficulty ratings
+  - [ ] Suggest sequencing
+  - [ ] Identify new climbs not yet done
+  - [ ] Fallback to climb-analyzer if PJAMM unavailable

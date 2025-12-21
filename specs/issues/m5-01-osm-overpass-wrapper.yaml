@@ -1,0 +1,13 @@
+title: Implement OSM Overpass wrapper
+milestone: "M5: Water Stops"
+labels:
+  - tool
+
+body: |
+  Wrapper for OpenStreetMap Overpass API.
+
+  ## Queries Needed
+
+  - [ ] amenity=drinking_water
+  - [ ] Parks with water facilities
+  - [ ] Surface type data (bonus)

@@ -1,0 +1,16 @@
+title: Integrate GraphHopper API
+milestone: "M2: GraphHopper Integration"
+labels:
+  - tool
+  - critical-path
+
+body: |
+  Integrate GraphHopper for cycling-optimized routing.
+
+  ## Acceptance Criteria
+
+  - [ ] API client with free tier auth
+  - [ ] Cycling-specific routing profiles
+  - [ ] Multi-waypoint routes
+  - [ ] Elevation profiles in response
+  - [ ] On-disk caching for dev (preserve free quota)

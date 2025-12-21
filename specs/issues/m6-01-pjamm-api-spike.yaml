@@ -1,0 +1,20 @@
+title: "[SPIKE] Reverse-engineer PJAMM mobile API"
+milestone: "M6: Climb Integration"
+labels:
+  - spike
+  - user-input-needed
+
+body: |
+  Investigate PJAMM mobile app API.
+
+  ## Steps
+
+  - [ ] Set up proxy (Charles/mitmproxy)
+  - [ ] Capture traffic from PJAMM app
+  - [ ] Document API endpoints
+  - [ ] Document auth mechanism
+  - [ ] Test API access with paid account
+
+  ## Notes
+
+  User has paid PJAMM account.

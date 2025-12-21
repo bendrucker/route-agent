@@ -1,0 +1,15 @@
+title: Implement query parser
+milestone: "M3: Route Synthesis"
+labels:
+  - skill
+
+body: |
+  Parse user queries into structured route requests.
+
+  ## Should Extract
+
+  - [ ] Origin location
+  - [ ] Destination(s)
+  - [ ] Waypoints
+  - [ ] Distance constraints
+  - [ ] Skill triggers (climbing, weather, stops)

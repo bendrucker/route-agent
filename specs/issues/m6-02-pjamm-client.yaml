@@ -1,0 +1,17 @@
+title: Implement PJAMM client
+milestone: "M6: Climb Integration"
+labels:
+  - tool
+depends_on:
+  - "[SPIKE] Reverse-engineer PJAMM mobile API"
+
+body: |
+  Client for PJAMM API.
+
+  ## Capabilities
+
+  - [ ] Search climbs by area
+  - [ ] Get climb profiles
+  - [ ] Get narrative reports
+  - [ ] Get photos
+  - [ ] Handle auth with user's account

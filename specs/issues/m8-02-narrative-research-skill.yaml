@@ -1,0 +1,14 @@
+title: Implement Narrative Research skill
+milestone: "M8: Narrative Research"
+labels:
+  - skill
+
+body: |
+  Enrich routes with local intel.
+
+  ## Capabilities
+
+  - [ ] Aggregate PJAMM narratives (if available)
+  - [ ] Search for ride reports
+  - [ ] Synthesize into route notes
+  - [ ] Graceful degradation if sources unavailable

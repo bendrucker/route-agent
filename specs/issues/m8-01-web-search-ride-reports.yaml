@@ -1,0 +1,13 @@
+title: Implement web search for ride reports
+milestone: "M8: Narrative Research"
+labels:
+  - tool
+
+body: |
+  Search for forum posts and ride reports.
+
+  ## Sources to Consider
+
+  - [ ] General web search
+  - [ ] Cycling forums
+  - [ ] Reddit cycling communities

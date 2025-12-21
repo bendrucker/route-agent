@@ -1,0 +1,17 @@
+title: Implement checkpoint system with AskUserQuestion
+milestone: "M0: Foundation"
+labels:
+  - infrastructure
+
+body: |
+  Implement the checkpoint flow for user confirmations.
+
+  ## Checkpoints Needed
+
+  - [ ] Confirm Intent
+  - [ ] Present Findings
+  - [ ] Select Route
+  - [ ] Refine Route
+  - [ ] Present Final
+
+  Use AskUserQuestion for prototyping in Claude Code.

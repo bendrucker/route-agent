@@ -1,0 +1,15 @@
+title: "[USER] Provide test fixture examples"
+milestone: "M11: Evaluation Framework"
+labels:
+  - user-input-needed
+  - blocked
+
+body: |
+  Need 2-3 example route queries with expected reasoning.
+
+  ## Format
+
+  - Query: "Route from X to Y via Z, ~N miles"
+  - Expected skills invoked
+  - Key decisions agent should make
+  - Expected output characteristics

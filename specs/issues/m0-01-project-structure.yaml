@@ -1,0 +1,15 @@
+title: Set up Claude Agent SDK project structure
+milestone: "M0: Foundation"
+labels:
+  - infrastructure
+  - critical-path
+
+body: |
+  Set up the basic project structure for the Route Agent.
+
+  ## Acceptance Criteria
+
+  - [ ] Package.json / project configuration
+  - [ ] Agent entry point
+  - [ ] Basic agent can receive a query and respond
+  - [ ] Logging infrastructure

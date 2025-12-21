@@ -1,0 +1,15 @@
+title: Integrate Strava MCP
+milestone: "M1: Strava Integration"
+labels:
+  - tool
+  - critical-path
+
+body: |
+  Integrate the existing open-source Strava MCP.
+
+  ## Acceptance Criteria
+
+  - [ ] MCP integrated and authenticated
+  - [ ] Can query activities by location
+  - [ ] Can query activities by date range
+  - [ ] Can query routes (planned) and activities (actual)

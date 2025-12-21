@@ -1,0 +1,22 @@
+title: Implement History Analysis skill
+milestone: "M1: Strava Integration"
+labels:
+  - skill
+depends_on:
+  - Integrate Strava MCP
+
+body: |
+  Skill to analyze user's cycling history.
+
+  ## Capabilities
+
+  - [ ] Find past rides in target area
+  - [ ] Extract segments used before
+  - [ ] Identify new vs. familiar roads
+  - [ ] Present activity summaries
+
+  ## Notes
+
+  Should handle casual location references:
+  - "Golden Gate Bridge"
+  - "Conservatory of Flowers"

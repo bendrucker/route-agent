@@ -1,0 +1,16 @@
+title: Implement Water Stop Planning skill
+milestone: "M5: Water Stops"
+labels:
+  - skill
+depends_on:
+  - Implement OSM Overpass wrapper
+
+body: |
+  Dedicated water stop planning for hot weather.
+
+  ## Capabilities
+
+  - [ ] Find water fountains along route
+  - [ ] Identify reliable vs. seasonal sources
+  - [ ] Plan for summer heat (more frequent)
+  - [ ] Skip in winter when not needed

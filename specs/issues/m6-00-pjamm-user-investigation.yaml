@@ -1,0 +1,14 @@
+title: "[USER] PJAMM API investigation"
+milestone: "M6: Climb Integration"
+labels:
+  - user-input-needed
+  - spike
+
+body: |
+  User to proxy PJAMM mobile app and document API.
+
+  ## Deliverables
+
+  - API endpoint patterns
+  - Auth mechanism
+  - Example responses
