@@ -4,6 +4,18 @@
 
 This is a deep research agent for cycling route planning. It integrates 5-10+ data sources to do the kind of multi-source research an expert cyclist would do manually.
 
+## Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [docs/architecture.md](docs/architecture.md) | System design, skills vs tools, orchestration model, checkpoints |
+| [docs/skills.md](docs/skills.md) | 10 composable skills with research patterns and domain knowledge |
+| [docs/tools.md](docs/tools.md) | Data sources (Strava, GraphHopper, WeatherKit, PJAMM, OSM) |
+| [docs/evals.md](docs/evals.md) | Evaluation framework with Promptfoo, test structure |
+| [specs/milestones.md](specs/milestones.md) | Development roadmap with dependencies |
+| [specs/issues/](specs/issues/) | Individual GitHub issue files |
+| [specs/agents/](specs/agents/) | Sub-agent specifications (Nutrition Facts, etc.) |
+
 ## Key Design Decisions
 
 ### User Interaction Model
@@ -37,4 +49,9 @@ This agent optimizes for **quality over speed**. It's acceptable to spend 10-20 
 
 ## Testing Philosophy
 
-Routes will be evaluated against real trips the maintainer has in mind. These become fixtures for regression testing as the agent improves.
+Test-driven development using **Promptfoo** (TypeScript-native eval framework). See [docs/evals.md](docs/evals.md) for details.
+
+- **Start narrow**: Begin with sub-agents (Nutrition Facts), then skills, then e2e
+- **Colocated evals**: Tests live next to code (`src/{component}/evals/`)
+- **Gold standard cases**: Real trips from user become regression fixtures
+- **llm-rubric**: Use LLM-as-judge for subjective quality assessment
