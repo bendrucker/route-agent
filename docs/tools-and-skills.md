@@ -91,47 +91,66 @@ graph LR
 
 ---
 
-### 4. Climb Data
+### 4. Climb Data + Route Planning (PJAMM/Sherpa)
 
-**Purpose**: Detailed climb profiles, difficulty ratings, **local intel and narrative reports**
+**Major Finding**: PJAMM has merged with [Sherpa Map](https://sherpa-map.com/), a cycling route planning tool. This combined platform offers:
 
-The key insight: raw climb metrics (gradient, length, elevation) can be derived from elevation data. The real value of curated climb data is **narrative reports** - firsthand knowledge of road conditions, best approach, photo opportunities, and local context.
+| Feature | Source |
+|---------|--------|
+| Climb narratives, photos, rankings | PJAMM |
+| AI surface classification (gravel detection) | Sherpa |
+| 28 routing profiles | Sherpa (GraphHopper backend) |
+| Weather integration | Sherpa |
+| Route generation by distance/direction | Sherpa |
 
-| Option | Type | Notes |
-|--------|------|-------|
-| PJAMM Cycling | Mobile API | Premium: narrative reports, photos, rankings, local intel |
-| climb-analyzer | OSM + Elevation | Open source climb discovery (no narratives) |
-| Strava Segments | Via Strava | Popular climbs, but less curated |
-| ClimbFinder | Web | European focus |
+Pro membership is $29.99/month for full PJAMM climb data in Sherpa.
 
-**PJAMM Value Proposition**:
+This is potentially a **primary integration target** rather than just a climb data source. The combined platform covers climb data, routing, surface classification, and weather.
+
+#### Integration Options
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| Wrap Sherpa/PJAMM as primary tool | Most features already integrated | Dependency on third-party, may lack API |
+| Reverse-engineer mobile/web APIs | Full access to combined data | Fragile, ToS concerns |
+| Use as reference, build independently | Full control, open tools | More work, no narratives |
+
+#### PJAMM Unique Value
+
+These capabilities are not replicable from open data:
+
 - Narrative reports with firsthand local intel (author rides the climbs)
 - Photos of key sections
 - Difficulty rankings calibrated across climbs
-- Mobile app exists → JSON API likely reverse-engineerable
 
-**Integration Strategy**:
-1. Users authenticate with their own PJAMM paid account
-2. Reverse-engineer mobile app API for structured access
-3. Each user's access supports PJAMM as a service
+#### Sherpa Technical Notes
 
-**Fallback (climb-analyzer approach)**:
+- Built on GraphHopper (same backend as RideWithGPS, Komoot)
+- GraphHopper has developer APIs - could use directly for routing
+- No public Sherpa API documented, but web app likely reverse-engineerable
+
+#### Fallback: climb-analyzer Approach
+
 - Use OSM Overpass + OpenTopoData to discover climbs from raw data
 - Provides metrics but no narrative/local intel
 - Useful for areas PJAMM doesn't cover
 - Reference: [stevehollx/climb-analyzer](https://github.com/stevehollx/climb-analyzer)
 
-**Required Capabilities**:
+#### Required Capabilities
+
 - Search climbs by area
 - Get profile (gradient %, length, elevation gain)
 - Difficulty rating
-- **Narrative report / description** (PJAMM unique value)
+- Narrative report / description (PJAMM unique value)
 - Photos
 - Link to Strava segment if available
 
-**Action Items**:
-1. Reverse-engineer PJAMM mobile app API (paid account access)
-2. Optionally reach out to PJAMM author (Bay Area local) about official API
+#### Action Items
+
+1. Evaluate Sherpa/PJAMM as primary integration vs. component
+2. Investigate Sherpa web app for API patterns
+3. Explore GraphHopper direct integration as routing fallback
+4. Optionally reach out to PJAMM/Sherpa team about partnership/API
 
 ---
 
@@ -383,44 +402,31 @@ graph TB
 
 **Purpose**: Find and optimize food, water, and rest stops
 
-**When Invoked**:
-- Routes over ~40 miles
-- When user mentions stops
-- Hot weather (water focus)
-- Remote areas (limited options)
+**When Invoked**: Routes over ~40 miles, when user mentions stops, hot weather (water focus), remote areas (limited options)
 
-**Sub-skills**:
+**Tools Used**: Google Places, Yelp, OSM (Overpass)
 
-##### 4a. Cafe/Food Stop Planning
-**Tools Used**: Google Places, Yelp
+##### Sub-skill: Cafe/Food Stop Planning
 
-**Capabilities**:
 - Find cafes/restaurants along route
 - Check hours (critical for early/late rides)
 - Assess appropriateness (cyclist-friendly?)
 - Optimize placement (not too early, not too late)
 
-##### 4b. Water Stop Planning
-**Tools Used**: OSM (Overpass), Google Places
+##### Sub-skill: Water Stop Planning
 
-**Capabilities**:
 - Find water fountains (parks, public facilities)
 - Locate stores for water purchase
 - Identify reliable vs. seasonal sources
 - Plan for summer heat (more frequent stops)
 
-##### 4c. Grocery/Resupply Planning
-**Tools Used**: Google Places
+##### Sub-skill: Grocery/Resupply Planning
 
-**Capabilities**:
 - Find grocery stores along route
 - Gas stations with food (last resort)
 - Convenience stores
 
-**Outputs**:
-- Prioritized stop recommendations
-- Distance/timing for each stop
-- Backup options if primary closed
+**Outputs**: Prioritized stop recommendations, distance/timing for each stop, backup options if primary closed
 
 ---
 
