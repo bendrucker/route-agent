@@ -54,21 +54,50 @@ graph LR
 
 **Purpose**: Generate turn-by-turn routes between waypoints
 
+**Decision: GraphHopper** - Selected as primary routing engine.
+
+#### Why GraphHopper
+
+- Same backend as RideWithGPS, Komoot, and Sherpa Map
+- Cycling-specific profiles built-in
+- Open source (can self-host for unlimited use)
+- Free API tier available for prototyping (500 credits/day)
+
+#### GraphHopper API Details
+
+| Tier | Credits/Day | Rate Limit | Cost |
+|------|-------------|------------|------|
+| Free | 500 | Limited | $0 (non-commercial) |
+| Basic | More | 1 req/sec | $59/mo |
+| Self-hosted | Unlimited | Your hardware | $0 |
+
+**APIs Available**:
+- Routing API (turn-by-turn with elevation)
+- Geocoding API
+- Map Matching API (snap GPS to roads)
+- Route Optimization API
+
+**Not in Free Tier**: Isochrone, Matrix APIs
+
+#### Integration Path
+
+1. Start with free API for prototyping
+2. Self-host for production (unlimited, no cost)
+3. GraphHopper uses OSM data, updates weekly
+
+#### Other Options (Backup)
+
 | Option | Type | Notes |
 |--------|------|-------|
-| Google Maps MCP (Grounding Light) | MCP | New, includes places integration |
-| Google Directions API | REST | Cycling mode, elevation data |
-| GraphHopper | REST/Self-host | Open source, cycling profiles |
-| OSRM | Self-host | Open source, fast, customizable |
-| Brouter | Self-host | Cycling-specific, highly customizable |
+| Google Maps MCP | MCP | Better place integration, but less cycling-aware |
+| OSRM | Self-host | Faster, less feature-rich |
+| Brouter | Self-host | Most cycling-specific, steeper learning curve |
 
 **Required Capabilities**:
 - Route with cycling preference
 - Support waypoints (not just A→B)
 - Return elevation profile
 - Avoid highways/unsuitable roads
-
-**Consideration**: May want multiple engines. Google for place-aware routing, Brouter for cycling-optimized alternatives.
 
 ---
 
