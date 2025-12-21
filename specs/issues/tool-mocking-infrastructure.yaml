@@ -1,4 +1,4 @@
-title: Implement HTTP recording/replay for test fixtures
+title: Implement tool recording/replay for test fixtures
 milestone: Eval Setup
 labels:
   - infrastructure
@@ -7,121 +7,115 @@ depends_on:
   - Set up Promptfoo evaluation framework
 
 body: |
-  Use HTTP recording to capture real API responses and replay them in tests.
+  Record tool calls and responses from real agent runs, replay them in tests.
 
-  ## Why Record/Replay
+  ## Why Tool-Level Recording
 
-  - **Determinism**: Same responses on every test run
-  - **Speed**: No network calls during tests
-  - **Cost**: No API quota consumed
-  - **Realistic**: Fixtures come from real APIs, not hand-crafted mocks
-  - **Maintainable**: Re-record when APIs change instead of updating mocks
+  - **MCP-compatible**: Works with MCP servers where we don't control HTTP
+  - **Tests agent reasoning**: Fixtures are what the agent sees, not internal HTTP
+  - **Determinism**: Same tool responses on every test run
+  - **Realistic**: Captured from real API interactions
 
-  ## Recommended: Polly.js
+  ## Recording Approach
 
-  Netflix's [Polly.js](https://netflix.github.io/pollyjs/) is purpose-built for this:
+  Capture tool invocations at the agent SDK level:
 
   ```typescript
-  import { Polly } from '@pollyjs/core';
-  import NodeHttpAdapter from '@pollyjs/adapter-node-http';
-  import FSPersister from '@pollyjs/persister-fs';
+  // Fixture format: request → response pairs
+  {
+    "tool": "strava_get_activities",
+    "request": { "limit": 10, "after": "2024-01-01" },
+    "response": { "activities": [...] }
+  }
+  ```
 
-  Polly.register(NodeHttpAdapter);
-  Polly.register(FSPersister);
+  ### Recording Mode
 
-  const polly = new Polly('weather-api', {
-    adapters: ['node-http'],
-    persister: 'fs',
-    persisterOptions: {
-      fs: { recordingsDir: 'fixtures/recordings' }
-    }
+  ```typescript
+  const tools = wrapToolsForRecording(mcpTools, {
+    recordingsDir: 'fixtures/tools',
+    mode: process.env.FIXTURE_MODE // 'record' | 'replay'
   });
 
-  // First run: records real HTTP calls
-  // Subsequent runs: replays from fixtures/recordings/
+  // Record: calls real tool, saves response to fixtures/
+  // Replay: returns saved response, no tool call
   ```
 
-  ### Alternatives Considered
+  ### Matching Strategy
 
-  | Tool | Pros | Cons |
-  |------|------|------|
-  | **Polly.js** | Purpose-built for record/replay, works with any HTTP client | Slightly more setup |
-  | **Nock** (nockBack) | Familiar, simple API | Node.js only, manual adapter setup for some clients |
-  | **MSW** | Great TypeScript support, browser+Node | No built-in recording |
+  Tool calls matched by:
+  - Tool name (exact)
+  - Request parameters (configurable: exact match, subset, or ignore)
 
-  ## Recording Workflow
+  For non-deterministic params (timestamps, pagination), use parameter normalization or sequence-based matching.
 
-  1. **Record mode**: Run tests against real APIs, Polly captures responses
-  2. **Replay mode**: Tests use recorded fixtures, no network calls
-  3. **Update fixtures**: Re-record when APIs change or new scenarios needed
+  ## Tools Requiring Fixtures
 
-  ```bash
-  # Record new fixtures
-  POLLY_MODE=record npm run evals
+  | Tool | Key Calls to Record |
+  |------|---------------------|
+  | Strava MCP | `get_activities`, `get_segments`, `get_athlete` |
+  | GraphHopper | `route`, `elevation` |
+  | WeatherKit | `forecast` (multiple locations/times) |
+  | Google Maps MCP | `search_places`, `get_place_details` |
+  | OSM Overpass | `query` (water fountains, bike infrastructure) |
+  | PJAMM | `get_climb`, `search_climbs` |
 
-  # Normal test runs (replay)
-  npm run evals
-  ```
-
-  ## Tools Requiring Recordings
-
-  | Tool | Recording Strategy |
-  |------|-------------------|
-  | Strava API | Record activity history, segments; scrub home location before commit |
-  | WeatherKit | Record for specific locations/dates, create scenarios (sunny, rain, cold→warm) |
-  | GraphHopper | Record route responses for test waypoints |
-  | Google Maps | Record place searches for test areas |
-  | OSM Overpass | Record infrastructure queries |
-  | PJAMM | Record climb data for known climbs |
-
-  ## Privacy: Location Data Scrubbing
+  ## Privacy: Location Data
 
   Strava and route fixtures contain GPS coordinates. Before committing:
 
-  ### Home Location Scrubbing
+  - **Strava privacy zones**: Ensure enabled on account (API responses pre-scrubbed)
+  - **Home radius scrub**: Truncate points within configured radius of home
+  - **ID replacement**: Athlete IDs, names → placeholder values
 
-  - **Configure home location**: Either set explicitly or prompt user during recording
-  - **Scrub radius**: Remove/truncate points within configured radius of home (similar to Strava's privacy zone)
-  - **Strava privacy zones**: If enabled on account, API responses may already exclude sensitive areas
-
-  ### What Gets Scrubbed
-
-  - First/last N points of activities within home radius
-  - Exact start/end coordinates replaced with nearest major intersection or landmark
-  - Athlete IDs, names replaced with placeholder values
-
-  ### What Stays Real
-
-  - Route shape and elevation profile (needed for realistic testing)
-  - Segment data and timestamps (shifted if needed)
-  - All coordinates outside home radius (needed for API integration)
+  Coordinates outside home radius stay real (needed for integration with other tools).
 
   ## Fixture Structure
 
   ```
   fixtures/
-  └── recordings/           # Polly.js auto-generated
+  └── tools/
       ├── strava/
-      ├── weather-api/
+      │   ├── get_activities.json
+      │   └── get_segments.json
       ├── graphhopper/
-      ├── google-maps/
-      └── osm-overpass/
+      │   └── route.json
+      ├── weather/
+      │   ├── forecast-sunny.json
+      │   └── forecast-cold-to-warm.json
+      └── places/
+          └── search_places.json
+  ```
+
+  ## Integration with Promptfoo
+
+  Promptfoo can use recorded fixtures via custom provider:
+
+  ```yaml
+  providers:
+    - id: file://src/test/recorded-tools-provider.ts
+      config:
+        fixturesDir: fixtures/tools
   ```
 
   ## Deliverables
 
-  - [ ] Install Polly.js and adapters
-  - [ ] Configure recording directory structure
-  - [ ] Create npm scripts for record vs replay modes
+  - [ ] Implement tool wrapper for record/replay
+  - [ ] Define fixture JSON schema
+  - [ ] Create npm scripts: `fixtures:record`, `fixtures:replay`
   - [ ] Implement home location scrubbing for Strava fixtures
-  - [ ] Record initial fixtures for WeatherKit (highest priority for Clothing Planning evals)
-  - [ ] Record Strava fixtures (with privacy scrubbing)
-  - [ ] Record GraphHopper fixtures for route tests
+  - [ ] Record initial Strava fixtures
+  - [ ] Record weather fixtures for clothing planning evals
   - [ ] Document recording workflow
 
   ## Success Criteria
 
-  - `npm run evals` works offline (airplane mode)
+  - `npm run evals` works offline
   - Same eval produces identical results on repeated runs
   - No home location exposed in committed fixtures
-  - Clear workflow for updating fixtures when needed
+  - Easy to add fixtures for new scenarios
+
+  ## Note on HTTP Recording (Polly.js)
+
+  For tools implemented as direct HTTP calls (not MCP), Polly.js can still be used.
+  But most tools will go through MCP, so tool-level recording is the primary approach.

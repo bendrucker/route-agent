@@ -9,11 +9,11 @@ body: |
 
   ## Strava History Fixtures
 
-  Recorded via Polly.js from Strava API (see: `Implement HTTP recording/replay for test fixtures`).
+  Recorded via tool-level recording (see: `Implement tool recording/replay for test fixtures`).
 
   **What to record**:
-  - Recent rides (last 3-6 months) showing typical patterns
-  - Segment data for favorite climbs
+  - `get_activities`: Recent rides (last 3-6 months) showing typical patterns
+  - `get_segments`: Favorite climbs, PR segments
   - Ensure Strava privacy zone is enabled to auto-exclude home area
 
   **What this enables**:
@@ -78,7 +78,7 @@ body: |
 
   ## Deliverables
 
-  - [ ] Record Strava API fixtures via Polly.js (with privacy zone enabled)
+  - [ ] Record Strava tool fixtures (with privacy zone enabled)
   - [ ] 3-5 route query test cases with expected outputs
   - [ ] Nutrition product list with preferences
   - [ ] Clothing inventory
