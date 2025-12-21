@@ -73,7 +73,7 @@ See [docs/architecture.md](docs/architecture.md) for detailed design.
 | Climb Data | PJAMM | Selected (API investigation needed) |
 | Water/Infrastructure | OSM Overpass | To build |
 
-See [docs/tools-and-skills.md](docs/tools-and-skills.md) for full catalog.
+See [docs/tools.md](docs/tools.md) and [docs/skills.md](docs/skills.md) for details.
 
 ## Project Structure
 
@@ -81,7 +81,8 @@ See [docs/tools-and-skills.md](docs/tools-and-skills.md) for full catalog.
 route-agent/
 ├── docs/           # Permanent documentation
 │   ├── architecture.md
-│   └── tools-and-skills.md
+│   ├── tools.md
+│   └── skills.md
 ├── specs/          # Temporary planning → GitHub issues
 │   ├── milestones.md
 │   └── github-issues.md

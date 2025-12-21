@@ -341,4 +341,4 @@ The orchestrator maintains global context; skills receive only what they need.
 
 6. **Development Approach**: Develop skills, tools, and prompts using Claude Code interactive mode. Move to Agent SDK for workflow automation once core functionality is validated.
 
-See [tools-and-skills.md](tools-and-skills.md) for detailed skill definitions and tool catalog.
+See [tools.md](tools.md) for data source abstractions and [skills.md](skills.md) for research patterns.
