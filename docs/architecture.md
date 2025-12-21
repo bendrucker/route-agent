@@ -337,10 +337,8 @@ The orchestrator maintains global context; skills receive only what they need.
 
 4. **Orchestration Model**: Flexible composition. Orchestrator can invoke skills inline, spawn single/multi-skill sub-agents with JIT prompting, or use pre-defined sub-agents for well-scoped problems.
 
-## Open Questions
+5. **Caching**: On-disk caching for local development to preserve free tier API quotas.
 
-1. **Caching Strategy**: Shared cache for common geographic queries across skills? What's the TTL?
-
-2. **Claude Agent SDK Mapping**: How do skills/sub-agents map to SDK primitives?
+6. **Development Approach**: Develop skills, tools, and prompts using Claude Code interactive mode. Move to Agent SDK for workflow automation once core functionality is validated.
 
 See [tools-and-skills.md](tools-and-skills.md) for detailed skill definitions and tool catalog.
