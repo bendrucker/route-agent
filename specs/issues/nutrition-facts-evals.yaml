@@ -1,0 +1,66 @@
+title: Create Nutrition Facts agent evals
+milestone: Eval Setup
+labels:
+  - evals
+depends_on:
+  - Create eval directory structure
+  - Implement Nutrition Facts sub-agent
+
+body: |
+  First eval cases for learning - start with the narrowest scope.
+
+  ## Why Start Here
+
+  - Sub-agents have focused inputs/outputs
+  - Easy to define expected values
+  - Quick feedback loop for learning evals
+
+  ## Test Cases
+
+  ### Commercial Products (Exact)
+
+  ```yaml
+  - vars:
+      product: "Clif Bar Chocolate Chip"
+    assert:
+      - type: contains-json
+      - type: javascript
+        value: output.calories === 250
+
+  - vars:
+      product: "GU Energy Gel Salted Caramel"
+    assert:
+      - type: javascript
+        value: output.calories === 100
+  ```
+
+  ### Generic Items (Estimated)
+
+  ```yaml
+  - vars:
+      product: "chocolate chip cookie"
+    assert:
+      - type: javascript
+        value: output.calories > 100 && output.calories < 200
+      - type: javascript
+        value: output.confidence === 'estimated'
+
+  - vars:
+      product: "PB&J sandwich"
+    assert:
+      - type: javascript
+        value: output.calories > 300 && output.calories < 500
+  ```
+
+  ## Deliverables
+
+  - [ ] Create promptfooconfig.yaml for nutrition-facts agent
+  - [ ] Add 5+ commercial product test cases
+  - [ ] Add 5+ generic item test cases
+  - [ ] All tests passing
+
+  ## Success Criteria
+
+  - Can run `npx promptfoo eval` in agent directory
+  - Pass rate > 90% for commercial products
+  - Reasonable estimates for generic items

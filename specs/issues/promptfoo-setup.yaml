@@ -1,0 +1,39 @@
+title: Set up Promptfoo evaluation framework
+milestone: Eval Setup
+labels:
+  - infrastructure
+  - evals
+
+body: |
+  Install and configure Promptfoo for TypeScript-based evaluations.
+
+  ## Why Promptfoo
+
+  - TypeScript-native (works with Claude Agent SDK)
+  - Declarative YAML configs
+  - Local execution during development
+  - Provider agnostic (supports Anthropic/Claude)
+
+  ## Deliverables
+
+  - [ ] Install promptfoo as dev dependency
+  - [ ] Create base promptfooconfig.yaml
+  - [ ] Set up npm scripts for running evals
+  - [ ] Configure for Anthropic provider
+  - [ ] Document usage in README
+
+  ## npm Scripts
+
+  ```json
+  {
+    "scripts": {
+      "evals": "npx promptfoo eval --config evals/promptfooconfig.yaml",
+      "evals:view": "npx promptfoo view"
+    }
+  }
+  ```
+
+  ## References
+
+  - [Promptfoo Docs](https://www.promptfoo.dev/docs/)
+  - [docs/evals.md](../docs/evals.md)

@@ -2,6 +2,9 @@ milestones:
   - title: Foundation
     description: Basic agent skeleton running in Claude Code
 
+  - title: Eval Setup
+    description: Establish evaluation framework with Promptfoo
+
   - title: Strava Integration
     description: Agent understands cycling history and preferences
 
@@ -66,3 +69,7 @@ labels:
   - name: critical-path
     color: "C2E0C6"
     description: Blocks other work
+
+  - name: evals
+    color: "1D76DB"
+    description: Evaluation and testing

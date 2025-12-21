@@ -27,6 +27,29 @@ These items are blocked on input from the user:
 
 ---
 
+## Eval Setup
+
+**Goal**: Establish evaluation framework and initial test cases
+
+**Depends on**: Foundation (can run in parallel after basic setup)
+
+This is a **learning milestone** - building practical experience with LLM evals.
+
+**Deliverables**:
+- [ ] Promptfoo installed and configured
+- [ ] Directory structure for colocated evals
+- [ ] First sub-agent evals (Nutrition Facts)
+- [ ] Custom scorer utilities
+- [ ] npm scripts for running evals
+
+**Exit Criteria**: Can run `npm run evals` and see pass/fail results
+
+**Start Simple**: Begin with sub-agents (narrow scope), then expand to skills and e2e.
+
+See [docs/evals.md](../docs/evals.md) for framework details.
+
+---
+
 ## Strava Integration
 
 **Goal**: Agent understands your cycling history and preferences
@@ -230,15 +253,16 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ## Evaluation Framework
 
-**Goal**: Systematic quality measurement
+**Goal**: Systematic quality measurement with gold standard cases
 
-**Depends on**: Route Refinement, Test fixtures (user dependency)
+**Depends on**: Eval Setup, Route Refinement, Test fixtures (user dependency)
 
 **Deliverables**:
-- [ ] Test fixtures based on real planned trips
-- [ ] Automated evaluation of route quality
-- [ ] Regression detection when agent changes
-- [ ] Metrics: coverage, stop quality, climb matching
+- [ ] Gold standard test fixtures from user
+- [ ] E2E eval cases for full route planning
+- [ ] Skill-level evals for all major skills
+- [ ] Regression detection on agent changes
+- [ ] Metrics dashboard: pass rate, latency, cost
 
 **Exit Criteria**: Can confidently make agent changes without degrading quality
 
@@ -262,6 +286,7 @@ graph TD
 
     Found[Foundation] --> Strava[Strava Integration]
     Found --> GH[GraphHopper Integration]
+    Found --> EvalSetup[Eval Setup]
 
     Strava --> Synth[Route Synthesis]
     GH --> Synth
@@ -283,6 +308,7 @@ graph TD
     Narr --> Quality[Research Quality]
     Quality --> Refine[Route Refinement]
     Refine --> Eval
+    EvalSetup --> Eval
 ```
 
 ## Parallelization Opportunities
@@ -293,6 +319,7 @@ After Foundation, these can proceed in parallel:
 |--------|------------|-------|
 | **Core** | Strava → Route Synthesis | Critical path |
 | **Routing** | GraphHopper | Joins at Route Synthesis |
+| **Evals** | Eval Setup | Learning track, start with sub-agents |
 | **Research** | PJAMM API investigation | User-driven, unblocks Climb Integration |
 
 After Route Synthesis, these can proceed in parallel:

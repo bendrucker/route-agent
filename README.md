@@ -84,7 +84,8 @@ route-agent/
 ├── docs/           # Permanent documentation
 │   ├── architecture.md
 │   ├── tools.md
-│   └── skills.md
+│   ├── skills.md
+│   └── evals.md
 ├── specs/          # Temporary planning → GitHub issues
 │   ├── milestones.md
 │   ├── issues/     # Individual issue files for GitHub API

@@ -57,4 +57,9 @@ web-search-ride-reports
 narrative-research-skill
 
 test-fixtures (user dependency)
+
+# Evals (parallel track)
+promptfoo-setup ──► eval-directory-structure ──┬──► nutrition-facts-evals
+                                               ├──► clothing-planning-evals
+                                               └──► custom-scorers
 ```
