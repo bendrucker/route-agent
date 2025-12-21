@@ -187,13 +187,44 @@ These capabilities are not replicable from open data:
 
 **Purpose**: Hyperlocal weather data for route timing and safety
 
+**Decision: Apple WeatherKit** - Selected as primary weather source.
+
+#### Why WeatherKit
+
+- Built by Dark Sky team (gold standard for hyperlocal forecasts)
+- Same backend as Epic Ride Weather (proven for cycling)
+- 500K calls/month included with existing Apple Developer account
+- Minute-by-minute precipitation, hourly forecasts up to 10 days
+- REST API available (not just Swift)
+
+#### WeatherKit API Details
+
+| Tier | Calls/Month | Cost |
+|------|-------------|------|
+| Free (with Apple Developer) | 500,000 | $0 (already paying $99/yr) |
+| 1M calls | 1,000,000 | $49.99/mo |
+
+**500K calls/month = ~16,000/day** - more than enough for route planning.
+
+#### Integration Pattern (Epic Ride Weather approach)
+
+1. Take route geometry from GraphHopper
+2. Sample points every 10 minutes of estimated ride time
+3. Call WeatherKit for each sample point
+4. Return per-segment forecast (temp, wind, precipitation)
+
+Example: 100-mile ride at 15mph = 6.7 hours = 40 sample points = 40 API calls
+
+#### Authentication
+
+WeatherKit requires JWT tokens signed with Apple Developer credentials. More complex than simple API keys but well-documented.
+
+#### Fallback Options
+
 | Option | Type | Notes |
 |--------|------|-------|
-| OpenWeatherMap | REST | Good free tier, hourly forecasts |
-| Weather.gov | REST | Free, US only, high quality |
-| Tomorrow.io | REST | Hyperlocal, minute-by-minute |
-| Pirate Weather | REST | Dark Sky replacement |
-| Visual Crossing | REST | Historical + forecast |
+| Weather.gov | REST | Free, US only, 2.5km grid |
+| Pirate Weather | REST | 20K/month free, Dark Sky compatible |
 
 **Required Capabilities**:
 - Forecast at multiple points along route
@@ -201,8 +232,6 @@ These capabilities are not replicable from open data:
 - Wind speed and direction (critical for cycling)
 - Precipitation probability
 - Temperature by hour
-
-**Consideration**: Weather along a 100-mile route can vary significantly. Need to query multiple points, not just start/end.
 
 ---
 
