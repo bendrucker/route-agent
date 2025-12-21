@@ -15,20 +15,20 @@ graph TB
     end
 
     subgraph Skills["Composable Skills"]
-        SA[History Analysis]
-        SB[Climb Planning]
-        SC[Weather Planning]
-        SD[Food Stop Planning]
-        SE[Water Stop Planning]
-        SF[Route Optimization]
-        SG[Narrative Research]
-        SH[Safety Assessment]
-        SI[Nutrition Planning]
-        SJ[Clothing Planning]
+        HA[History Analysis]
+        CP[Climb Planning]
+        WP[Weather Planning]
+        FSP[Food Stop Planning]
+        WSP[Water Stop Planning]
+        RO[Route Optimization]
+        NR[Narrative Research]
+        SA[Safety Assessment]
+        NP[Nutrition Planning]
+        CLP[Clothing Planning]
     end
 
-    Plan --> SA & SB & SC & SD & SE & SF & SG & SH & SI & SJ
-    SA & SB & SC & SD & SE & SF & SG & SH & SI & SJ --> Synth
+    Plan --> HA & CP & WP & FSP & WSP & RO & NR & SA & NP & CLP
+    HA & CP & WP & FSP & WSP & RO & NR & SA & NP & CLP --> Synth
 ```
 
 ## Conditional Invocation {#conditional-invocation}

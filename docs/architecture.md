@@ -13,52 +13,52 @@ flowchart TB
     subgraph Orchestrator["Route Planning Orchestrator"]
         QU[Query Understanding]
         SI[Skill Invoker]
-        CP[Checkpoint Manager]
+        CM[Checkpoint Manager]
         RS[Route Synthesis]
         GPX[GPX Generator]
     end
 
     subgraph Skills["Composable Skills"]
-        historyAnalysis["History Analysis"]
-        climbPlanning["Climb Planning"]
-        weatherPlanning["Weather Planning"]
-        foodStopPlanning["Food Stop Planning"]
-        waterStopPlanning["Water Stop Planning"]
-        routeOptimization["Route Optimization"]
-        narrativeResearch["Narrative Research"]
-        safetyAssessment["Safety Assessment"]
-        nutritionPlanning["Nutrition Planning"]
-        clothingPlanning["Clothing Planning"]
+        HA["History Analysis"]
+        CP["Climb Planning"]
+        WP["Weather Planning"]
+        FSP["Food Stop Planning"]
+        WSP["Water Stop Planning"]
+        RO["Route Optimization"]
+        NR["Narrative Research"]
+        SA["Safety Assessment"]
+        NP["Nutrition Planning"]
+        CLP["Clothing Planning"]
     end
 
     subgraph Tools["MCP Tool Layer"]
-        stravaData["Strava MCP"]
-        googleMaps["Google Maps MCP"]
-        weatherAPI["Weather API"]
-        osmTools["OSM Tools"]
-        climbData["Climb Data"]
-        elevationData["Elevation"]
+        SM["Strava MCP"]
+        GM["Google Maps MCP"]
+        WA["Weather API"]
+        OSM["OSM Tools"]
+        CD["Climb Data"]
+        EL["Elevation"]
     end
 
     CC <--> Orchestrator
     QU --> SI
-    SI --> historyAnalysis & climbPlanning & weatherPlanning & foodStopPlanning & waterStopPlanning & routeOptimization & narrativeResearch & safetyAssessment & nutritionPlanning & clothingPlanning
-    historyAnalysis & climbPlanning & weatherPlanning & foodStopPlanning & waterStopPlanning & routeOptimization & narrativeResearch & safetyAssessment & nutritionPlanning & clothingPlanning --> RS
+    SI --> HA & CP & WP & FSP & WSP & RO & NR & SA & NP & CLP
+    HA & CP & WP & FSP & WSP & RO & NR & SA & NP & CLP --> RS
     RS --> GPX
-    CP -.-> QU
-    CP -.-> SI
-    CP -.-> RS
+    CM -.-> QU
+    CM -.-> SI
+    CM -.-> RS
 
-    historyAnalysis <--> stravaData
-    climbPlanning <--> climbData & elevationData & stravaData
-    weatherPlanning <--> weatherAPI
-    foodStopPlanning <--> googleMaps
-    waterStopPlanning <--> googleMaps & osmTools
-    routeOptimization <--> googleMaps & elevationData
-    narrativeResearch <--> climbData
-    safetyAssessment <--> googleMaps & osmTools
-    nutritionPlanning <--> weatherPlanning & routeOptimization
-    clothingPlanning <--> weatherPlanning
+    HA <--> SM
+    CP <--> CD & EL & SM
+    WP <--> WA
+    FSP <--> GM
+    WSP <--> GM & OSM
+    RO <--> GM & EL
+    NR <--> CD
+    SA <--> GM & OSM
+    NP <--> WP & RO
+    CLP <--> WP
 ```
 
 ## Core Concepts
@@ -97,25 +97,25 @@ The orchestrator has flexibility in how it composes skills:
 
 ```mermaid
 flowchart TD
-    Orchestrator[Orchestrator]
+    ORC[Orchestrator]
 
     subgraph Inline["Inline (Main Thread)"]
-        inlineSkills["Simple skill calls"]
+        IS["Simple skill calls"]
     end
 
     subgraph Dynamic["Dynamic Sub-agents"]
-        dynamicJIT["JIT prompted with 1+ skills"]
+        DJ["JIT prompted with 1+ skills"]
     end
 
     subgraph Predefined["Pre-defined Sub-agents"]
-        climbResearchAgent["Climb Research Agent"]
-        stopPlanningAgent["Stop Planning Agent"]
-        narrativeResearchAgent["Narrative Research Agent"]
+        CRA["Climb Research Agent"]
+        SPA["Stop Planning Agent"]
+        NRA["Narrative Research Agent"]
     end
 
-    Orchestrator --> Inline
-    Orchestrator --> Dynamic
-    Orchestrator --> Predefined
+    ORC --> Inline
+    ORC --> Dynamic
+    ORC --> Predefined
 ```
 
 **Design principle**: Skills exist for flexible composition. The orchestrator decides based on query complexity whether to invoke skills directly, spawn a general sub-agent with JIT prompting, or use a specialized pre-defined sub-agent.
@@ -153,8 +153,8 @@ flowchart LR
 
     subgraph Parse["Query Understanding"]
         NER[Named Entity Recognition]
-        Intent[Intent Classification]
-        Triggers[Skill Trigger Detection]
+        IC[Intent Classification]
+        STD[Skill Trigger Detection]
     end
 
     Output["Structured Query +<br/>Skills: [History, Climb,<br/>Route, Stops]"]
@@ -173,30 +173,30 @@ Orchestrates skill execution based on query analysis:
 
 ```mermaid
 sequenceDiagram
-    participant Orchestrator
-    participant History as History Skill
-    participant Climb as Climb Skill
-    participant Weather as Weather Skill
-    participant Stops as Stop Skill
-    participant Route as Route Skill
+    participant ORC as Orchestrator
+    participant HA as History Analysis
+    participant CP as Climb Planning
+    participant WP as Weather Planning
+    participant SP as Stop Planning
+    participant RO as Route Optimization
 
-    Orchestrator->>History: Analyze past rides in area
-    Orchestrator->>Climb: Find climbs near destination
-    Orchestrator->>Weather: Check conditions
+    ORC->>HA: Analyze past rides in area
+    ORC->>CP: Find climbs near destination
+    ORC->>WP: Check conditions
 
-    History-->>Orchestrator: Past routes, segments
-    Climb-->>Orchestrator: Climb options, profiles
-    Weather-->>Orchestrator: Forecast, wind analysis
+    HA-->>ORC: Past routes, segments
+    CP-->>ORC: Climb options, profiles
+    WP-->>ORC: Forecast, wind analysis
 
-    Note over Orchestrator: Wait for context skills
+    Note over ORC: Wait for context skills
 
-    Orchestrator->>Route: Optimize route with context
-    Orchestrator->>Stops: Plan stops along route
+    ORC->>RO: Optimize route with context
+    ORC->>SP: Plan stops along route
 
-    Route-->>Orchestrator: Route candidates
-    Stops-->>Orchestrator: Stop recommendations
+    RO-->>ORC: Route candidates
+    SP-->>ORC: Stop recommendations
 
-    Orchestrator->>Orchestrator: Synthesize final plan
+    ORC->>ORC: Synthesize final plan
 ```
 
 ### Checkpoint Manager
