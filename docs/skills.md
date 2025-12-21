@@ -1,6 +1,8 @@
 # Skills
 
-Skills are composable research patterns that use tools to accomplish route planning tasks. Each skill encapsulates domain expertise and can be invoked conditionally based on route requirements.
+Skills are composable research patterns that use [tools](tools.md) to accomplish route planning tasks. Each skill encapsulates domain expertise and can be invoked conditionally based on route requirements.
+
+See [architecture.md](architecture.md) for orchestration model and design decisions.
 
 ## Skill Architecture
 
@@ -31,14 +33,14 @@ graph TB
 
 | Skill | Always? | Triggers |
 |-------|---------|----------|
-| History Analysis | Yes | - |
-| Route Optimization | Yes | - |
-| Climb Planning | No | Climbing route, user mentions climbs |
-| Weather Planning | No | Adverse conditions, long routes, summer heat |
-| Food Stop Planning | No | Routes > 40mi, user mentions food/cafe |
-| Water Stop Planning | No | Hot weather, remote areas, summer rides |
-| Narrative Research | No | New areas, user wants local intel |
-| Safety Assessment | No | Unfamiliar roads, user asks about safety |
+| [History Analysis](#1-history-analysis) | Yes | - |
+| [Route Optimization](#6-route-optimization) | Yes | - |
+| [Climb Planning](#2-climb-planning) | No | Climbing route, user mentions climbs |
+| [Weather Planning](#3-weather-planning) | No | Adverse conditions, long routes, summer heat |
+| [Food Stop Planning](#4-food-stop-planning) | No | Routes > 40mi, user mentions food/cafe |
+| [Water Stop Planning](#5-water-stop-planning) | No | Hot weather, remote areas, summer rides |
+| [Narrative Research](#7-narrative-research) | No | New areas, user wants local intel |
+| [Safety Assessment](#8-safety-assessment) | No | Unfamiliar roads, user asks about safety |
 
 **Note on Food vs Water**: Every food stop is implicitly a water stop. A dedicated water stop is for drinking water only (fountains, stores). Water stops are critical in summer heat; may be skipped entirely in winter.
 
@@ -52,7 +54,7 @@ graph TB
 
 **Invocation**: Always (foundational context)
 
-**Tools**: Strava MCP
+**Tools**: [Strava MCP](tools.md#1-activity-history-strava)
 
 **Research Pattern**:
 1. Parse geographic bounds from user query
@@ -76,7 +78,7 @@ graph TB
 
 **Invocation**: When route involves climbing or user mentions climbs
 
-**Tools**: PJAMM, Strava Segments, Elevation
+**Tools**: [PJAMM](tools.md#4-climb-data-pjamm), [Strava MCP](tools.md#1-activity-history-strava) (segments)
 
 **Research Pattern**:
 1. Identify target area from route/destination
@@ -102,7 +104,7 @@ graph TB
 
 **Invocation**: Adverse conditions, long routes, summer heat
 
-**Tools**: WeatherKit
+**Tools**: [WeatherKit](tools.md#5-weather-apple-weatherkit)
 
 **Research Pattern**:
 1. Get route geometry and estimated duration
@@ -128,7 +130,7 @@ graph TB
 
 **Invocation**: Routes > 40mi, user mentions food
 
-**Tools**: Google Places, Yelp
+**Tools**: [Google Maps MCP](tools.md#3-place-search-google-maps)
 
 **Research Pattern**:
 1. Calculate ideal stop distances based on route length
@@ -153,7 +155,7 @@ graph TB
 
 **Invocation**: Hot weather, summer rides, remote areas
 
-**Tools**: OSM Overpass, Google Places
+**Tools**: [OSM Overpass](tools.md#6-water--infrastructure-osm), [Google Maps MCP](tools.md#3-place-search-google-maps)
 
 **Research Pattern**:
 1. Analyze route for remote sections
@@ -178,11 +180,11 @@ graph TB
 
 **Invocation**: Always (core synthesis)
 
-**Tools**: GraphHopper, Elevation
+**Tools**: [GraphHopper](tools.md#2-routing-engine-graphhopper)
 
 **Research Pattern**:
 1. Parse waypoints from user query
-2. Incorporate segments from History Analysis
+2. Incorporate segments from [History Analysis](#1-history-analysis)
 3. Request cycling-optimized route from GraphHopper
 4. Analyze elevation profile
 5. Check for highways or unsuitable roads
@@ -204,7 +206,7 @@ graph TB
 
 **Invocation**: New areas, user wants local intel
 
-**Tools**: PJAMM, Web Search
+**Tools**: [PJAMM](tools.md#4-climb-data-pjamm), Web Search
 
 **Research Pattern**:
 1. Identify key locations/climbs on route
@@ -220,7 +222,7 @@ graph TB
 - Warnings and tips
 - Photo opportunities
 
-**Degradation**: If sources unavailable, skip this enrichment. Route still usable.
+**Degradation**: If sources unavailable, skip this enrichment. Route still usable. See [Tool Criticality](architecture.md#tool-criticality).
 
 ---
 
@@ -230,7 +232,7 @@ graph TB
 
 **Invocation**: Unfamiliar roads, user asks about safety
 
-**Tools**: Street View, OSM (surface), Traffic
+**Tools**: [Street Imagery](tools.md#8-street-imagery-p3---deferred), [OSM Overpass](tools.md#6-water--infrastructure-osm)
 
 **Research Pattern**:
 1. Identify segments on unfamiliar roads

@@ -40,6 +40,8 @@ graph LR
 
 **Implementation**: Strava MCP (open source)
 
+**Used by**: [History Analysis](skills.md#1-history-analysis), [Climb Planning](skills.md#2-climb-planning) (for segment data)
+
 **Capabilities**:
 - Search activities by geographic area
 - Filter by date, distance, elevation
@@ -54,6 +56,8 @@ graph LR
 **Purpose**: Generate turn-by-turn routes between waypoints
 
 **Decision**: GraphHopper selected as primary routing engine.
+
+**Used by**: [Route Optimization](skills.md#6-route-optimization)
 
 ### Why GraphHopper
 
@@ -100,6 +104,8 @@ graph LR
 
 **Implementation**: Google Maps MCP
 
+**Used by**: [Food Stop Planning](skills.md#4-food-stop-planning), [Water Stop Planning](skills.md#5-water-stop-planning), [Safety Assessment](skills.md#8-safety-assessment)
+
 **Capabilities**:
 - Search by type within radius
 - Search along a route corridor
@@ -111,6 +117,8 @@ graph LR
 ## 4. Climb Data (PJAMM)
 
 **Purpose**: Detailed climb profiles, difficulty ratings, local intel
+
+**Used by**: [Climb Planning](skills.md#2-climb-planning), [Narrative Research](skills.md#7-narrative-research)
 
 ### PJAMM/Sherpa Integration
 
@@ -146,6 +154,8 @@ For areas PJAMM doesn't cover:
 **Purpose**: Hyperlocal weather data for route timing and safety
 
 **Decision**: Apple WeatherKit selected.
+
+**Used by**: [Weather Planning](skills.md#3-weather-planning)
 
 ### Why WeatherKit
 
@@ -192,6 +202,8 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Implementation**: OSM Overpass API
 
+**Used by**: [Water Stop Planning](skills.md#5-water-stop-planning), [Safety Assessment](skills.md#8-safety-assessment)
+
 **Capabilities**:
 - Find drinking water fountains (amenity=drinking_water)
 - Locate bike repair stations
@@ -203,6 +215,8 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 ## 7. Elevation
 
 **Purpose**: Detailed elevation profiles for arbitrary paths
+
+**Used by**: [Route Optimization](skills.md#6-route-optimization), [Climb Planning](skills.md#2-climb-planning)
 
 **Note**: GraphHopper routing responses include elevation data, so this may not need a separate tool.
 
@@ -218,6 +232,8 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Purpose**: Visual assessment of road conditions, scenery
 
+**Will be used by**: [Safety Assessment](skills.md#8-safety-assessment)
+
 | Option | Type | Notes |
 |--------|------|-------|
 | Google Street View API | REST | Best coverage |
@@ -229,6 +245,8 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Purpose**: Determine pavement condition, surface type
 
+**Will be used by**: [Safety Assessment](skills.md#8-safety-assessment)
+
 | Option | Type | Notes |
 |--------|------|-------|
 | OSM surface tags | Via Overpass | Inconsistent but free |
@@ -239,6 +257,8 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 ## 10. Traffic & Safety (P3 - Deferred)
 
 **Purpose**: Avoid dangerous roads, construction
+
+**Will be used by**: [Safety Assessment](skills.md#8-safety-assessment)
 
 | Option | Type | Notes |
 |--------|------|-------|

@@ -22,9 +22,11 @@ flowchart TB
         S1[History Analysis]
         S2[Climb Planning]
         S3[Weather Planning]
-        S4[Stop Planning]
-        S5[Route Optimization]
-        S6[Safety Assessment]
+        S4[Food Stop Planning]
+        S5[Water Stop Planning]
+        S6[Route Optimization]
+        S7[Narrative Research]
+        S8[Safety Assessment]
     end
 
     subgraph Tools["MCP Tool Layer"]
@@ -38,19 +40,21 @@ flowchart TB
 
     CC <--> Orchestrator
     QU --> SI
-    SI --> S1 & S2 & S3 & S4 & S5 & S6
-    S1 & S2 & S3 & S4 & S5 & S6 --> RS
+    SI --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8
+    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 --> RS
     RS --> GPX
     CP -.-> QU
     CP -.-> SI
     CP -.-> RS
 
     S1 <--> T1
-    S2 <--> T5 & T6
+    S2 <--> T5 & T6 & T1
     S3 <--> T3
-    S4 <--> T2 & T4
-    S5 <--> T2 & T6
-    S6 <--> T2 & T4
+    S4 <--> T2
+    S5 <--> T2 & T4
+    S6 <--> T2 & T6
+    S7 <--> T5
+    S8 <--> T2 & T4
 ```
 
 ## Core Concepts
@@ -321,8 +325,10 @@ Each skill operates with focused context to avoid overload:
 | History Analysis | User query, geographic bounds | Low |
 | Climb Planning | Target area, user preferences, past climbs | Medium |
 | Weather Planning | Route geometry, timing, duration | Medium |
-| Stop Planning | Route corridor, distance markers, timing | Medium |
+| Food Stop Planning | Route corridor, distance markers | Medium |
+| Water Stop Planning | Route corridor, weather, season | Low-Medium |
 | Route Optimization | Waypoints, constraints, skill outputs | Medium |
+| Narrative Research | Key locations on route | Low |
 | Safety Assessment | Specific road segments to evaluate | Low-Medium |
 
 The orchestrator maintains global context; skills receive only what they need.
