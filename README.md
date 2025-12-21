@@ -42,8 +42,8 @@ The agent uses a **skills-based architecture** where composable skills handle sp
          │                   │                   │
          ▼                   ▼                   ▼
     ┌─────────┐        ┌──────────┐        ┌──────────┐
-    │ Strava  │        │  Climb   │        │ Weather  │
-    │  MCP    │        │   Data   │        │   API    │
+    │ Strava  │        │  PJAMM   │        │WeatherKit│
+    │  MCP    │        │   API    │        │   API    │
     └─────────┘        └──────────┘        └──────────┘
 ```
 
@@ -57,42 +57,42 @@ See [docs/architecture.md](docs/architecture.md) for detailed design.
 | Route Optimization | Generate optimal route through waypoints | Always |
 | Climb Planning | Research and select climbs | Climbing routes |
 | Weather Planning | Hyperlocal weather along route | Adverse conditions, long routes |
-| Stop Planning | Find cafes, water, grocery stops | Routes > 40mi |
+| Food Stop Planning | Find cafes and restaurants | Routes > 40mi |
+| Water Stop Planning | Find water fountains and stores | Hot weather, summer rides |
+| Narrative Research | Local intel from web/forums | New areas |
 | Safety Assessment | Evaluate road conditions | Unfamiliar roads |
 
 ## Tools
 
-The agent integrates 10+ external data sources via MCP and custom tools:
-
-| Category | Examples | Status |
+| Category | Decision | Status |
 |----------|----------|--------|
 | Activity History | Strava MCP | Available |
-| Routing | Google Maps MCP | Available |
-| Places | Google Places, Yelp | Available |
-| Weather | OpenWeatherMap, Tomorrow.io | To select |
-| Climb Data | PJAMM Cycling | API access TBD |
-| Infrastructure | OpenStreetMap (Overpass) | To build |
-| Elevation | Google Elevation, Open-Elevation | To select |
+| Routing | GraphHopper | Selected |
+| Places | Google Maps MCP | Available |
+| Weather | Apple WeatherKit | Selected |
+| Climb Data | PJAMM | Selected (API investigation needed) |
+| Water/Infrastructure | OSM Overpass | To build |
 
 See [docs/tools-and-skills.md](docs/tools-and-skills.md) for full catalog.
+
+## Project Structure
+
+```
+route-agent/
+├── docs/           # Permanent documentation
+│   ├── architecture.md
+│   └── tools-and-skills.md
+├── specs/          # Temporary planning → GitHub issues
+│   ├── milestones.md
+│   └── github-issues.md
+└── CLAUDE.md       # Development context
+```
 
 ## Development Status
 
 **Phase: Planning & Architecture**
 
-This project is in early design phase. See [docs/milestones.md](docs/milestones.md) for roadmap.
-
-## Running
-
-(Not yet implemented)
-
-```bash
-# Future: Run as Claude Code extension
-claude --agent route-agent
-
-# Future: Run standalone
-npm start
-```
+See [specs/milestones.md](specs/milestones.md) for roadmap.
 
 ## License
 
