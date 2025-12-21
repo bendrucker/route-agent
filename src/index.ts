@@ -9,13 +9,11 @@ export interface RouteQuery {
 }
 
 export interface RouteAgentConfig {
-  apiKey: string;
   model?: string;
 }
 
-export function createRouteAgent(config: RouteAgentConfig): Agent {
+export function createRouteAgent(config: RouteAgentConfig = {}): Agent {
   const agent = new Agent({
-    apiKey: config.apiKey,
     model: config.model || "claude-sonnet-4-5-20251101",
     systemPrompt: `You are a cycling route planning expert assistant.
 
