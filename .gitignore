@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Promptfoo outputs
+evals/results/
+.promptfoo/
+
+# Temporary files
+tmp/
+*.log
+

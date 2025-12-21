@@ -1,0 +1,22 @@
+{
+  "name": "route-agent",
+  "version": "0.1.0",
+  "description": "Deep research agent for cycling route planning",
+  "type": "module",
+  "scripts": {
+    "evals": "promptfoo eval",
+    "evals:view": "promptfoo view"
+  },
+  "keywords": [
+    "cycling",
+    "routing",
+    "agent",
+    "claude"
+  ],
+  "author": "@bendrucker",
+  "license": "ISC",
+  "devDependencies": {
+    "promptfoo": "^0.99.4",
+    "typescript": "^5.7.2"
+  }
+}
