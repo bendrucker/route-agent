@@ -15,43 +15,66 @@ This agent encapsulates expert knowledge about route planning, integrating data 
 3. **Expert knowledge encoded** - The agent should reason like an experienced route planner
 4. **GPX output** - Final deliverable is a GPX file ready for bike computers
 
-## Data Sources
-
-The agent integrates multiple specialized sources:
-
-| Source | Purpose |
-|--------|---------|
-| Strava | Activity history, segments, past routes |
-| Google Maps | Places (cafes, grocery stores), Street View, general routing |
-| OpenStreetMap | Water fountains, bike infrastructure, trail data |
-| PJAMCYCLING | Climb profiles and ratings |
-| (more TBD) | Weather, road conditions, etc. |
-
 ## Architecture
+
+The agent uses a **skills-based architecture** where composable skills handle specific aspects of route planning. Skills are invoked conditionally based on route requirements, keeping context focused.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      User (Claude Code)                          │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   Route Planning Orchestrator                    │
+│  ┌──────────────┐  ┌───────────────┐  ┌──────────────────────┐  │
+│  │    Query     │  │    Skill      │  │   Route Synthesis    │  │
+│  │Understanding │─▶│   Invoker     │─▶│  & GPX Generation    │  │
+│  └──────────────┘  └───────┬───────┘  └──────────────────────┘  │
+└────────────────────────────┼────────────────────────────────────┘
+                             │
+         ┌───────────────────┼───────────────────┐
+         ▼                   ▼                   ▼
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│ History Analysis│ │ Climb Planning  │ │ Weather Planning│
+│     Skill       │ │     Skill       │ │     Skill       │
+└────────┬────────┘ └────────┬────────┘ └────────┬────────┘
+         │                   │                   │
+         ▼                   ▼                   ▼
+    ┌─────────┐        ┌──────────┐        ┌──────────┐
+    │ Strava  │        │  Climb   │        │ Weather  │
+    │  MCP    │        │   Data   │        │   API    │
+    └─────────┘        └──────────┘        └──────────┘
+```
 
 See [docs/architecture.md](docs/architecture.md) for detailed design.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     User (Claude Code)                       │
-└─────────────────────────────┬───────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   Route Planning Agent                       │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │   Query     │  │  Research   │  │  Route Synthesis    │  │
-│  │ Understanding│─▶│   Engine    │─▶│  & GPX Generation   │  │
-│  └─────────────┘  └──────┬──────┘  └─────────────────────┘  │
-└──────────────────────────┼──────────────────────────────────┘
-                           │
-        ┌──────────────────┼──────────────────┐
-        ▼                  ▼                  ▼
-   ┌─────────┐       ┌──────────┐       ┌──────────┐
-   │ Strava  │       │ Google   │       │   OSM    │
-   │  MCP    │       │ Maps MCP │       │  Tools   │
-   └─────────┘       └──────────┘       └──────────┘
-```
+## Skills
+
+| Skill | Purpose | When Invoked |
+|-------|---------|--------------|
+| History Analysis | Analyze past rides in target area | Always |
+| Route Optimization | Generate optimal route through waypoints | Always |
+| Climb Planning | Research and select climbs | Climbing routes |
+| Weather Planning | Hyperlocal weather along route | Adverse conditions, long routes |
+| Stop Planning | Find cafes, water, grocery stops | Routes > 40mi |
+| Safety Assessment | Evaluate road conditions | Unfamiliar roads |
+
+## Tools
+
+The agent integrates 10+ external data sources via MCP and custom tools:
+
+| Category | Examples | Status |
+|----------|----------|--------|
+| Activity History | Strava MCP | Available |
+| Routing | Google Maps MCP | Available |
+| Places | Google Places, Yelp | Available |
+| Weather | OpenWeatherMap, Tomorrow.io | To select |
+| Climb Data | PJAMM Cycling | API access TBD |
+| Infrastructure | OpenStreetMap (Overpass) | To build |
+| Elevation | Google Elevation, Open-Elevation | To select |
+
+See [docs/tools-and-skills.md](docs/tools-and-skills.md) for full catalog.
 
 ## Development Status
 
