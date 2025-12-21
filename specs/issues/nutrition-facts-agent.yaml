@@ -1,0 +1,42 @@
+title: Implement Nutrition Facts sub-agent
+milestone: Ride Preparation
+labels:
+  - infrastructure
+depends_on:
+  - Implement Nutrition Planning skill
+
+body: |
+  Focused lookup agent for product nutrition data.
+
+  ## Purpose
+
+  Takes product names (commercial or generic), returns macros.
+  Used by Nutrition Planning skill to calculate fuel needs.
+
+  ## Capabilities
+
+  - [ ] Look up commercial products (Clif Bar, GU gel, Skratch mix)
+  - [ ] Estimate macros for generic items (cookie, PB&J, banana)
+  - [ ] Return structured data: calories, carbs, protein, fat, serving size
+  - [ ] Indicate confidence level (exact vs. estimated)
+
+  ## Data Sources
+
+  - [ ] USDA FoodData Central API
+  - [ ] OpenFoodFacts database
+  - [ ] Curated database of cycling-specific products
+
+  ## Example Usage
+
+  ```
+  Input: "Clif Bar Chocolate Chip"
+  Output: { calories: 250, carbs: 44, protein: 10, fat: 5, confidence: "exact" }
+
+  Input: "chocolate chip cookie"
+  Output: { calories: 150, carbs: 20, protein: 2, fat: 7, confidence: "estimated" }
+  ```
+
+  ## Notes
+
+  This is a sub-agent, not a skill. It's stateless and doesn't need
+  route context - just the product query.

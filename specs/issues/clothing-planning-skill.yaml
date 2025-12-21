@@ -1,0 +1,47 @@
+title: Implement Clothing Planning skill
+milestone: Ride Preparation
+labels:
+  - skill
+depends_on:
+  - Implement Weather Planning skill
+
+body: |
+  Match clothing choices to weather conditions throughout the ride.
+
+  ## Capabilities
+
+  - [ ] Get weather by segment from Weather Planning
+  - [ ] Identify temperature range (start vs. midday vs. end)
+  - [ ] Consider effort level effects (climbing warms you up)
+  - [ ] Plan layering strategy:
+    - Base layer needs
+    - Mid-layer options
+    - Outer layer for wind/rain
+  - [ ] Plan for transitions:
+    - What to remove and when
+    - Storage requirements (jersey pockets vs. bag)
+  - [ ] Suggest specific gear types based on conditions
+
+  ## Domain Knowledge to Encode
+
+  | Condition | Gear Considerations |
+  |-----------|---------------------|
+  | Cold start, warm midday | Short sleeve + removable jacket, arm warmers |
+  | Large temp swing (> 20°F) | Consider saddle bag for storage |
+  | Variable conditions | Packable wind vest |
+  | Descent after climb | Keep warm layer accessible |
+  | Arm/leg warmers | Ideal for 50-65°F, easy to remove |
+  | Knee warmers | Protect joints in cool temps |
+  | Shoe covers | Below 50°F or wet conditions |
+
+  ## Layering Logic
+
+  - Start slightly cold (you'll warm up)
+  - Plan to shed layers within first 30 min
+  - Heavier layers for descents after climbs
+  - Extremities (hands, feet, ears) matter most
+
+  ## Notes
+
+  Agent doesn't know user's exact wardrobe - provides guidance on
+  weight/type of clothing and specific cycling gear options.

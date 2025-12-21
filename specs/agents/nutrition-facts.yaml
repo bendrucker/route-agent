@@ -1,0 +1,60 @@
+name: Nutrition Facts Agent
+used_by:
+  - Nutrition Planning skill
+
+purpose: |
+  Look up nutritional information for food items. Handles both commercial
+  products (exact values) and generic items (estimated values).
+
+input:
+  - Product name or description (e.g., "Clif Bar", "chocolate chip cookie", "PB&J sandwich")
+
+output:
+  calories: number
+  carbs_g: number
+  protein_g: number
+  fat_g: number
+  serving_size: string
+  confidence: "exact" | "estimated"
+
+data_sources:
+  - USDA FoodData Central API (free)
+  - OpenFoodFacts (community database)
+  - Brand websites (for commercial products)
+  - Estimation logic for generic items
+
+examples:
+  - input: "Clif Bar Chocolate Chip"
+    output:
+      calories: 250
+      carbs_g: 44
+      protein_g: 10
+      fat_g: 5
+      serving_size: "1 bar (68g)"
+      confidence: "exact"
+
+  - input: "chocolate chip cookie"
+    output:
+      calories: 150
+      carbs_g: 20
+      protein_g: 2
+      fat_g: 7
+      serving_size: "1 medium cookie (~30g)"
+      confidence: "estimated"
+
+  - input: "GU Energy Gel"
+    output:
+      calories: 100
+      carbs_g: 22
+      protein_g: 0
+      fat_g: 0
+      serving_size: "1 packet (32g)"
+      confidence: "exact"
+
+notes: |
+  This agent doesn't need route context - it just takes a product name
+  and returns nutrition data. The Nutrition Planning skill handles the
+  complex reasoning about when/where to consume different foods.
+
+  For cycling-specific products (gels, bars, drink mixes), maintain a
+  curated database of common items for faster, more accurate lookups.

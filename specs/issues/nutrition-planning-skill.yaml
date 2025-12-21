@@ -1,0 +1,37 @@
+title: Implement Nutrition Planning skill
+milestone: Ride Preparation
+labels:
+  - skill
+depends_on:
+  - Implement Weather Planning skill
+  - Implement Route Optimization skill
+
+body: |
+  Plan calorie consumption and on-bike fueling strategy.
+
+  ## Capabilities
+
+  - [ ] Calculate total calorie burn (distance, elevation, terrain, weather)
+  - [ ] Estimate consumption rate per hour
+  - [ ] Identify high-effort sections (climbs, headwinds)
+  - [ ] Plan food stop timing for real food consumption
+  - [ ] Plan on-bike nutrition for sections between stops
+  - [ ] Consider fuel type by terrain:
+    - Whole foods for steady efforts
+    - Gels/chews for intense climbing
+    - Drink mixes for sustained calories
+  - [ ] Output packing list with consumption schedule
+
+  ## Domain Knowledge to Encode
+
+  | Fuel Type | Best For | Notes |
+  |-----------|----------|-------|
+  | Whole foods | Long steady sections | Eat at stops or easy terrain |
+  | Energy bars | Moderate efforts | Can eat while riding |
+  | Gels/chews | Intense efforts | Fast absorption |
+  | Drink mix | Sustained effort | Continuous calorie intake |
+
+  ## Integration
+
+  Works with Food Stop Planning skill - that skill finds where to stop,
+  this skill calculates what you need and when to consume it.

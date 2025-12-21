@@ -47,7 +47,11 @@ osm-overpass-wrapper ──► water-stop-planning-skill
 
 pjamm-api-spike ──► pjamm-client ──► climb-planning-skill
 
-weatherkit-client ──► weather-planning-skill
+weatherkit-client ──► weather-planning-skill ──┐
+                                              │
+route-optimization-skill ─────────────────────┼──► nutrition-planning-skill ──► nutrition-facts-agent
+                                              │
+                                              └──► clothing-planning-skill
 
 web-search-ride-reports
 narrative-research-skill

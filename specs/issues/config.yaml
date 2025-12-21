@@ -23,6 +23,9 @@ milestones:
   - title: Weather Integration
     description: Hyperlocal weather along routes via WeatherKit
 
+  - title: Ride Preparation
+    description: Nutrition and clothing planning for the ride
+
   - title: Narrative Research
     description: Enrich routes with local intel from multiple sources
 

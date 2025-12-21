@@ -23,10 +23,12 @@ graph TB
         S6[Route Optimization]
         S7[Narrative Research]
         S8[Safety Assessment]
+        S9[Nutrition Planning]
+        S10[Clothing Planning]
     end
 
-    Plan --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8
-    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 --> Synth
+    Plan --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10
+    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10 --> Synth
 ```
 
 ## Conditional Invocation
@@ -41,6 +43,8 @@ graph TB
 | [Water Stop Planning](#5-water-stop-planning) | No | Hot weather, remote areas, summer rides |
 | [Narrative Research](#7-narrative-research) | No | New areas, user wants local intel |
 | [Safety Assessment](#8-safety-assessment) | No | Unfamiliar roads, user asks about safety |
+| [Nutrition Planning](#9-nutrition-planning) | No | Long routes, user asks about fueling |
+| [Clothing Planning](#10-clothing-planning) | No | Temperature swings, user asks about gear |
 
 **Note on Food vs Water**: Every food stop is implicitly a water stop. A dedicated water stop is for drinking water only (fountains, stores). Water stops are critical in summer heat; may be skipped entirely in winter.
 
@@ -250,6 +254,106 @@ graph TB
 
 ---
 
+### 9. Nutrition Planning
+
+**Purpose**: Plan calorie consumption and on-bike fueling strategy
+
+**Invocation**: Long routes (> 50mi), user asks about nutrition/fueling
+
+**Tools**: [Weather Planning](#3-weather-planning) (heat affects consumption), Route Optimization (terrain analysis)
+
+**Sub-agents**:
+- **Nutrition Facts Agent**: Focused lookup agent for product nutrition data
+  - Takes product names (commercial or generic)
+  - Returns calories, carbs, protein, fat
+  - Exact values for commercial products (Clif Bar, GU gel)
+  - Estimated values for generic items (chocolate chip cookie, PB&J)
+
+**Research Pattern**:
+1. Calculate total calorie burn based on:
+   - Distance and elevation gain
+   - Terrain difficulty (climbing vs. flat)
+   - Weather conditions (heat increases burn rate)
+2. Estimate consumption rate per hour
+3. If user provides food options, invoke Nutrition Facts Agent to get macros
+4. Identify high-effort sections (climbs, headwinds)
+5. Plan food stop timing for real food consumption
+6. Plan on-bike nutrition for sections between stops
+7. Consider fuel type by terrain:
+   - Whole foods (sandwiches, bars) for steady efforts
+   - Quick fuels (gels, chews) for intense climbing
+   - Drink mixes for sustained hydration/calories
+8. Output packing list with consumption schedule
+
+**Domain Knowledge**:
+
+| Fuel Type | Best For | Notes |
+|-----------|----------|-------|
+| Whole foods (sandwich, rice cake) | Long steady sections | Eat at stops or easy terrain |
+| Energy bars | Moderate efforts | Can eat while riding |
+| Gels/chews | Intense efforts, climbs | Fast absorption, no chewing |
+| Drink mix | Sustained effort | Continuous calorie intake |
+
+**Outputs**:
+- Total calorie target
+- Packing list (what to bring)
+- Consumption schedule (when to eat what)
+- Stop-specific food recommendations
+- On-bike nutrition timing
+
+**Note**: This skill works with [Food Stop Planning](#4-food-stop-planning) but serves a different purpose. Food Stop Planning finds where to get food; Nutrition Planning calculates what you need and when to consume it.
+
+---
+
+### 10. Clothing Planning
+
+**Purpose**: Match clothing choices to weather conditions throughout the ride
+
+**Invocation**: Temperature swings (> 15°F change), user asks about clothing/gear
+
+**Tools**: [Weather Planning](#3-weather-planning) (conditions by segment)
+
+**Research Pattern**:
+1. Get weather by segment from Weather Planning
+2. Identify temperature range (start vs. midday vs. end)
+3. Consider effort level effects (climbing warms you up)
+4. Plan layering strategy:
+   - Base layer needs
+   - Mid-layer options
+   - Outer layer for wind/rain
+5. Plan for transitions:
+   - What to remove and when
+   - Storage requirements (jersey pockets vs. bag)
+6. Suggest specific gear types based on conditions
+
+**Domain Knowledge**:
+
+| Condition | Gear Considerations |
+|-----------|---------------------|
+| Cold start, warm midday | Short sleeve + removable jacket, arm warmers |
+| Large temp swing (> 20°F) | Consider saddle bag for storage |
+| Variable conditions | Packable wind vest |
+| Descent after climb | Keep warm layer accessible |
+| Arm/leg warmers | Ideal for 50-65°F, easy to remove |
+| Knee warmers | Protect joints in cool temps |
+| Shoe covers | Below 50°F or wet conditions |
+
+**Layering Logic**:
+- Start slightly cold (you'll warm up)
+- Plan to shed layers within first 30 min
+- Heavier layers for descents after climbs
+- Extremities (hands, feet, ears) matter most
+
+**Outputs**:
+- Recommended clothing by segment
+- Layer change points
+- Storage requirements
+- Specific gear suggestions (arm warmers, vest, etc.)
+
+**Note**: The agent doesn't know your exact wardrobe, but provides guidance on weight/type of clothing and specific cycling gear options.
+
+---
+
 ## Skill Invocation Flow
 
 ```mermaid
@@ -278,8 +382,15 @@ flowchart TD
     Parse --> Unfamiliar{New roads?}
     Unfamiliar -->|Yes| SafetySkill[Safety Assessment]
 
+    Parse --> LongRoute{Long route?}
+    LongRoute -->|Yes| NutritionSkill[Nutrition Planning]
+
+    Parse --> TempSwing{Temp swing?}
+    TempSwing -->|Yes| ClothingSkill[Clothing Planning]
+
     History & Optimize & ClimbSkill & WeatherSkill --> Synthesize
     FoodSkill & WaterSkill & NarrativeSkill & SafetySkill --> Synthesize
+    NutritionSkill & ClothingSkill --> Synthesize
 
     Synthesize[Synthesize Results] --> Present[Present to User]
 ```
@@ -300,5 +411,7 @@ Each skill operates with focused context:
 | Route Optimization | Waypoints, constraints, skill outputs | Medium |
 | Narrative Research | Key locations on route | Low |
 | Safety Assessment | Specific road segments | Low-Medium |
+| Nutrition Planning | Route profile, weather, stop locations | Medium |
+| Clothing Planning | Weather by segment, terrain profile | Low-Medium |
 
 Skills return structured summaries, not raw data dumps. The orchestrator synthesizes skill outputs into a coherent route plan.

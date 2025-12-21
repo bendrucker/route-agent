@@ -155,11 +155,36 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
+## Ride Preparation
+
+**Goal**: Help prepare for the ride with nutrition and clothing planning
+
+**Depends on**: Route Synthesis, Weather Integration
+
+**Deliverables**:
+- [ ] Nutrition Planning skill
+  - Calculate calorie needs based on route profile
+  - Plan consumption timing (stops vs. on-bike)
+  - Suggest fuel types by terrain (whole foods, gels, drink mix)
+  - Output packing list with consumption schedule
+- [ ] Nutrition Facts sub-agent
+  - Look up macros for commercial products (Clif Bar, GU gel)
+  - Estimate macros for generic items (cookie, sandwich)
+- [ ] Clothing Planning skill
+  - Match clothing to weather by segment
+  - Plan layering strategy for temperature swings
+  - Recommend specific gear (arm warmers, vest, shoe covers)
+  - Consider storage needs for removed layers
+
+**Exit Criteria**: Route plan includes nutrition schedule and clothing recommendations
+
+---
+
 ## Narrative Research
 
 **Goal**: Enrich routes with local intel from multiple sources
 
-**Depends on**: Place Search, Water Stops, Climb Integration, Weather Integration
+**Depends on**: Place Search, Water Stops, Climb Integration, Weather Integration, Ride Preparation
 
 **Deliverables**:
 - [ ] Web search for forum posts, ride reports
@@ -246,10 +271,14 @@ graph TD
     Synth --> Climb
     Synth --> Weather[Weather Integration]
 
+    Synth --> Prep[Ride Preparation]
+    Weather --> Prep
+
     Places --> Narr[Narrative Research]
     Water --> Narr
     Climb --> Narr
     Weather --> Narr
+    Prep --> Narr
 
     Narr --> Quality[Research Quality]
     Quality --> Refine[Route Refinement]
@@ -268,6 +297,9 @@ After Foundation, these can proceed in parallel:
 
 After Route Synthesis, these can proceed in parallel:
 - Place Search, Water Stops, Climb Integration, Weather Integration
+
+After Weather Integration:
+- Ride Preparation can start (needs route profile + weather data)
 
 ---
 

@@ -59,6 +59,8 @@ See [docs/architecture.md](docs/architecture.md) for detailed design.
 | Weather Planning | Hyperlocal weather along route | Adverse conditions, long routes |
 | Food Stop Planning | Find cafes and restaurants | Routes > 40mi |
 | Water Stop Planning | Find water fountains and stores | Hot weather, summer rides |
+| Nutrition Planning | Plan calorie consumption and fueling | Long routes |
+| Clothing Planning | Match clothing to weather conditions | Temperature swings |
 | Narrative Research | Local intel from web/forums | New areas |
 | Safety Assessment | Evaluate road conditions | Unfamiliar roads |
 
@@ -85,8 +87,10 @@ route-agent/
 │   └── skills.md
 ├── specs/          # Temporary planning → GitHub issues
 │   ├── milestones.md
-│   └── issues/     # Individual issue files for GitHub API
-│       ├── config.yaml
+│   ├── issues/     # Individual issue files for GitHub API
+│   │   ├── config.yaml
+│   │   └── {name}.yaml
+│   └── agents/     # Sub-agent specifications
 │       └── {name}.yaml
 └── CLAUDE.md       # Development context
 ```

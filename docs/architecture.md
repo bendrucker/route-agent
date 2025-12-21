@@ -27,6 +27,8 @@ flowchart TB
         S6[Route Optimization]
         S7[Narrative Research]
         S8[Safety Assessment]
+        S9[Nutrition Planning]
+        S10[Clothing Planning]
     end
 
     subgraph Tools["MCP Tool Layer"]
@@ -40,8 +42,8 @@ flowchart TB
 
     CC <--> Orchestrator
     QU --> SI
-    SI --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8
-    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 --> RS
+    SI --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10
+    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10 --> RS
     RS --> GPX
     CP -.-> QU
     CP -.-> SI
@@ -55,6 +57,8 @@ flowchart TB
     S6 <--> T2 & T6
     S7 <--> T5
     S8 <--> T2 & T4
+    S9 <--> S3 & S6
+    S10 <--> S3
 ```
 
 ## Core Concepts
@@ -116,6 +120,19 @@ flowchart TD
 
 **Design principle**: Skills exist for flexible composition. The orchestrator decides based on query complexity whether to invoke skills directly, spawn a general sub-agent with JIT prompting, or use a specialized pre-defined sub-agent.
 
+### Skills vs Sub-agents
+
+Not everything should be a skill. Use sub-agents for focused data retrieval tasks:
+
+| Use a Skill when... | Use a Sub-agent when... |
+|---------------------|------------------------|
+| Task requires route context | Task is a focused lookup |
+| Complex reasoning needed | Returns small, structured data |
+| Affects route planning decisions | Doesn't need route context |
+| Invoked conditionally by orchestrator | Invoked by a skill as helper |
+
+**Example**: Nutrition Planning is a skill (needs route profile, weather, stop locations). Nutrition Facts lookup is a sub-agent (takes product name, returns macros).
+
 ### Conditional Skill Invocation
 
 | Skill | Always? | Conditional Triggers |
@@ -128,6 +145,8 @@ flowchart TD
 | Water Stop Planning | No | Hot weather, remote areas, summer rides |
 | Narrative Research | No | New areas, user wants local intel |
 | Safety Assessment | No | Unfamiliar roads, user asks about safety |
+| Nutrition Planning | No | Long routes, user asks about fueling |
+| Clothing Planning | No | Temperature swings, user asks about gear |
 
 **Note on Food vs Water**: Every food stop is implicitly a water stop. A dedicated water stop is for drinking water only (fountains, stores) when no food is needed. Water stops are critical in summer heat; may be skipped entirely in winter.
 
@@ -140,6 +159,8 @@ flowchart LR
     Parse --> |Weather concern?| Weather[Weather Planning]
     Parse --> |Long route?| Stops[Stop Planning]
     Parse --> |New roads?| Safety[Safety Assessment]
+    Parse --> |Long route?| Nutrition[Nutrition Planning]
+    Parse --> |Temp swing?| Clothing[Clothing Planning]
 ```
 
 ## Component Details
@@ -250,6 +271,8 @@ Combines skill outputs into coherent route candidates:
 3. **Climb Sequencing**: Order climbs from Climb Planning skill
 4. **Weather Adjustment**: Factor in Weather Planning recommendations
 5. **Safety Notes**: Include warnings from Safety Assessment skill
+6. **Nutrition Schedule**: Integrate fueling plan from Nutrition Planning skill
+7. **Clothing Guidance**: Include gear recommendations from Clothing Planning skill
 
 ### GPX Generator
 
@@ -295,6 +318,8 @@ const routeAgent = createAgent({
     stopPlanningSkill,
     routeOptimizationSkill,
     safetySkill,
+    nutritionPlanningSkill,
+    clothingPlanningSkill,
   ],
 
   workflow: async (input) => {
@@ -330,6 +355,8 @@ Each skill operates with focused context to avoid overload:
 | Route Optimization | Waypoints, constraints, skill outputs | Medium |
 | Narrative Research | Key locations on route | Low |
 | Safety Assessment | Specific road segments to evaluate | Low-Medium |
+| Nutrition Planning | Route profile, weather, stop locations | Medium |
+| Clothing Planning | Weather by segment, terrain profile | Low-Medium |
 
 The orchestrator maintains global context; skills receive only what they need.
 
