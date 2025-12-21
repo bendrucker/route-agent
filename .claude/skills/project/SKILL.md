@@ -46,7 +46,7 @@ Parse from issue body:
 ## Parallel Work (`/project work`)
 
 1. **Find ready tasks** - Parse dependencies, filter unblocked
-2. **Create worktrees** - One per issue in `~/.worktrees/route-agent/<N>/`
+2. **Create worktrees** - One per issue in `./worktrees/<N>/` (inside project, sandbox-allowed)
 3. **Spawn sub-agents** - Each works in background, creates PR
 4. **Report** - List spawned agents for monitoring
 

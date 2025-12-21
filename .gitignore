@@ -10,3 +10,6 @@ evals/results/
 tmp/
 *.log
 
+# Git worktrees for parallel work
+worktrees/
+

@@ -6,11 +6,10 @@ Use git worktrees to work on multiple issues in parallel. Each worktree is an in
 
 ## Worktree Location
 
-Store worktrees in `~/.worktrees/<repo>/<issue-number>/`:
+Store worktrees in `./worktrees/<issue-number>/` (inside project, sandbox-allowed):
 
 ```bash
-REPO_NAME=$(basename $(git rev-parse --show-toplevel))
-WORKTREE_PATH=~/.worktrees/$REPO_NAME/$ISSUE
+WORKTREE_PATH=./worktrees/$ISSUE
 ```
 
 ## Lifecycle
@@ -19,8 +18,7 @@ WORKTREE_PATH=~/.worktrees/$REPO_NAME/$ISSUE
 
 ```bash
 ISSUE=5
-REPO_NAME=$(basename $(git rev-parse --show-toplevel))
-WORKTREE_PATH=~/.worktrees/$REPO_NAME/$ISSUE
+WORKTREE_PATH=./worktrees/$ISSUE
 
 git fetch origin main
 git worktree add "$WORKTREE_PATH" -b "issue-$ISSUE" origin/main
@@ -52,8 +50,7 @@ Cleanup is **lazy** - only run when explicitly requested via `/project cleanup`.
 ### `/project cleanup`
 
 ```bash
-REPO_NAME=$(basename $(git rev-parse --show-toplevel))
-git worktree list | grep "$REPO_NAME" | while read path _ branch; do
+git worktree list | grep "worktrees/" | while read path _ branch; do
   ISSUE=$(echo "$branch" | sed 's/.*issue-//')
   if gh issue view "$ISSUE" --json state --jq '.state' | grep -q CLOSED; then
     git worktree remove "$path"
@@ -65,7 +62,7 @@ git worktree prune
 ## Conventions
 
 - **Branch naming**: `issue-<number>` (e.g., `issue-5`)
-- **Worktree path**: `~/.worktrees/<repo>/<issue-number>/`
+- **Worktree path**: `./worktrees/<issue-number>/`
 - **One issue per worktree**: Don't mix concerns
 - **PR links issue**: Include "Closes #N" in PR body
 - **Lazy cleanup**: Run `/project cleanup` periodically
