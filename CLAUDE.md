@@ -11,10 +11,10 @@ This is a deep research agent for cycling route planning. It integrates 5-10+ da
 | [docs/architecture.md](docs/architecture.md) | System design, skills vs tools, orchestration model, checkpoints |
 | [docs/skills.md](docs/skills.md) | 10 composable skills with research patterns and domain knowledge |
 | [docs/tools.md](docs/tools.md) | Data sources (Strava, GraphHopper, WeatherKit, PJAMM, OSM) |
+| [docs/agents.md](docs/agents.md) | Sub-agents (Nutrition Facts, etc.) |
 | [docs/evals.md](docs/evals.md) | Evaluation framework with Promptfoo, test structure |
 | [specs/milestones.md](specs/milestones.md) | Development roadmap with dependencies |
 | [specs/issues/](specs/issues/) | Individual GitHub issue files |
-| [specs/agents/](specs/agents/) | Sub-agent specifications (Nutrition Facts, etc.) |
 
 ## Key Design Decisions
 

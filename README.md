@@ -85,13 +85,12 @@ route-agent/
 │   ├── architecture.md
 │   ├── tools.md
 │   ├── skills.md
+│   ├── agents.md
 │   └── evals.md
 ├── specs/          # Temporary planning → GitHub issues
 │   ├── milestones.md
-│   ├── issues/     # Individual issue files for GitHub API
-│   │   ├── config.yaml
-│   │   └── {name}.yaml
-│   └── agents/     # Sub-agent specifications
+│   └── issues/     # Individual issue files for GitHub API
+│       ├── config.yaml
 │       └── {name}.yaml
 └── CLAUDE.md       # Development context
 ```
