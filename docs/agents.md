@@ -17,7 +17,7 @@ See [architecture.md](architecture.md#skills-vs-sub-agents) for when to use skil
 
 ## Nutrition Facts Agent
 
-**Used by**: [Nutrition Planning](skills.md#9-nutrition-planning) skill
+**Used by**: [Nutrition Planning](skills.md#nutrition-planning) skill
 
 **Purpose**: Look up nutritional information for food items. Handles both commercial products (exact values) and generic items (estimated values).
 

@@ -19,46 +19,46 @@ flowchart TB
     end
 
     subgraph Skills["Composable Skills"]
-        S1[History Analysis]
-        S2[Climb Planning]
-        S3[Weather Planning]
-        S4[Food Stop Planning]
-        S5[Water Stop Planning]
-        S6[Route Optimization]
-        S7[Narrative Research]
-        S8[Safety Assessment]
-        S9[Nutrition Planning]
-        S10[Clothing Planning]
+        historyAnalysis["History Analysis"]
+        climbPlanning["Climb Planning"]
+        weatherPlanning["Weather Planning"]
+        foodStopPlanning["Food Stop Planning"]
+        waterStopPlanning["Water Stop Planning"]
+        routeOptimization["Route Optimization"]
+        narrativeResearch["Narrative Research"]
+        safetyAssessment["Safety Assessment"]
+        nutritionPlanning["Nutrition Planning"]
+        clothingPlanning["Clothing Planning"]
     end
 
     subgraph Tools["MCP Tool Layer"]
-        T1[Strava MCP]
-        T2[Google Maps MCP]
-        T3[Weather API]
-        T4[OSM Tools]
-        T5[Climb Data]
-        T6[Elevation]
+        stravaData["Strava MCP"]
+        googleMaps["Google Maps MCP"]
+        weatherAPI["Weather API"]
+        osmTools["OSM Tools"]
+        climbData["Climb Data"]
+        elevationData["Elevation"]
     end
 
     CC <--> Orchestrator
     QU --> SI
-    SI --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10
-    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10 --> RS
+    SI --> historyAnalysis & climbPlanning & weatherPlanning & foodStopPlanning & waterStopPlanning & routeOptimization & narrativeResearch & safetyAssessment & nutritionPlanning & clothingPlanning
+    historyAnalysis & climbPlanning & weatherPlanning & foodStopPlanning & waterStopPlanning & routeOptimization & narrativeResearch & safetyAssessment & nutritionPlanning & clothingPlanning --> RS
     RS --> GPX
     CP -.-> QU
     CP -.-> SI
     CP -.-> RS
 
-    S1 <--> T1
-    S2 <--> T5 & T6 & T1
-    S3 <--> T3
-    S4 <--> T2
-    S5 <--> T2 & T4
-    S6 <--> T2 & T6
-    S7 <--> T5
-    S8 <--> T2 & T4
-    S9 <--> S3 & S6
-    S10 <--> S3
+    historyAnalysis <--> stravaData
+    climbPlanning <--> climbData & elevationData & stravaData
+    weatherPlanning <--> weatherAPI
+    foodStopPlanning <--> googleMaps
+    waterStopPlanning <--> googleMaps & osmTools
+    routeOptimization <--> googleMaps & elevationData
+    narrativeResearch <--> climbData
+    safetyAssessment <--> googleMaps & osmTools
+    nutritionPlanning <--> weatherPlanning & routeOptimization
+    clothingPlanning <--> weatherPlanning
 ```
 
 ## Core Concepts
@@ -100,17 +100,17 @@ flowchart TD
     Orchestrator[Orchestrator]
 
     subgraph Inline["Inline (Main Thread)"]
-        S1[Simple skill calls]
+        inlineSkills["Simple skill calls"]
     end
 
     subgraph Dynamic["Dynamic Sub-agents"]
-        D1[JIT prompted with 1+ skills]
+        dynamicJIT["JIT prompted with 1+ skills"]
     end
 
     subgraph Predefined["Pre-defined Sub-agents"]
-        P1[Climb Research Agent]
-        P2[Stop Planning Agent]
-        P3[Narrative Research Agent]
+        climbResearchAgent["Climb Research Agent"]
+        stopPlanningAgent["Stop Planning Agent"]
+        narrativeResearchAgent["Narrative Research Agent"]
     end
 
     Orchestrator --> Inline

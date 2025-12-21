@@ -15,36 +15,36 @@ graph TB
     end
 
     subgraph Skills["Composable Skills"]
-        S1[History Analysis]
-        S2[Climb Planning]
-        S3[Weather Planning]
-        S4[Food Stop Planning]
-        S5[Water Stop Planning]
-        S6[Route Optimization]
-        S7[Narrative Research]
-        S8[Safety Assessment]
-        S9[Nutrition Planning]
-        S10[Clothing Planning]
+        SA[History Analysis]
+        SB[Climb Planning]
+        SC[Weather Planning]
+        SD[Food Stop Planning]
+        SE[Water Stop Planning]
+        SF[Route Optimization]
+        SG[Narrative Research]
+        SH[Safety Assessment]
+        SI[Nutrition Planning]
+        SJ[Clothing Planning]
     end
 
-    Plan --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10
-    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10 --> Synth
+    Plan --> SA & SB & SC & SD & SE & SF & SG & SH & SI & SJ
+    SA & SB & SC & SD & SE & SF & SG & SH & SI & SJ --> Synth
 ```
 
 ## Conditional Invocation {#conditional-invocation}
 
 | Skill | Always? | Triggers |
 |-------|---------|----------|
-| [History Analysis](#1-history-analysis) | Yes | - |
-| [Route Optimization](#6-route-optimization) | Yes | - |
-| [Climb Planning](#2-climb-planning) | No | Climbing route, user mentions climbs |
-| [Weather Planning](#3-weather-planning) | No | Adverse conditions, long routes, summer heat |
-| [Food Stop Planning](#4-food-stop-planning) | No | Routes > 40mi, user mentions food/cafe |
-| [Water Stop Planning](#5-water-stop-planning) | No | Hot weather, remote areas, summer rides |
-| [Narrative Research](#7-narrative-research) | No | New areas, user wants local intel |
-| [Safety Assessment](#8-safety-assessment) | No | Unfamiliar roads, user asks about safety |
-| [Nutrition Planning](#9-nutrition-planning) | No | Long routes, user asks about fueling |
-| [Clothing Planning](#10-clothing-planning) | No | Temperature swings, user asks about gear |
+| [History Analysis](#history-analysis) | Yes | - |
+| [Route Optimization](#route-optimization) | Yes | - |
+| [Climb Planning](#climb-planning) | No | Climbing route, user mentions climbs |
+| [Weather Planning](#weather-planning) | No | Adverse conditions, long routes, summer heat |
+| [Food Stop Planning](#food-stop-planning) | No | Routes > 40mi, user mentions food/cafe |
+| [Water Stop Planning](#water-stop-planning) | No | Hot weather, remote areas, summer rides |
+| [Narrative Research](#narrative-research) | No | New areas, user wants local intel |
+| [Safety Assessment](#safety-assessment) | No | Unfamiliar roads, user asks about safety |
+| [Nutrition Planning](#nutrition-planning) | No | Long routes, user asks about fueling |
+| [Clothing Planning](#clothing-planning) | No | Temperature swings, user asks about gear |
 
 **Note on Food vs Water**: Every food stop is implicitly a water stop. A dedicated water stop is for drinking water only (fountains, stores). Water stops are critical in summer heat; may be skipped entirely in winter.
 
@@ -52,7 +52,7 @@ graph TB
 
 ## Skill Definitions {#skill-definitions}
 
-### 1. History Analysis {#1-history-analysis}
+### History Analysis {#history-analysis}
 
 **Purpose**: Understand past rides relevant to current query
 
@@ -76,7 +76,7 @@ graph TB
 
 ---
 
-### 2. Climb Planning {#2-climb-planning}
+### Climb Planning {#climb-planning}
 
 **Purpose**: Research and select climbs for the route
 
@@ -102,7 +102,7 @@ graph TB
 
 ---
 
-### 3. Weather Planning {#3-weather-planning}
+### Weather Planning {#weather-planning}
 
 **Purpose**: Assess weather impact on route timing and safety
 
@@ -128,7 +128,7 @@ graph TB
 
 ---
 
-### 4. Food Stop Planning {#4-food-stop-planning}
+### Food Stop Planning {#food-stop-planning}
 
 **Purpose**: Find cafes and restaurants along route
 
@@ -153,7 +153,7 @@ graph TB
 
 ---
 
-### 5. Water Stop Planning {#5-water-stop-planning}
+### Water Stop Planning {#water-stop-planning}
 
 **Purpose**: Find water-only stops (fountains, stores) for hydration
 
@@ -178,7 +178,7 @@ graph TB
 
 ---
 
-### 6. Route Optimization {#6-route-optimization}
+### Route Optimization {#route-optimization}
 
 **Purpose**: Synthesize waypoints into optimal route
 
@@ -188,7 +188,7 @@ graph TB
 
 **Research Pattern**:
 1. Parse waypoints from user query
-2. Incorporate segments from [History Analysis](#1-history-analysis)
+2. Incorporate segments from [History Analysis](#history-analysis)
 3. Request cycling-optimized route from GraphHopper
 4. Analyze elevation profile
 5. Check for highways or unsuitable roads
@@ -204,7 +204,7 @@ graph TB
 
 ---
 
-### 7. Narrative Research {#7-narrative-research}
+### Narrative Research {#narrative-research}
 
 **Purpose**: Enrich routes with local intel from multiple sources
 
@@ -230,7 +230,7 @@ graph TB
 
 ---
 
-### 8. Safety Assessment {#8-safety-assessment}
+### Safety Assessment {#safety-assessment}
 
 **Purpose**: Evaluate route safety and road quality
 
@@ -254,13 +254,13 @@ graph TB
 
 ---
 
-### 9. Nutrition Planning {#9-nutrition-planning}
+### Nutrition Planning {#nutrition-planning}
 
 **Purpose**: Plan calorie consumption and on-bike fueling strategy
 
 **Invocation**: Long routes (> 50mi), user asks about nutrition/fueling
 
-**Tools**: [Weather Planning](#3-weather-planning) (heat affects consumption), Route Optimization (terrain analysis)
+**Tools**: [Weather Planning](#weather-planning) (heat affects consumption), Route Optimization (terrain analysis)
 
 **Sub-agents**:
 - **Nutrition Facts Agent**: Focused lookup agent for product nutrition data
@@ -301,17 +301,17 @@ graph TB
 - Stop-specific food recommendations
 - On-bike nutrition timing
 
-**Note**: This skill works with [Food Stop Planning](#4-food-stop-planning) but serves a different purpose. Food Stop Planning finds where to get food; Nutrition Planning calculates what you need and when to consume it.
+**Note**: This skill works with [Food Stop Planning](#food-stop-planning) but serves a different purpose. Food Stop Planning finds where to get food; Nutrition Planning calculates what you need and when to consume it.
 
 ---
 
-### 10. Clothing Planning {#10-clothing-planning}
+### Clothing Planning {#clothing-planning}
 
 **Purpose**: Match clothing choices to weather conditions throughout the ride
 
 **Invocation**: Temperature swings (> 15°F change), user asks about clothing/gear
 
-**Tools**: [Weather Planning](#3-weather-planning) (conditions by segment)
+**Tools**: [Weather Planning](#weather-planning) (conditions by segment)
 
 **Research Pattern**:
 1. Get weather by segment from Weather Planning

@@ -33,7 +33,7 @@ graph LR
 
 **Implementation**: Strava MCP (open source)
 
-**Used by**: [History Analysis](skills.md#1-history-analysis), [Climb Planning](skills.md#2-climb-planning) (for segment data)
+**Used by**: [History Analysis](skills.md#history-analysis), [Climb Planning](skills.md#climb-planning) (for segment data)
 
 **Capabilities**:
 - Search activities by geographic area
@@ -48,7 +48,7 @@ graph LR
 
 **Purpose**: Generate turn-by-turn routes between waypoints
 
-**Used by**: [Route Optimization](skills.md#6-route-optimization)
+**Used by**: [Route Optimization](skills.md#route-optimization)
 
 **Why selected**: Uses the same backend as RideWithGPS and Komoot with built-in cycling profiles, open-source self-hosting, and a free API tier (500 credits/day) suitable for prototyping.
 
@@ -90,7 +90,7 @@ graph LR
 
 **Implementation**: Google Maps MCP
 
-**Used by**: [Food Stop Planning](skills.md#4-food-stop-planning), [Water Stop Planning](skills.md#5-water-stop-planning), [Safety Assessment](skills.md#8-safety-assessment)
+**Used by**: [Food Stop Planning](skills.md#food-stop-planning), [Water Stop Planning](skills.md#water-stop-planning), [Safety Assessment](skills.md#safety-assessment)
 
 **Capabilities**:
 - Search by type within radius
@@ -104,7 +104,7 @@ graph LR
 
 **Purpose**: Detailed climb profiles, difficulty ratings, local intel
 
-**Used by**: [Climb Planning](skills.md#2-climb-planning), [Narrative Research](skills.md#7-narrative-research)
+**Used by**: [Climb Planning](skills.md#climb-planning), [Narrative Research](skills.md#narrative-research)
 
 ### PJAMM/Sherpa Integration
 
@@ -139,7 +139,7 @@ For areas PJAMM doesn't cover:
 
 **Purpose**: Hyperlocal weather data for route timing and safety
 
-**Used by**: [Weather Planning](skills.md#3-weather-planning)
+**Used by**: [Weather Planning](skills.md#weather-planning)
 
 **Why selected**: Built by the Dark Sky team (proven hyperlocal forecasting for cycling), provides 500K free API calls/month with existing Apple Developer account, and supports minute-by-minute precipitation data.
 
@@ -180,7 +180,7 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Implementation**: OSM Overpass API
 
-**Used by**: [Water Stop Planning](skills.md#5-water-stop-planning), [Safety Assessment](skills.md#8-safety-assessment)
+**Used by**: [Water Stop Planning](skills.md#water-stop-planning), [Safety Assessment](skills.md#safety-assessment)
 
 **Capabilities**:
 - Find drinking water fountains (amenity=drinking_water)
@@ -194,7 +194,7 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Purpose**: Detailed elevation profiles for arbitrary paths
 
-**Used by**: [Route Optimization](skills.md#6-route-optimization), [Climb Planning](skills.md#2-climb-planning)
+**Used by**: [Route Optimization](skills.md#route-optimization), [Climb Planning](skills.md#climb-planning)
 
 **Note**: GraphHopper routing responses include elevation data, so this may not need a separate tool.
 
@@ -210,7 +210,7 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Purpose**: Visual assessment of road conditions, scenery
 
-**Will be used by**: [Safety Assessment](skills.md#8-safety-assessment)
+**Will be used by**: [Safety Assessment](skills.md#safety-assessment)
 
 | Option | Type | Notes |
 |--------|------|-------|
@@ -223,7 +223,7 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Purpose**: Determine pavement condition, surface type
 
-**Will be used by**: [Safety Assessment](skills.md#8-safety-assessment)
+**Will be used by**: [Safety Assessment](skills.md#safety-assessment)
 
 | Option | Type | Notes |
 |--------|------|-------|
@@ -236,7 +236,7 @@ WeatherKit requires JWT tokens signed with Apple Developer credentials.
 
 **Purpose**: Avoid dangerous roads, construction
 
-**Will be used by**: [Safety Assessment](skills.md#8-safety-assessment)
+**Will be used by**: [Safety Assessment](skills.md#safety-assessment)
 
 | Option | Type | Notes |
 |--------|------|-------|
