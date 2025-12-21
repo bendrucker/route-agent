@@ -67,25 +67,45 @@ body: |
 
   | Tool | Recording Strategy |
   |------|-------------------|
+  | Strava API | Record activity history, segments; scrub home location before commit |
   | WeatherKit | Record for specific locations/dates, create scenarios (sunny, rain, cold→warm) |
   | GraphHopper | Record route responses for test waypoints |
   | Google Maps | Record place searches for test areas |
   | OSM Overpass | Record infrastructure queries |
   | PJAMM | Record climb data for known climbs |
-  | Strava MCP | User-provided export (not HTTP recording - already structured data) |
+
+  ## Privacy: Location Data Scrubbing
+
+  Strava and route fixtures contain GPS coordinates. Before committing:
+
+  ### Home Location Scrubbing
+
+  - **Configure home location**: Either set explicitly or prompt user during recording
+  - **Scrub radius**: Remove/truncate points within configured radius of home (similar to Strava's privacy zone)
+  - **Strava privacy zones**: If enabled on account, API responses may already exclude sensitive areas
+
+  ### What Gets Scrubbed
+
+  - First/last N points of activities within home radius
+  - Exact start/end coordinates replaced with nearest major intersection or landmark
+  - Athlete IDs, names replaced with placeholder values
+
+  ### What Stays Real
+
+  - Route shape and elevation profile (needed for realistic testing)
+  - Segment data and timestamps (shifted if needed)
+  - All coordinates outside home radius (needed for API integration)
 
   ## Fixture Structure
 
   ```
   fixtures/
-  ├── recordings/           # Polly.js auto-generated
-  │   ├── weather-api/
-  │   ├── graphhopper/
-  │   ├── google-maps/
-  │   └── osm-overpass/
-  └── strava/               # User-provided exports
-      ├── activities.json
-      └── segments.json
+  └── recordings/           # Polly.js auto-generated
+      ├── strava/
+      ├── weather-api/
+      ├── graphhopper/
+      ├── google-maps/
+      └── osm-overpass/
   ```
 
   ## Deliverables
@@ -93,7 +113,9 @@ body: |
   - [ ] Install Polly.js and adapters
   - [ ] Configure recording directory structure
   - [ ] Create npm scripts for record vs replay modes
+  - [ ] Implement home location scrubbing for Strava fixtures
   - [ ] Record initial fixtures for WeatherKit (highest priority for Clothing Planning evals)
+  - [ ] Record Strava fixtures (with privacy scrubbing)
   - [ ] Record GraphHopper fixtures for route tests
   - [ ] Document recording workflow
 
@@ -101,4 +123,5 @@ body: |
 
   - `npm run evals` works offline (airplane mode)
   - Same eval produces identical results on repeated runs
+  - No home location exposed in committed fixtures
   - Clear workflow for updating fixtures when needed

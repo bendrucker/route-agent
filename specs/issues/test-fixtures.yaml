@@ -9,21 +9,17 @@ body: |
 
   ## Strava History Fixtures
 
-  Export sample ride data that represents typical usage patterns:
+  Recorded via Polly.js from Strava API (see: `Implement HTTP recording/replay for test fixtures`).
 
-  - **Recent rides** (last 3-6 months): JSON/GPX exports showing:
-    - Typical route distances (80-100 mile range)
-    - Elevation profiles
-    - Preferred road types
-    - Frequent starting locations
-  - **Segment data**: Favorite climbs, PR segments
-  - **Format**: Anonymized if needed, but preserve route characteristics
+  **What to record**:
+  - Recent rides (last 3-6 months) showing typical patterns
+  - Segment data for favorite climbs
+  - Ensure Strava privacy zone is enabled to auto-exclude home area
 
-  ### What this enables
-
+  **What this enables**:
   - History Analysis skill can pattern-match on real preferences
   - Route Optimization can reference actual past routes
-  - Evals can verify agent finds patterns in your riding style
+  - Evals can verify agent finds patterns in riding style
 
   ## Route Query Test Cases
 
@@ -82,7 +78,7 @@ body: |
 
   ## Deliverables
 
-  - [ ] Strava history export (anonymized GPX/JSON)
+  - [ ] Record Strava API fixtures via Polly.js (with privacy zone enabled)
   - [ ] 3-5 route query test cases with expected outputs
   - [ ] Nutrition product list with preferences
   - [ ] Clothing inventory
