@@ -93,22 +93,45 @@ graph LR
 
 ### 4. Climb Data
 
-**Purpose**: Detailed climb profiles, difficulty ratings, discovery
+**Purpose**: Detailed climb profiles, difficulty ratings, **local intel and narrative reports**
+
+The key insight: raw climb metrics (gradient, length, elevation) can be derived from elevation data. The real value of curated climb data is **narrative reports** - firsthand knowledge of road conditions, best approach, photo opportunities, and local context.
 
 | Option | Type | Notes |
 |--------|------|-------|
-| PJAMM Cycling | Web/API? | Best climb data; paid service, API access unclear |
+| PJAMM Cycling | Mobile API | Premium: narrative reports, photos, rankings, local intel |
+| climb-analyzer | OSM + Elevation | Open source climb discovery (no narratives) |
 | Strava Segments | Via Strava | Popular climbs, but less curated |
 | ClimbFinder | Web | European focus |
-| Custom database | Local | Build from GPX + elevation data |
+
+**PJAMM Value Proposition**:
+- Narrative reports with firsthand local intel (author rides the climbs)
+- Photos of key sections
+- Difficulty rankings calibrated across climbs
+- Mobile app exists → JSON API likely reverse-engineerable
+
+**Integration Strategy**:
+1. Users authenticate with their own PJAMM paid account
+2. Reverse-engineer mobile app API for structured access
+3. Each user's access supports PJAMM as a service
+
+**Fallback (climb-analyzer approach)**:
+- Use OSM Overpass + OpenTopoData to discover climbs from raw data
+- Provides metrics but no narrative/local intel
+- Useful for areas PJAMM doesn't cover
+- Reference: [stevehollx/climb-analyzer](https://github.com/stevehollx/climb-analyzer)
 
 **Required Capabilities**:
 - Search climbs by area
 - Get profile (gradient %, length, elevation gain)
 - Difficulty rating
+- **Narrative report / description** (PJAMM unique value)
+- Photos
 - Link to Strava segment if available
 
-**Action Item**: Reach out to PJAMM author (Bay Area local) about API access for this project.
+**Action Items**:
+1. Reverse-engineer PJAMM mobile app API (paid account access)
+2. Optionally reach out to PJAMM author (Bay Area local) about official API
 
 ---
 
