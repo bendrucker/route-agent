@@ -64,3 +64,16 @@ body: |
   - Can run `npx promptfoo eval` in agent directory
   - Pass rate > 90% for commercial products
   - Reasonable estimates for generic items
+
+  ## User-Provided Data
+
+  To make evals realistic, user should provide:
+
+  - **Preferred products**: Actual gels, bars, chews user carries
+    - Enables testing agent knows user's specific nutrition
+  - **Homemade options**: If user makes rice cakes, PB&J, etc.
+    - Agent should estimate nutrition for these
+  - **Restrictions**: Allergies, dietary preferences
+    - Agent should never suggest avoided items
+
+  See: `[USER] Provide test fixture data and expected outputs`

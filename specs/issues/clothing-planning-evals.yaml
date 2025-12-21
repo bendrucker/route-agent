@@ -5,6 +5,7 @@ labels:
 depends_on:
   - Create eval directory structure
   - Implement Clothing Planning skill
+  - "[USER] Provide test fixture data and expected outputs"
 
 body: |
   Skill-level evals for Clothing Planning.
@@ -69,3 +70,19 @@ body: |
 
   Use `llm-rubric` assertion type since clothing recommendations
   are subjective - we're checking for reasoning quality, not exact matches.
+
+  ## User-Provided Data Dependencies
+
+  These evals require fixture data from the user:
+
+  - **Clothing inventory**: What gear the user actually owns
+    - Agent should only recommend items user has
+    - Enables realistic "what to pack" scenarios
+  - **Weather fixture scenarios**: Based on real conditions user encounters
+    - Bay Area morning fog → afternoon sun
+    - Cold mountain summit vs warm valley
+  - **Route context**: Real routes with known microclimates
+    - Coastal vs inland temperature differences
+    - Elevation-based temperature drops
+
+  See: `[USER] Provide test fixture data and expected outputs`

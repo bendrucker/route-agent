@@ -1,15 +1,89 @@
-title: "[USER] Provide test fixture examples"
-milestone: Evaluation Framework
+title: "[USER] Provide test fixture data and expected outputs"
+milestone: Eval Setup
 labels:
   - user-input-needed
   - blocked
 
 body: |
-  Need 2-3 example route queries with expected reasoning.
+  User needs to provide real-world data to make evals assess the agent on realistic tasks.
 
-  ## Format
+  ## Strava History Fixtures
 
-  - Query: "Route from X to Y via Z, ~N miles"
-  - Expected skills invoked
-  - Key decisions agent should make
-  - Expected output characteristics
+  Export sample ride data that represents typical usage patterns:
+
+  - **Recent rides** (last 3-6 months): JSON/GPX exports showing:
+    - Typical route distances (80-100 mile range)
+    - Elevation profiles
+    - Preferred road types
+    - Frequent starting locations
+  - **Segment data**: Favorite climbs, PR segments
+  - **Format**: Anonymized if needed, but preserve route characteristics
+
+  ### What this enables
+
+  - History Analysis skill can pattern-match on real preferences
+  - Route Optimization can reference actual past routes
+  - Evals can verify agent finds patterns in your riding style
+
+  ## Route Query Test Cases
+
+  Provide 3-5 example queries you would actually ask, with expected outputs:
+
+  ### Format per query
+
+  ```yaml
+  query: "Plan a century ride from Palo Alto to Santa Cruz via the coast"
+  context:
+    season: summer
+    fitness_level: high
+    time_constraints: "start by 7am, finish by 4pm"
+  expected:
+    skills_invoked:
+      - History Analysis
+      - Climb Planning
+      - Weather Planning
+      - Food Stop Planning
+      - Water Stop Planning
+    key_decisions:
+      - "Should suggest Highway 1 vs inland route based on wind"
+      - "Should identify Page Mill or OLH as climb options"
+      - "Should recommend water stops every 20-25 miles"
+    output_characteristics:
+      - "GPX file with turn-by-turn"
+      - "Nutrition plan for 5000+ calories"
+      - "Clothing recommendation for fog → sun transition"
+  ```
+
+  ## Nutrition Preferences
+
+  List your actual on-bike nutrition choices so evals can verify agent suggests appropriate options:
+
+  - Preferred commercial products (gels, bars, chews)
+  - Homemade options you use
+  - Foods you avoid (allergies, preferences)
+  - Hydration preferences (plain water, electrolytes, specific brands)
+
+  ## Clothing Inventory
+
+  What gear do you actually own? Agent should recommend from realistic options:
+
+  - Base layers, jerseys, jackets
+  - Arm/leg warmers, vests
+  - Storage options (saddle bag, jersey pockets)
+
+  ## Geographic Context
+
+  Where do you ride? Agent needs local knowledge:
+
+  - Primary riding area (e.g., SF Bay Area)
+  - Known routes and their characteristics
+  - Favorite climbs with typical conditions
+  - Reliable food/water stops you use
+
+  ## Deliverables
+
+  - [ ] Strava history export (anonymized GPX/JSON)
+  - [ ] 3-5 route query test cases with expected outputs
+  - [ ] Nutrition product list with preferences
+  - [ ] Clothing inventory
+  - [ ] Geographic context notes

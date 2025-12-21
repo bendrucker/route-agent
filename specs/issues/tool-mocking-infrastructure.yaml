@@ -1,0 +1,95 @@
+title: Implement tool mocking infrastructure for evals
+milestone: Eval Setup
+labels:
+  - infrastructure
+  - evals
+depends_on:
+  - Set up Promptfoo evaluation framework
+  - "[USER] Provide test fixture data and expected outputs"
+
+body: |
+  Evals need deterministic tool responses to test agent reasoning in isolation.
+
+  ## Why Mock Tools
+
+  - **Determinism**: Real APIs return different data over time (weather changes, Strava syncs)
+  - **Speed**: Avoid API calls during test runs
+  - **Cost**: No API quota consumed during development
+  - **Control**: Test edge cases (bad weather, no food stops nearby)
+
+  ## Tools Requiring Mocks
+
+  | Tool | Mock Provides | Source of Fixture Data |
+  |------|---------------|------------------------|
+  | Strava MCP | Activity history, segments | User-provided export |
+  | GraphHopper | Route geometry, elevation | Cached real responses |
+  | WeatherKit | Forecast data | Synthetic scenarios |
+  | Google Maps | Place search results | Cached real responses |
+  | OSM Overpass | Water fountains, infrastructure | Cached real responses |
+  | PJAMM | Climb profiles | Cached real responses |
+
+  ## Implementation Approach
+
+  ### Option A: Promptfoo Provider Mocking
+
+  Use Promptfoo's provider override to inject mock tool responses:
+
+  ```yaml
+  providers:
+    - id: anthropic:claude-3-5-sonnet
+      config:
+        tools:
+          strava_get_activities:
+            mock: fixtures/strava-history.json
+  ```
+
+  ### Option B: MCP Mock Servers
+
+  Create mock MCP servers that return fixture data:
+
+  ```typescript
+  // src/tools/strava/mock-server.ts
+  export function createMockStravaMCP(fixtures: StravaFixtures) {
+    return new MCPServer({
+      getActivities: () => fixtures.activities,
+      getSegments: () => fixtures.segments,
+    });
+  }
+  ```
+
+  ### Option C: Hybrid
+
+  - Use Option A for simple evals (unit tests)
+  - Use Option B for integration tests requiring realistic tool behavior
+
+  ## Fixture Structure
+
+  ```
+  fixtures/
+  ├── strava/
+  │   ├── activities.json      # User-provided ride history
+  │   └── segments.json        # Favorite segments
+  ├── weather/
+  │   ├── sunny-warm.json      # Good conditions
+  │   ├── cold-start-warm-end.json
+  │   └── rain-risk.json       # Edge case
+  ├── places/
+  │   ├── bay-area-cafes.json  # Food stops
+  │   └── bay-area-fountains.json
+  └── routes/
+      └── cached-responses/    # Real GraphHopper responses
+  ```
+
+  ## Deliverables
+
+  - [ ] Choose mocking approach (A, B, or C)
+  - [ ] Create fixtures/ directory structure
+  - [ ] Implement Strava mock (highest priority - needed for History Analysis)
+  - [ ] Implement Weather mock (needed for Clothing Planning evals)
+  - [ ] Document how to add new fixtures
+
+  ## Success Criteria
+
+  - Evals run without network calls
+  - Same eval produces same result on repeated runs
+  - Easy to add new fixture scenarios
