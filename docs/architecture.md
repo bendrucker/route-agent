@@ -67,9 +67,52 @@ flowchart TB
 
 This separation allows the orchestrator to invoke only relevant skills, keeping context focused and avoiding overload.
 
-### Conditional Skill Invocation
+### Tool Criticality
 
-Not every route needs every skill:
+Tools are classified as **Critical** or **Enhancing**:
+
+| Type | Behavior on Failure | Examples |
+|------|---------------------|----------|
+| **Critical** | Block - cannot proceed | Routing (GraphHopper), Activity History (Strava) |
+| **Enhancing** | Degrade gracefully - skip that enrichment | PJAMM narratives, Web search, Weather details |
+
+The agent should complete a useful route even if enhancing tools fail. For example, if PJAMM API is unavailable, we still produce a route - just without climb narratives.
+
+### Orchestration Model
+
+The orchestrator has flexibility in how it composes skills:
+
+1. **Direct invocation**: Use a skill inline in the main thread
+2. **Single-skill sub-agent**: Spawn a focused sub-agent for one skill
+3. **Multi-skill sub-agent**: Spawn a sub-agent with access to multiple skills
+4. **Pre-defined sub-agents**: Well-scoped agents for common patterns
+
+```mermaid
+flowchart TD
+    Orchestrator[Orchestrator]
+
+    subgraph Inline["Inline (Main Thread)"]
+        S1[Simple skill calls]
+    end
+
+    subgraph Dynamic["Dynamic Sub-agents"]
+        D1[JIT prompted with 1+ skills]
+    end
+
+    subgraph Predefined["Pre-defined Sub-agents"]
+        P1[Climb Research Agent]
+        P2[Stop Planning Agent]
+        P3[Narrative Research Agent]
+    end
+
+    Orchestrator --> Inline
+    Orchestrator --> Dynamic
+    Orchestrator --> Predefined
+```
+
+**Design principle**: Skills exist for flexible composition. The orchestrator decides based on query complexity whether to invoke skills directly, spawn a general sub-agent with JIT prompting, or use a specialized pre-defined sub-agent.
+
+### Conditional Skill Invocation
 
 | Skill | Always? | Conditional Triggers |
 |-------|---------|---------------------|
@@ -77,8 +120,12 @@ Not every route needs every skill:
 | Route Optimization | Yes | - |
 | Climb Planning | No | Climbing route, user mentions climbs |
 | Weather Planning | No | Adverse conditions, long routes, summer heat |
-| Stop Planning | No | Routes > 40mi, user mentions stops |
+| Food Stop Planning | No | Routes > 40mi, user mentions food/cafe |
+| Water Stop Planning | No | Hot weather, remote areas, summer rides |
+| Narrative Research | No | New areas, user wants local intel |
 | Safety Assessment | No | Unfamiliar roads, user asks about safety |
+
+**Note on Food vs Water**: Every food stop is implicitly a water stop. A dedicated water stop is for drinking water only (fountains, stores) when no food is needed. Water stops are critical in summer heat; may be skipped entirely in winter.
 
 ```mermaid
 flowchart LR
@@ -280,16 +327,20 @@ Each skill operates with focused context to avoid overload:
 
 The orchestrator maintains global context; skills receive only what they need.
 
+## Resolved Design Decisions
+
+1. **Skill Granularity**: Food and Water are separate skills. Food stops are implicitly water stops; dedicated water stops are for drinking water only (fountains, stores). Water stops critical in summer, may be skipped in winter.
+
+2. **Skill Dependencies**: Orchestrator aggregates. Skills don't see each other's outputs directly. Orchestrator decides what context to pass to each skill.
+
+3. **Error Handling**: Tools classified as Critical vs. Enhancing. Critical tools (routing, Strava) block on failure. Enhancing tools (PJAMM, web search) degrade gracefully - agent completes route without that enrichment.
+
+4. **Orchestration Model**: Flexible composition. Orchestrator can invoke skills inline, spawn single/multi-skill sub-agents with JIT prompting, or use pre-defined sub-agents for well-scoped problems.
+
 ## Open Questions
 
-1. **Skill Granularity**: Are 6 skills the right decomposition? Should Stop Planning be split into Food/Water/Resupply?
+1. **Caching Strategy**: Shared cache for common geographic queries across skills? What's the TTL?
 
-2. **Skill Dependencies**: Should some skills see other skills' outputs, or should the orchestrator aggregate?
-
-3. **Caching Across Skills**: Shared cache for common geographic queries?
-
-4. **Error Handling**: What if a skill fails? Degrade gracefully or block?
-
-5. **Sub-agent vs Skill**: When is a skill complex enough to warrant its own sub-agent?
+2. **Claude Agent SDK Mapping**: How do skills/sub-agents map to SDK primitives?
 
 See [tools-and-skills.md](tools-and-skills.md) for detailed skill definitions and tool catalog.
