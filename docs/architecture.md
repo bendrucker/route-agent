@@ -122,8 +122,6 @@ flowchart TD
 
 ### Skills vs Sub-agents
 
-Not everything should be a skill. Use sub-agents for focused data retrieval tasks:
-
 | Use a Skill when... | Use a Sub-agent when... |
 |---------------------|------------------------|
 | Task requires route context | Task is a focused lookup |
@@ -135,33 +133,7 @@ Not everything should be a skill. Use sub-agents for focused data retrieval task
 
 ### Conditional Skill Invocation
 
-| Skill | Always? | Conditional Triggers |
-|-------|---------|---------------------|
-| History Analysis | Yes | - |
-| Route Optimization | Yes | - |
-| Climb Planning | No | Climbing route, user mentions climbs |
-| Weather Planning | No | Adverse conditions, long routes, summer heat |
-| Food Stop Planning | No | Routes > 40mi, user mentions food/cafe |
-| Water Stop Planning | No | Hot weather, remote areas, summer rides |
-| Narrative Research | No | New areas, user wants local intel |
-| Safety Assessment | No | Unfamiliar roads, user asks about safety |
-| Nutrition Planning | No | Long routes, user asks about fueling |
-| Clothing Planning | No | Temperature swings, user asks about gear |
-
-**Note on Food vs Water**: Every food stop is implicitly a water stop. A dedicated water stop is for drinking water only (fountains, stores) when no food is needed. Water stops are critical in summer heat; may be skipped entirely in winter.
-
-```mermaid
-flowchart LR
-    Query --> Parse
-    Parse --> |Always| History[History Analysis]
-    Parse --> |Always| Route[Route Optimization]
-    Parse --> |Climbing?| Climb[Climb Planning]
-    Parse --> |Weather concern?| Weather[Weather Planning]
-    Parse --> |Long route?| Stops[Stop Planning]
-    Parse --> |New roads?| Safety[Safety Assessment]
-    Parse --> |Long route?| Nutrition[Nutrition Planning]
-    Parse --> |Temp swing?| Clothing[Clothing Planning]
-```
+See [skills.md](skills.md#conditional-invocation) for skill trigger conditions.
 
 ## Component Details
 
@@ -229,7 +201,7 @@ sequenceDiagram
 
 ### Checkpoint Manager
 
-Controls the interaction flow. The user remains "in the driver's seat" through structured checkpoints:
+Manages interaction flow through structured pauses where the user provides input:
 
 ```mermaid
 stateDiagram-v2
@@ -252,15 +224,13 @@ stateDiagram-v2
     GenerateGPX --> [*]: Output file
 ```
 
-**Checkpoint Types:**
-
-| Checkpoint | Purpose | User Actions |
-|------------|---------|--------------|
-| Confirm Intent | Verify parsed query and skill selection | Confirm, clarify, add constraints |
-| Present Findings | Show skill results | Select interesting options, request more |
-| Select Route | Choose from candidates | Pick route, request alternatives |
-| Refine Route | Fine-tune details | Adjust stops, reorder waypoints |
-| Present Final | Review before generation | Approve or tweak |
+| Checkpoint | Purpose |
+|------------|---------|
+| Confirm Intent | Verify parsed query and skill selection |
+| Present Findings | Show skill results |
+| Select Route | Choose from route candidates |
+| Refine Route | Fine-tune details |
+| Present Final | Review before generation |
 
 ### Route Synthesis
 
@@ -290,8 +260,6 @@ Skills can be implemented as:
 3. **Hybrid**: Sub-agent for complex skills, prompts for simple ones
 
 ```typescript
-// Conceptual structure - not final implementation
-
 // Skill as sub-agent
 const climbPlanningSkill = createAgent({
   name: "climb-planner",
@@ -303,24 +271,15 @@ const climbPlanningSkill = createAgent({
 const stopPlanningSkill = {
   name: "stop-planner",
   tools: [googlePlaces, osmWater],
-  invoke: async (routeCorridor, constraints) => {
-    // Use tools with focused context
-  }
+  invoke: async (routeCorridor, constraints) => { }
 };
 
-// Orchestrator
+// Orchestrator workflow
 const routeAgent = createAgent({
   name: "route-planner",
-  skills: [
-    historySkill,
-    climbPlanningSkill,
-    weatherSkill,
-    stopPlanningSkill,
-    routeOptimizationSkill,
-    safetySkill,
-    nutritionPlanningSkill,
-    clothingPlanningSkill,
-  ],
+  skills: [historySkill, climbPlanningSkill, weatherSkill, stopPlanningSkill,
+           routeOptimizationSkill, safetySkill, nutritionPlanningSkill,
+           clothingPlanningSkill],
 
   workflow: async (input) => {
     const query = await parseQuery(input);
@@ -343,35 +302,8 @@ const routeAgent = createAgent({
 
 ## Context Management
 
-Each skill operates with focused context to avoid overload:
-
-| Skill | Context Needs | Typical Size |
-|-------|--------------|--------------|
-| History Analysis | User query, geographic bounds | Low |
-| Climb Planning | Target area, user preferences, past climbs | Medium |
-| Weather Planning | Route geometry, timing, duration | Medium |
-| Food Stop Planning | Route corridor, distance markers | Medium |
-| Water Stop Planning | Route corridor, weather, season | Low-Medium |
-| Route Optimization | Waypoints, constraints, skill outputs | Medium |
-| Narrative Research | Key locations on route | Low |
-| Safety Assessment | Specific road segments to evaluate | Low-Medium |
-| Nutrition Planning | Route profile, weather, stop locations | Medium |
-| Clothing Planning | Weather by segment, terrain profile | Low-Medium |
+See [skills.md](skills.md#context-management) for per-skill context requirements.
 
 The orchestrator maintains global context; skills receive only what they need.
-
-## Resolved Design Decisions
-
-1. **Skill Granularity**: Food and Water are separate skills. Food stops are implicitly water stops; dedicated water stops are for drinking water only (fountains, stores). Water stops critical in summer, may be skipped in winter.
-
-2. **Skill Dependencies**: Orchestrator aggregates. Skills don't see each other's outputs directly. Orchestrator decides what context to pass to each skill.
-
-3. **Error Handling**: Tools classified as Critical vs. Enhancing. Critical tools (routing, Strava) block on failure. Enhancing tools (PJAMM, web search) degrade gracefully - agent completes route without that enrichment.
-
-4. **Orchestration Model**: Flexible composition. Orchestrator can invoke skills inline, spawn single/multi-skill sub-agents with JIT prompting, or use pre-defined sub-agents for well-scoped problems.
-
-5. **Caching**: On-disk caching for local development to preserve free tier API quotas.
-
-6. **Development Approach**: Develop skills, tools, and prompts using Claude Code interactive mode. Move to Agent SDK for workflow automation once core functionality is validated.
 
 See [tools.md](tools.md) for data source abstractions and [skills.md](skills.md) for research patterns.

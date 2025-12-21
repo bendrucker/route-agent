@@ -4,7 +4,7 @@ Skills are composable research patterns that use [tools](tools.md) to accomplish
 
 See [architecture.md](architecture.md) for orchestration model and design decisions.
 
-## Skill Architecture
+## Skill Architecture {#skill-architecture}
 
 ```mermaid
 graph TB
@@ -31,7 +31,7 @@ graph TB
     S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 & S10 --> Synth
 ```
 
-## Conditional Invocation
+## Conditional Invocation {#conditional-invocation}
 
 | Skill | Always? | Triggers |
 |-------|---------|----------|
@@ -50,9 +50,9 @@ graph TB
 
 ---
 
-## Skill Definitions
+## Skill Definitions {#skill-definitions}
 
-### 1. History Analysis
+### 1. History Analysis {#1-history-analysis}
 
 **Purpose**: Understand past rides relevant to current query
 
@@ -76,7 +76,7 @@ graph TB
 
 ---
 
-### 2. Climb Planning
+### 2. Climb Planning {#2-climb-planning}
 
 **Purpose**: Research and select climbs for the route
 
@@ -102,7 +102,7 @@ graph TB
 
 ---
 
-### 3. Weather Planning
+### 3. Weather Planning {#3-weather-planning}
 
 **Purpose**: Assess weather impact on route timing and safety
 
@@ -128,7 +128,7 @@ graph TB
 
 ---
 
-### 4. Food Stop Planning
+### 4. Food Stop Planning {#4-food-stop-planning}
 
 **Purpose**: Find cafes and restaurants along route
 
@@ -153,7 +153,7 @@ graph TB
 
 ---
 
-### 5. Water Stop Planning
+### 5. Water Stop Planning {#5-water-stop-planning}
 
 **Purpose**: Find water-only stops (fountains, stores) for hydration
 
@@ -178,7 +178,7 @@ graph TB
 
 ---
 
-### 6. Route Optimization
+### 6. Route Optimization {#6-route-optimization}
 
 **Purpose**: Synthesize waypoints into optimal route
 
@@ -204,7 +204,7 @@ graph TB
 
 ---
 
-### 7. Narrative Research
+### 7. Narrative Research {#7-narrative-research}
 
 **Purpose**: Enrich routes with local intel from multiple sources
 
@@ -230,7 +230,7 @@ graph TB
 
 ---
 
-### 8. Safety Assessment
+### 8. Safety Assessment {#8-safety-assessment}
 
 **Purpose**: Evaluate route safety and road quality
 
@@ -254,7 +254,7 @@ graph TB
 
 ---
 
-### 9. Nutrition Planning
+### 9. Nutrition Planning {#9-nutrition-planning}
 
 **Purpose**: Plan calorie consumption and on-bike fueling strategy
 
@@ -305,7 +305,7 @@ graph TB
 
 ---
 
-### 10. Clothing Planning
+### 10. Clothing Planning {#10-clothing-planning}
 
 **Purpose**: Match clothing choices to weather conditions throughout the ride
 
@@ -354,7 +354,7 @@ graph TB
 
 ---
 
-## Skill Invocation Flow
+## Skill Invocation Flow {#skill-invocation-flow}
 
 ```mermaid
 flowchart TD
@@ -397,7 +397,7 @@ flowchart TD
 
 ---
 
-## Context Management
+## Context Management {#context-management}
 
 Each skill operates with focused context:
 

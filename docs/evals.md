@@ -12,15 +12,6 @@ Test-driven development for the route agent using structured evaluations.
 - **Provider agnostic**: Works with Anthropic/Claude
 - **Assertions**: Built-in validation for pass/fail grading
 
-### Why not others?
-
-| Framework | Issue |
-|-----------|-------|
-| Deepeval | Python-only |
-| LangSmith | Python-focused, overkill for local dev |
-| OpenAI Evals | OpenAI-only |
-| Braintrust | Great, but Promptfoo is simpler for getting started |
-
 ## Directory Structure
 
 Evals are organized as siblings of the code they test:
@@ -59,12 +50,7 @@ route-agent/
     └── run-all.ts            # Script to run all evals
 ```
 
-### Why colocate evals?
-
-- **Discoverability**: Find tests next to the code they test
-- **Maintenance**: Update tests when updating code
-- **Ownership**: Clear responsibility for each eval set
-- **Scalability**: Add new skills/agents with their own evals
+Evals are colocated with code for discoverability and maintenance.
 
 ## Eval Categories
 
@@ -282,32 +268,6 @@ Gold standard cases are blocked on user input:
 | Tunitas Creek route | **Needed** | Climb-focused, coastal |
 | Mt. Tam loop | **Needed** | Multi-climb, Marin |
 | South Bay flat | **Needed** | Speed-focused, minimal climbing |
-
-## Development Workflow
-
-1. **Start with sub-agents**: Narrow scope, quick feedback
-2. **Add skill evals**: Test domain logic
-3. **Build up to e2e**: Full system validation
-4. **Iterate**: Fail → fix → pass cycle
-
-### TDD for New Features
-
-```bash
-# 1. Write failing test
-echo "test case" >> src/skills/new-skill/evals/cases/feature.yaml
-
-# 2. Run eval (should fail)
-cd src/skills/new-skill/evals && npx promptfoo eval
-
-# 3. Implement feature
-# ... code changes ...
-
-# 4. Run eval (should pass)
-npx promptfoo eval
-
-# 5. Commit with passing tests
-git add . && git commit -m "Add feature with passing evals"
-```
 
 ## Metrics to Track
 

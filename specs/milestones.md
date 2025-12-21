@@ -33,8 +33,6 @@ These items are blocked on input from the user:
 
 **Depends on**: Foundation (can run in parallel after basic setup)
 
-This is a **learning milestone** - building practical experience with LLM evals.
-
 **Deliverables**:
 - [ ] Promptfoo installed and configured
 - [ ] Directory structure for colocated evals
@@ -310,31 +308,3 @@ graph TD
     Refine --> Eval
     EvalSetup --> Eval
 ```
-
-## Parallelization Opportunities
-
-After Foundation, these can proceed in parallel:
-
-| Stream | Milestones | Notes |
-|--------|------------|-------|
-| **Core** | Strava → Route Synthesis | Critical path |
-| **Routing** | GraphHopper | Joins at Route Synthesis |
-| **Evals** | Eval Setup | Learning track, start with sub-agents |
-| **Research** | PJAMM API investigation | User-driven, unblocks Climb Integration |
-
-After Route Synthesis, these can proceed in parallel:
-- Place Search, Water Stops, Climb Integration, Weather Integration
-
-After Weather Integration:
-- Ride Preparation can start (needs route profile + weather data)
-
----
-
-## Current Status
-
-**Active**: Planning & Architecture
-
-**Next Steps**:
-- User provides test fixture examples
-- User begins PJAMM API investigation (proxy mobile app)
-- Set up Claude Agent SDK project structure

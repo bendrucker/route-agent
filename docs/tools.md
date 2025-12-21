@@ -25,13 +25,6 @@ graph LR
     end
 ```
 
-## Tool Criticality
-
-| Type | Behavior on Failure | Examples |
-|------|---------------------|----------|
-| **Critical** | Block - cannot proceed | Routing (GraphHopper), Activity History (Strava) |
-| **Enhancing** | Degrade gracefully | PJAMM narratives, Web search, Weather details |
-
 ---
 
 ## 1. Activity History (Strava)
@@ -55,16 +48,9 @@ graph LR
 
 **Purpose**: Generate turn-by-turn routes between waypoints
 
-**Decision**: GraphHopper selected as primary routing engine.
-
 **Used by**: [Route Optimization](skills.md#6-route-optimization)
 
-### Why GraphHopper
-
-- Same backend as RideWithGPS, Komoot, and Sherpa Map
-- Cycling-specific profiles built-in
-- Open source (can self-host for unlimited use)
-- Free API tier available for prototyping (500 credits/day)
+**Why selected**: Uses the same backend as RideWithGPS and Komoot with built-in cycling profiles, open-source self-hosting, and a free API tier (500 credits/day) suitable for prototyping.
 
 ### API Details
 
@@ -153,17 +139,9 @@ For areas PJAMM doesn't cover:
 
 **Purpose**: Hyperlocal weather data for route timing and safety
 
-**Decision**: Apple WeatherKit selected.
-
 **Used by**: [Weather Planning](skills.md#3-weather-planning)
 
-### Why WeatherKit
-
-- Built by Dark Sky team (gold standard for hyperlocal forecasts)
-- Same backend as Epic Ride Weather (proven for cycling)
-- 500K calls/month included with existing Apple Developer account
-- Minute-by-minute precipitation, hourly forecasts up to 10 days
-- REST API available
+**Why selected**: Built by the Dark Sky team (proven hyperlocal forecasting for cycling), provides 500K free API calls/month with existing Apple Developer account, and supports minute-by-minute precipitation data.
 
 ### API Details
 
