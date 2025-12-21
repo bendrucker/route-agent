@@ -1,95 +1,104 @@
-title: Implement tool mocking infrastructure for evals
+title: Implement HTTP recording/replay for test fixtures
 milestone: Eval Setup
 labels:
   - infrastructure
   - evals
 depends_on:
   - Set up Promptfoo evaluation framework
-  - "[USER] Provide test fixture data and expected outputs"
 
 body: |
-  Evals need deterministic tool responses to test agent reasoning in isolation.
+  Use HTTP recording to capture real API responses and replay them in tests.
 
-  ## Why Mock Tools
+  ## Why Record/Replay
 
-  - **Determinism**: Real APIs return different data over time (weather changes, Strava syncs)
-  - **Speed**: Avoid API calls during test runs
-  - **Cost**: No API quota consumed during development
-  - **Control**: Test edge cases (bad weather, no food stops nearby)
+  - **Determinism**: Same responses on every test run
+  - **Speed**: No network calls during tests
+  - **Cost**: No API quota consumed
+  - **Realistic**: Fixtures come from real APIs, not hand-crafted mocks
+  - **Maintainable**: Re-record when APIs change instead of updating mocks
 
-  ## Tools Requiring Mocks
+  ## Recommended: Polly.js
 
-  | Tool | Mock Provides | Source of Fixture Data |
-  |------|---------------|------------------------|
-  | Strava MCP | Activity history, segments | User-provided export |
-  | GraphHopper | Route geometry, elevation | Cached real responses |
-  | WeatherKit | Forecast data | Synthetic scenarios |
-  | Google Maps | Place search results | Cached real responses |
-  | OSM Overpass | Water fountains, infrastructure | Cached real responses |
-  | PJAMM | Climb profiles | Cached real responses |
-
-  ## Implementation Approach
-
-  ### Option A: Promptfoo Provider Mocking
-
-  Use Promptfoo's provider override to inject mock tool responses:
-
-  ```yaml
-  providers:
-    - id: anthropic:claude-3-5-sonnet
-      config:
-        tools:
-          strava_get_activities:
-            mock: fixtures/strava-history.json
-  ```
-
-  ### Option B: MCP Mock Servers
-
-  Create mock MCP servers that return fixture data:
+  Netflix's [Polly.js](https://netflix.github.io/pollyjs/) is purpose-built for this:
 
   ```typescript
-  // src/tools/strava/mock-server.ts
-  export function createMockStravaMCP(fixtures: StravaFixtures) {
-    return new MCPServer({
-      getActivities: () => fixtures.activities,
-      getSegments: () => fixtures.segments,
-    });
-  }
+  import { Polly } from '@pollyjs/core';
+  import NodeHttpAdapter from '@pollyjs/adapter-node-http';
+  import FSPersister from '@pollyjs/persister-fs';
+
+  Polly.register(NodeHttpAdapter);
+  Polly.register(FSPersister);
+
+  const polly = new Polly('weather-api', {
+    adapters: ['node-http'],
+    persister: 'fs',
+    persisterOptions: {
+      fs: { recordingsDir: 'fixtures/recordings' }
+    }
+  });
+
+  // First run: records real HTTP calls
+  // Subsequent runs: replays from fixtures/recordings/
   ```
 
-  ### Option C: Hybrid
+  ### Alternatives Considered
 
-  - Use Option A for simple evals (unit tests)
-  - Use Option B for integration tests requiring realistic tool behavior
+  | Tool | Pros | Cons |
+  |------|------|------|
+  | **Polly.js** | Purpose-built for record/replay, works with any HTTP client | Slightly more setup |
+  | **Nock** (nockBack) | Familiar, simple API | Node.js only, manual adapter setup for some clients |
+  | **MSW** | Great TypeScript support, browser+Node | No built-in recording |
+
+  ## Recording Workflow
+
+  1. **Record mode**: Run tests against real APIs, Polly captures responses
+  2. **Replay mode**: Tests use recorded fixtures, no network calls
+  3. **Update fixtures**: Re-record when APIs change or new scenarios needed
+
+  ```bash
+  # Record new fixtures
+  POLLY_MODE=record npm run evals
+
+  # Normal test runs (replay)
+  npm run evals
+  ```
+
+  ## Tools Requiring Recordings
+
+  | Tool | Recording Strategy |
+  |------|-------------------|
+  | WeatherKit | Record for specific locations/dates, create scenarios (sunny, rain, cold→warm) |
+  | GraphHopper | Record route responses for test waypoints |
+  | Google Maps | Record place searches for test areas |
+  | OSM Overpass | Record infrastructure queries |
+  | PJAMM | Record climb data for known climbs |
+  | Strava MCP | User-provided export (not HTTP recording - already structured data) |
 
   ## Fixture Structure
 
   ```
   fixtures/
-  ├── strava/
-  │   ├── activities.json      # User-provided ride history
-  │   └── segments.json        # Favorite segments
-  ├── weather/
-  │   ├── sunny-warm.json      # Good conditions
-  │   ├── cold-start-warm-end.json
-  │   └── rain-risk.json       # Edge case
-  ├── places/
-  │   ├── bay-area-cafes.json  # Food stops
-  │   └── bay-area-fountains.json
-  └── routes/
-      └── cached-responses/    # Real GraphHopper responses
+  ├── recordings/           # Polly.js auto-generated
+  │   ├── weather-api/
+  │   ├── graphhopper/
+  │   ├── google-maps/
+  │   └── osm-overpass/
+  └── strava/               # User-provided exports
+      ├── activities.json
+      └── segments.json
   ```
 
   ## Deliverables
 
-  - [ ] Choose mocking approach (A, B, or C)
-  - [ ] Create fixtures/ directory structure
-  - [ ] Implement Strava mock (highest priority - needed for History Analysis)
-  - [ ] Implement Weather mock (needed for Clothing Planning evals)
-  - [ ] Document how to add new fixtures
+  - [ ] Install Polly.js and adapters
+  - [ ] Configure recording directory structure
+  - [ ] Create npm scripts for record vs replay modes
+  - [ ] Record initial fixtures for WeatherKit (highest priority for Clothing Planning evals)
+  - [ ] Record GraphHopper fixtures for route tests
+  - [ ] Document recording workflow
 
   ## Success Criteria
 
-  - Evals run without network calls
-  - Same eval produces same result on repeated runs
-  - Easy to add new fixture scenarios
+  - `npm run evals` works offline (airplane mode)
+  - Same eval produces identical results on repeated runs
+  - Clear workflow for updating fixtures when needed
