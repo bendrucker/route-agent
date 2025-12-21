@@ -49,6 +49,40 @@ body: |
 
   For non-deterministic params (timestamps, pagination), use parameter normalization or sequence-based matching.
 
+  ## Date Handling in Evals
+
+  Weather forecasts and time-sensitive data require careful date handling.
+
+  ### The Problem
+
+  If fixtures were recorded on 2024-06-15 and we replay them with "today" as 2025-01-10:
+  - Model knows its training cutoff is later than the fixture date
+  - Weather data is historical, not a "forecast" - model might reason differently
+  - Model could be confused by temporal inconsistency
+
+  ### Options to Consider
+
+  1. **Mock "today" in system prompt**: Tell the agent "Today is June 15, 2024" and use fixtures from that date. Model reasons as if it's that date.
+
+  2. **Relative date fixtures**: Store fixtures with relative timestamps ("today", "tomorrow") and transform at replay time. More complex but avoids historical confusion.
+
+  3. **Accept the limitation**: Use historical dates, document that evals test reasoning patterns not temporal awareness. May be sufficient for most cases.
+
+  4. **Re-record periodically**: Keep fixtures fresh by re-recording seasonally. High maintenance but most realistic.
+
+  ### Recommendation
+
+  Start with option 1 (mock "today" in system prompt). It's simple and makes the temporal context explicit. If we observe model confusion about dates, revisit.
+
+  ```yaml
+  # In eval config
+  vars:
+    simulated_date: "2024-06-15"
+  prompt: |
+    Today is {{simulated_date}}.
+    Plan a route for: {{query}}
+  ```
+
   ## Tools Requiring Fixtures
 
   | Tool | Key Calls to Record |
