@@ -87,7 +87,7 @@ route-agent/
 │   ├── milestones.md
 │   └── issues/     # Individual issue files for GitHub API
 │       ├── config.yaml
-│       └── m{N}-{NN}-*.yaml
+│       └── {name}.yaml
 └── CLAUDE.md       # Development context
 ```
 

@@ -1,5 +1,5 @@
 title: Implement Food Stop Planning skill
-milestone: "M4: Place Search"
+milestone: Place Search
 labels:
   - skill
 depends_on:

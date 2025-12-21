@@ -5,17 +5,17 @@ Individual issue files for automated creation via GitHub API.
 ## Structure
 
 - `config.yaml` - Milestones and labels to create first
-- `m{N}-{NN}-{name}.yaml` - Individual issues, sorted by milestone
+- `{name}.yaml` - Individual issues with descriptive names
 
 ## File Format
 
 ```yaml
 title: Issue title
-milestone: "M0: Foundation"
+milestone: Foundation
 labels:
   - tool
   - critical-path
-depends_on:  # optional
+depends_on:  # optional, references other issue titles
   - Other issue title
 body: |
   Markdown body content
@@ -25,21 +25,32 @@ body: |
 
 1. Create milestones from `config.yaml`
 2. Create labels from `config.yaml`
-3. Create issues in filename order (respects dependencies)
+3. Create issues (use `depends_on` to link after creation)
 
-## Issues by Milestone
+## Dependency Graph
 
-| Milestone | Issues |
-|-----------|--------|
-| M0: Foundation | 2 |
-| M1: Strava Integration | 2 |
-| M2: GraphHopper Integration | 2 |
-| M3: Route Synthesis | 2 |
-| M4: Place Search | 2 |
-| M5: Water Stops | 2 |
-| M6: Climb Integration | 4 |
-| M7: Weather Integration | 2 |
-| M8: Narrative Research | 2 |
-| M11: Evaluation Framework | 1 |
+Relationships are expressed via `depends_on` fields, not ordering.
 
-M9 and M10 issues to be defined after core functionality is validated.
+```
+project-structure
+checkpoint-system
+
+strava-mcp ──► history-analysis-skill ─┐
+                                       │
+graphhopper-api ──► gpx-generation     ├──► route-optimization-skill
+                │                      │
+                └──────────────────────┘
+
+google-maps-mcp ──► food-stop-planning-skill
+
+osm-overpass-wrapper ──► water-stop-planning-skill
+
+pjamm-api-spike ──► pjamm-client ──► climb-planning-skill
+
+weatherkit-client ──► weather-planning-skill
+
+web-search-ride-reports
+narrative-research-skill
+
+test-fixtures (user dependency)
+```

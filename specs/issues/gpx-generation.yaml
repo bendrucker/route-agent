@@ -1,5 +1,5 @@
 title: Implement GPX generation
-milestone: "M2: GraphHopper Integration"
+milestone: GraphHopper Integration
 labels:
   - infrastructure
 depends_on:

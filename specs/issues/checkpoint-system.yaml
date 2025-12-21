@@ -1,5 +1,5 @@
 title: Implement checkpoint system with AskUserQuestion
-milestone: "M0: Foundation"
+milestone: Foundation
 labels:
   - infrastructure
 

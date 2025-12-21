@@ -1,5 +1,5 @@
 title: Implement PJAMM client
-milestone: "M6: Climb Integration"
+milestone: Climb Integration
 labels:
   - tool
 depends_on:

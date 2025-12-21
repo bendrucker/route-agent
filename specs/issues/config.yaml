@@ -1,65 +1,65 @@
 milestones:
-  - title: "M0: Foundation"
-    description: "Basic agent skeleton running in Claude Code"
+  - title: Foundation
+    description: Basic agent skeleton running in Claude Code
 
-  - title: "M1: Strava Integration"
-    description: "Agent understands cycling history and preferences"
+  - title: Strava Integration
+    description: Agent understands cycling history and preferences
 
-  - title: "M2: GraphHopper Integration"
-    description: "Cycling-optimized routing between waypoints"
+  - title: GraphHopper Integration
+    description: Cycling-optimized routing between waypoints
 
-  - title: "M3: Route Synthesis"
-    description: "Combine Strava history + GraphHopper routing into a plan"
+  - title: Route Synthesis
+    description: Combine Strava history + GraphHopper routing into a plan
 
-  - title: "M4: Place Search"
-    description: "Find cafes, stores, and stops along routes"
+  - title: Place Search
+    description: Find cafes, stores, and stops along routes
 
-  - title: "M5: Water Stops"
-    description: "Dedicated water stop planning for hot weather"
+  - title: Water Stops
+    description: Dedicated water stop planning for hot weather
 
-  - title: "M6: Climb Integration"
-    description: "Deep knowledge of climbs via PJAMM"
+  - title: Climb Integration
+    description: Deep knowledge of climbs via PJAMM
 
-  - title: "M7: Weather Integration"
-    description: "Hyperlocal weather along routes via WeatherKit"
+  - title: Weather Integration
+    description: Hyperlocal weather along routes via WeatherKit
 
-  - title: "M8: Narrative Research"
-    description: "Enrich routes with local intel from multiple sources"
+  - title: Narrative Research
+    description: Enrich routes with local intel from multiple sources
 
-  - title: "M9: Research Quality"
-    description: "Expert-level multi-source research"
+  - title: Research Quality
+    description: Expert-level multi-source research
 
-  - title: "M10: Route Refinement"
-    description: "Interactive fine-tuning of routes"
+  - title: Route Refinement
+    description: Interactive fine-tuning of routes
 
-  - title: "M11: Evaluation Framework"
-    description: "Systematic quality measurement with test fixtures"
+  - title: Evaluation Framework
+    description: Systematic quality measurement with test fixtures
 
 labels:
-  - name: "tool"
+  - name: tool
     color: "0052CC"
-    description: "External API/MCP integration"
+    description: External API/MCP integration
 
-  - name: "skill"
+  - name: skill
     color: "5319E7"
-    description: "Agent skill implementation"
+    description: Agent skill implementation
 
-  - name: "infrastructure"
+  - name: infrastructure
     color: "006B75"
-    description: "Project setup, tooling, CI"
+    description: Project setup, tooling, CI
 
-  - name: "spike"
+  - name: spike
     color: "FBCA04"
-    description: "Research/investigation task"
+    description: Research/investigation task
 
-  - name: "blocked"
+  - name: blocked
     color: "B60205"
-    description: "Waiting on external dependency"
+    description: Waiting on external dependency
 
-  - name: "user-input-needed"
+  - name: user-input-needed
     color: "D93F0B"
-    description: "Requires input from user"
+    description: Requires input from user
 
-  - name: "critical-path"
+  - name: critical-path
     color: "C2E0C6"
-    description: "Blocks other work"
+    description: Blocks other work

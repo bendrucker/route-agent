@@ -1,5 +1,5 @@
 title: Implement Weather Planning skill
-milestone: "M7: Weather Integration"
+milestone: Weather Integration
 labels:
   - skill
 depends_on:

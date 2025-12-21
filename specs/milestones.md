@@ -13,7 +13,7 @@ These items are blocked on input from the user:
 
 ---
 
-## Milestone 0: Foundation
+## Foundation
 
 **Goal**: Basic agent skeleton running in Claude Code
 
@@ -27,11 +27,13 @@ These items are blocked on input from the user:
 
 ---
 
-## Milestone 1: Strava Integration
+## Strava Integration
 
 **Goal**: Agent understands your cycling history and preferences
 
 This is the **highest priority** integration. The agent's value comes from understanding your past behavior and preferences, not just generic routing.
+
+**Depends on**: Foundation
 
 **Deliverables**:
 - [ ] Strava MCP integrated and authenticated
@@ -51,9 +53,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 2: GraphHopper Integration
+## GraphHopper Integration
 
 **Goal**: Cycling-optimized routing between waypoints
+
+**Depends on**: Foundation
 
 **Deliverables**:
 - [ ] GraphHopper API integration (free tier)
@@ -66,9 +70,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 3: Basic Route Synthesis
+## Route Synthesis
 
 **Goal**: Combine Strava history + GraphHopper routing into a plan
+
+**Depends on**: Strava Integration, GraphHopper Integration
 
 **Deliverables**:
 - [ ] Parse user query into structured route request
@@ -81,9 +87,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 4: Place Search (Google Maps)
+## Place Search
 
 **Goal**: Find cafes, stores, and stops along routes
+
+**Depends on**: Route Synthesis
 
 **Deliverables**:
 - [ ] Google Maps MCP integrated
@@ -96,9 +104,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 5: Water Stops (OSM)
+## Water Stops
 
 **Goal**: Dedicated water stop planning for hot weather
+
+**Depends on**: Route Synthesis
 
 **Deliverables**:
 - [ ] Overpass API wrapper for OSM queries
@@ -110,11 +120,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 6: Climb Integration
+## Climb Integration
 
 **Goal**: Deep knowledge of climbs in the area
 
-**Depends on**: PJAMM API investigation (user dependency)
+**Depends on**: Route Synthesis, PJAMM API investigation (user dependency)
 
 **Deliverables**:
 - [ ] PJAMM API access via reverse-engineered mobile API
@@ -128,9 +138,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 7: Weather Integration
+## Weather Integration
 
 **Goal**: Hyperlocal weather along routes
+
+**Depends on**: Route Synthesis
 
 **Deliverables**:
 - [ ] WeatherKit API integration (JWT auth)
@@ -143,9 +155,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 8: Narrative Research
+## Narrative Research
 
 **Goal**: Enrich routes with local intel from multiple sources
+
+**Depends on**: Place Search, Water Stops, Climb Integration, Weather Integration
 
 **Deliverables**:
 - [ ] Web search for forum posts, ride reports
@@ -157,9 +171,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 9: Research Quality
+## Research Quality
 
 **Goal**: Agent performs expert-level multi-source research
+
+**Depends on**: Narrative Research
 
 **Deliverables**:
 - [ ] Parallel data gathering from all sources
@@ -171,9 +187,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 10: Route Refinement
+## Route Refinement
 
 **Goal**: Interactive fine-tuning of routes
+
+**Depends on**: Research Quality
 
 **Deliverables**:
 - [ ] User can adjust stops, reorder waypoints
@@ -185,11 +203,11 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone 11: Evaluation Framework
+## Evaluation Framework
 
 **Goal**: Systematic quality measurement
 
-**Depends on**: Test fixtures from user
+**Depends on**: Route Refinement, Test fixtures (user dependency)
 
 **Deliverables**:
 - [ ] Test fixtures based on real planned trips
@@ -210,54 +228,54 @@ This is the **highest priority** integration. The agent's value comes from under
 
 ---
 
-## Milestone Dependency Graph
+## Dependency Graph
 
 ```mermaid
 graph TD
-    U1[User: Test Fixtures] -.-> M11
-    U2[User: PJAMM API Investigation] -.-> M6
+    U1[User: Test Fixtures] -.-> Eval[Evaluation Framework]
+    U2[User: PJAMM Investigation] -.-> Climb[Climb Integration]
 
-    M0[M0: Foundation] --> M1[M1: Strava]
-    M0 --> M2[M2: GraphHopper]
+    Found[Foundation] --> Strava[Strava Integration]
+    Found --> GH[GraphHopper Integration]
 
-    M1 --> M3[M3: Route Synthesis]
-    M2 --> M3
+    Strava --> Synth[Route Synthesis]
+    GH --> Synth
 
-    M3 --> M4[M4: Places]
-    M3 --> M5[M5: Water/OSM]
-    M3 --> M6[M6: Climbs]
-    M3 --> M7[M7: Weather]
+    Synth --> Places[Place Search]
+    Synth --> Water[Water Stops]
+    Synth --> Climb
+    Synth --> Weather[Weather Integration]
 
-    M4 --> M8[M8: Narrative Research]
-    M5 --> M8
-    M6 --> M8
-    M7 --> M8
+    Places --> Narr[Narrative Research]
+    Water --> Narr
+    Climb --> Narr
+    Weather --> Narr
 
-    M8 --> M9[M9: Research Quality]
-    M9 --> M10[M10: Refinement]
-    M10 --> M11[M11: Evaluation]
+    Narr --> Quality[Research Quality]
+    Quality --> Refine[Route Refinement]
+    Refine --> Eval
 ```
 
 ## Parallelization Opportunities
 
-After M0 (Foundation), these can proceed in parallel:
+After Foundation, these can proceed in parallel:
 
 | Stream | Milestones | Notes |
 |--------|------------|-------|
-| **Core** | M1 (Strava) → M3 (Synthesis) | Critical path |
-| **Routing** | M2 (GraphHopper) | Joins at M3 |
-| **Research** | PJAMM API investigation | User-driven, unblocks M6 |
+| **Core** | Strava → Route Synthesis | Critical path |
+| **Routing** | GraphHopper | Joins at Route Synthesis |
+| **Research** | PJAMM API investigation | User-driven, unblocks Climb Integration |
 
-After M3 (Route Synthesis), these can proceed in parallel:
-- M4 (Places), M5 (Water), M6 (Climbs), M7 (Weather)
+After Route Synthesis, these can proceed in parallel:
+- Place Search, Water Stops, Climb Integration, Weather Integration
 
 ---
 
 ## Current Status
 
-**Active Milestone**: Planning & Architecture (pre-M0)
+**Active**: Planning & Architecture
 
 **Next Steps**:
-1. User provides test fixture examples
-2. User begins PJAMM API investigation (proxy mobile app)
-3. Set up Claude Agent SDK project structure (M0)
+- User provides test fixture examples
+- User begins PJAMM API investigation (proxy mobile app)
+- Set up Claude Agent SDK project structure

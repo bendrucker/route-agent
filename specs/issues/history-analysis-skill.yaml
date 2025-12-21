@@ -1,5 +1,5 @@
 title: Implement History Analysis skill
-milestone: "M1: Strava Integration"
+milestone: Strava Integration
 labels:
   - skill
 depends_on:

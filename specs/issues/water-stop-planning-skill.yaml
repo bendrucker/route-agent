@@ -1,5 +1,5 @@
 title: Implement Water Stop Planning skill
-milestone: "M5: Water Stops"
+milestone: Water Stops
 labels:
   - skill
 depends_on:

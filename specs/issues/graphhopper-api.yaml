@@ -1,5 +1,5 @@
 title: Integrate GraphHopper API
-milestone: "M2: GraphHopper Integration"
+milestone: GraphHopper Integration
 labels:
   - tool
   - critical-path
