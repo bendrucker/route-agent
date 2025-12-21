@@ -1,11 +1,27 @@
 /**
  * Checkpoint system for Route Agent.
  *
- * Provides structured user interaction points throughout the route planning workflow.
+ * Provides tools and prompts for structured user interaction throughout
+ * the route planning workflow. The agent uses RoutePlan to manage state
+ * and prompt templates to guide interactions.
  */
 
-export { CheckpointManager, createCheckpointManager } from "./manager.ts";
-export type { AskUserQuestionFn } from "./manager.ts";
+// State management
+export { RoutePlan, createRoutePlan } from "./route-plan.ts";
+export type { RoutePlanState, WorkflowStage } from "./route-plan.ts";
+
+// Prompt templates
+export {
+  getConfirmIntentPrompt,
+  getPresentFindingsPrompt,
+  getSelectRoutePrompt,
+  getRefineRoutePrompt,
+  getPresentFinalPrompt,
+  getPromptForStage,
+  ORCHESTRATOR_SYSTEM_PROMPT,
+} from "./prompts.ts";
+
+// Types
 export type {
   CheckpointName,
   CheckpointData,
@@ -22,3 +38,7 @@ export type {
   RouteCandidate,
   RefinedRoute,
 } from "./types.ts";
+
+// Legacy exports (deprecated - will be removed)
+export { CheckpointManager, createCheckpointManager } from "./manager.ts";
+export type { AskUserQuestionFn } from "./manager.ts";
