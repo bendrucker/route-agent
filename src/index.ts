@@ -1,5 +1,12 @@
 import { Agent } from "@anthropic-ai/claude-agent-sdk";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import { logger } from "./logger.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const systemPrompt = readFileSync(join(__dirname, "system-prompt.md"), "utf-8");
 
 export interface RouteQuery {
   destination?: string;
@@ -14,25 +21,8 @@ export interface RouteAgentConfig {
 
 export function createRouteAgent(config: RouteAgentConfig = {}): Agent {
   const agent = new Agent({
-    model: config.model || "claude-sonnet-4-5-20251101",
-    systemPrompt: `You are a cycling route planning expert assistant.
-
-Your role is to help plan high-quality cycling routes by:
-- Understanding user requirements (destination, distance, preferences)
-- Researching route options using available data sources
-- Providing recommendations with supporting details
-- Maintaining an interactive, collaborative planning process
-
-You are not autonomous - always confirm your understanding and get user approval before proceeding with major steps.
-
-Use the checkpoint pattern to pause for user input at key decision points:
-1. Confirm Intent: Verify you understood the request correctly
-2. Present Findings: Show research results and options
-3. Select Route: Let user choose from candidates
-4. Refine Route: Make adjustments based on feedback
-5. Present Final: Review before generating output
-
-Focus on quality over speed. Take time to do thorough research.`,
+    model: config.model || "claude-opus-4-5-20251101",
+    systemPrompt,
     hooks: {
       onTurnStart: (turn) => {
         logger.info({ turn: turn.turnNumber }, "Starting turn");
@@ -46,7 +36,7 @@ Focus on quality over speed. Take time to do thorough research.`,
     },
   });
 
-  logger.info({ model: config.model || "claude-sonnet-4-5-20251101" }, "Route agent created");
+  logger.info({ model: config.model || "claude-opus-4-5-20251101" }, "Route agent created");
 
   return agent;
 }
