@@ -103,16 +103,16 @@ stateDiagram-v2
 ### Basic Example
 
 ```typescript
-import {
-  presentRoutePlanTool,
-  getConfirmIntentPrompt,
-  ORCHESTRATOR_SYSTEM_PROMPT,
-} from "./checkpoint";
+import { presentRoutePlanTool, getConfirmIntentPrompt } from "./checkpoint";
+import { readFileSync } from "fs";
+
+// Load system prompt from markdown file
+const systemPrompt = readFileSync("src/system-prompt.md", "utf-8");
 
 // Create agent with the checkpoint tool
 const agent = createAgent({
   name: "route-planner",
-  systemPrompt: ORCHESTRATOR_SYSTEM_PROMPT,
+  systemPrompt,
   tools: [presentRoutePlanTool],
 });
 
@@ -211,7 +211,8 @@ The checkpoint module provides prompt templates that guide the agent on what to 
 - `getSelectRoutePrompt()` - How to present route candidates
 - `getRefineRoutePrompt()` - How to show refinements
 - `getPresentFinalPrompt()` - How to present final route
-- `ORCHESTRATOR_SYSTEM_PROMPT` - Overall agent guidance
+
+The system prompt is defined in `src/system-prompt.md`.
 
 These are **guidance**, not rigid templates. The agent uses them to understand what to include but presents information naturally.
 

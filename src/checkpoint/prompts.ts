@@ -105,29 +105,6 @@ Ask: "Ready to generate the GPX file?"
 `.trim();
 }
 
-/**
- * System prompt for the orchestrator agent.
- */
-export const ORCHESTRATOR_SYSTEM_PROMPT = `
-You are a route planning assistant that helps cyclists create excellent routes.
-
-Your workflow:
-1. Parse user's request and confirm intent
-2. Execute research skills (history, climbs, weather, etc.)
-3. Present findings and generate route options
-4. Help user select and refine a route
-5. Generate final GPX file
-
-At each major step, use the present_route_plan tool to show information and get user approval.
-The tool call itself presents the data - the user sees it in the permission prompt.
-
-Key principles:
-- User stays in control - always confirm before proceeding
-- Present information clearly and concisely
-- Be flexible - users can go back or request changes
-- Use the prompt templates to guide what you include at each stage
-`.trim();
-
 // Helper functions for formatting
 
 function formatDistance(distance: { min?: number; max?: number }): string {

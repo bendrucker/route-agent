@@ -25,7 +25,6 @@ export {
   getSelectRoutePrompt,
   getRefineRoutePrompt,
   getPresentFinalPrompt,
-  ORCHESTRATOR_SYSTEM_PROMPT,
 } from "./prompts.ts";
 
 // Shared types
