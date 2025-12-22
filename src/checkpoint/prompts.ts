@@ -1,9 +1,8 @@
 /**
- * Checkpoint prompt templates for the Route Agent.
+ * Prompt templates for route planning checkpoints.
  *
- * These prompts guide the agent through the route planning workflow.
- * Rather than hard-coded methods, the agent uses these templates to
- * understand what to do at each stage and how to interact with users.
+ * These templates guide the agent on what to include when presenting
+ * route plans to users at each workflow stage.
  */
 
 import type {
@@ -15,238 +14,192 @@ import type {
 } from "./types.ts";
 
 /**
- * Base template for checkpoint prompts.
- */
-interface CheckpointPromptTemplate {
-  stage: string;
-  systemPrompt: string;
-  formatContext: (data: unknown) => string;
-  userMessageTemplate: string;
-  expectedActions: string[];
-}
-
-/**
- * Confirm Intent checkpoint prompt.
+ * Get prompt guidance for the Confirm Intent stage.
+ *
+ * Tells the agent what to include when presenting the parsed query.
  */
 export function getConfirmIntentPrompt(
   query: ParsedQuery,
   skillsNeeded: SkillsNeeded
 ): string {
-  const parts: string[] = [
-    "Present the following route planning details to the user for confirmation:",
-    "",
-  ];
+  return `
+Present the following route planning details to the user for confirmation:
 
-  if (query.destinations.length > 0) {
-    parts.push(`**Destinations:** ${query.destinations.join(", ")}`);
-  }
+**What you understood:**
+${query.destinations.length > 0 ? `- Destinations: ${query.destinations.join(", ")}` : ""}
+${query.distance ? formatDistance(query.distance) : ""}
+${query.constraints ? formatConstraints(query.constraints) : ""}
+${query.reference ? `- Reference activity: ${query.reference}` : ""}
 
-  if (query.distance) {
-    const { min, max } = query.distance;
-    if (min && max) {
-      parts.push(`**Distance:** ${min}-${max} miles`);
-    } else if (min) {
-      parts.push(`**Distance:** At least ${min} miles`);
-    } else if (max) {
-      parts.push(`**Distance:** Up to ${max} miles`);
-    }
-  }
+**Research areas I'll investigate:**
+${formatSkills(skillsNeeded)}
 
-  if (query.constraints) {
-    const { mustVisit, avoid, surfacePreferences } = query.constraints;
-    if (mustVisit?.length) {
-      parts.push(`**Must visit:** ${mustVisit.join(", ")}`);
-    }
-    if (avoid?.length) {
-      parts.push(`**Avoid:** ${avoid.join(", ")}`);
-    }
-    if (surfacePreferences?.length) {
-      parts.push(`**Surface:** ${surfacePreferences.join(", ")}`);
-    }
-  }
-
-  if (query.reference) {
-    parts.push(`**Reference activity:** ${query.reference}`);
-  }
-
-  const activeSkills = Object.entries(skillsNeeded)
-    .filter(([, active]) => active)
-    .map(([skill]) => skill);
-
-  if (activeSkills.length > 0) {
-    parts.push("");
-    parts.push(`**Research areas:** ${activeSkills.join(", ")}`);
-  }
-
-  parts.push("");
-  parts.push(
-    "Ask the user to confirm this is correct or provide clarifications."
-  );
-  parts.push("");
-  parts.push("Based on their response:");
-  parts.push("- If confirmed: Use RoutePlan.confirmIntent() to proceed");
-  parts.push(
-    "- If they want changes: Use RoutePlan.setQuery() to update, then ask again"
-  );
-  parts.push(
-    "- If they provide additional details: Use RoutePlan.addUserFeedback() to record"
-  );
-
-  return parts.join("\n");
+Use the present_route_plan tool with stage "confirm_intent" to show this to the user.
+Ask: "Does this match what you're looking for?"
+`.trim();
 }
 
 /**
- * Present Findings checkpoint prompt.
+ * Get prompt guidance for the Present Findings stage.
  */
 export function getPresentFindingsPrompt(
   skillResults: SkillResult[],
   insights?: string[]
 ): string {
-  const parts: string[] = [
-    "Present your research findings to the user:",
-    "",
-  ];
+  return `
+Present your research findings to the user:
 
-  parts.push("**Research Results:**");
-  for (const result of skillResults) {
-    parts.push(`- **${result.skillName}**: ${result.summary}`);
-  }
+**Research completed:**
+${skillResults.map((r) => `- ${r.skillName}: ${r.summary}`).join("\n")}
 
-  if (insights?.length) {
-    parts.push("");
-    parts.push("**Key Insights:**");
-    for (const insight of insights) {
-      parts.push(`- ${insight}`);
-    }
-  }
+${insights && insights.length > 0 ? `\n**Key insights:**\n${insights.map((i) => `- ${i}`).join("\n")}` : ""}
 
-  parts.push("");
-  parts.push(
-    "Ask the user if they'd like to proceed with route options or if they want more research."
-  );
-  parts.push("");
-  parts.push("Based on their response:");
-  parts.push(
-    "- If proceeding: Use RoutePlan.presentFindings() to advance"
-  );
-  parts.push(
-    "- If requesting more: Invoke additional skills, then present again"
-  );
-  parts.push(
-    "- Record their feedback: Use RoutePlan.addUserFeedback()"
-  );
-
-  return parts.join("\n");
+Use the present_route_plan tool with stage "present_findings" to show this to the user.
+Ask: "Would you like me to generate route options based on these findings?"
+`.trim();
 }
 
 /**
- * Select Route checkpoint prompt.
+ * Get prompt guidance for the Select Route stage.
  */
-export function getSelectRoutePrompt(
-  candidates: RouteCandidate[]
-): string {
-  const parts: string[] = [
-    "Present the following route options to the user:",
-    "",
-  ];
+export function getSelectRoutePrompt(candidates: RouteCandidate[]): string {
+  return `
+Present the following route options to the user:
 
-  for (let i = 0; i < candidates.length; i++) {
-    const route = candidates[i];
-    parts.push(`**Route ${i + 1}: ${route.name}** (ID: ${route.id})`);
-    parts.push(`- Distance: ${route.distance} miles`);
-    parts.push(`- Elevation: ${route.elevation} ft`);
-    parts.push(`- Highlights: ${route.highlights.join(", ")}`);
+${candidates.map((route, i) => formatRouteCandidate(route, i + 1)).join("\n\n")}
 
-    if (route.stops?.length) {
-      parts.push(`- Stops: ${route.stops.map((s) => s.name).join(", ")}`);
-    }
-
-    if (route.warnings?.length) {
-      parts.push(`- Warnings: ${route.warnings.join("; ")}`);
-    }
-
-    parts.push("");
-  }
-
-  parts.push("Ask the user which route they'd like to select.");
-  parts.push("");
-  parts.push("Based on their response:");
-  parts.push(
-    "- If selecting a route: Use RoutePlan.selectRoute(routeId) with the route's ID"
-  );
-  parts.push(
-    "- If they want modifications: Adjust candidates and present again"
-  );
-  parts.push(
-    "- Record their feedback: Use RoutePlan.addUserFeedback()"
-  );
-
-  return parts.join("\n");
+Use the present_route_plan tool with stage "select_route" to show these options.
+Ask: "Which route would you like to select?"
+`.trim();
 }
 
 /**
- * Refine Route checkpoint prompt.
+ * Get prompt guidance for the Refine Route stage.
  */
 export function getRefineRoutePrompt(
   selected: RouteCandidate,
   refinements?: string[]
 ): string {
-  const parts: string[] = [
-    `Refining **${selected.name}**`,
-    "",
-  ];
+  return `
+Present refinements for the selected route:
 
-  if (refinements?.length) {
-    parts.push("**Proposed Adjustments:**");
-    for (const refinement of refinements) {
-      parts.push(`- ${refinement}`);
-    }
-    parts.push("");
+**Route:** ${selected.name}
+${refinements && refinements.length > 0 ? `\n**Proposed adjustments:**\n${refinements.map((r) => `- ${r}`).join("\n")}` : ""}
+
+Use the present_route_plan tool with stage "refine_route" to show these details.
+Ask: "Do these refinements look good?"
+`.trim();
+}
+
+/**
+ * Get prompt guidance for the Present Final stage.
+ */
+export function getPresentFinalPrompt(route: RefinedRoute): string {
+  return `
+Present the complete final route:
+
+${formatFinalRoute(route)}
+
+Use the present_route_plan tool with stage "present_final" to show the complete route.
+Ask: "Ready to generate the GPX file?"
+`.trim();
+}
+
+/**
+ * System prompt for the orchestrator agent.
+ */
+export const ORCHESTRATOR_SYSTEM_PROMPT = `
+You are a route planning assistant that helps cyclists create excellent routes.
+
+Your workflow:
+1. Parse user's request and confirm intent
+2. Execute research skills (history, climbs, weather, etc.)
+3. Present findings and generate route options
+4. Help user select and refine a route
+5. Generate final GPX file
+
+At each major step, use the present_route_plan tool to show information and get user approval.
+The tool call itself presents the data - the user sees it in the permission prompt.
+
+Key principles:
+- User stays in control - always confirm before proceeding
+- Present information clearly and concisely
+- Be flexible - users can go back or request changes
+- Use the prompt templates to guide what you include at each stage
+`.trim();
+
+// Helper functions for formatting
+
+function formatDistance(distance: { min?: number; max?: number }): string {
+  if (distance.min && distance.max) {
+    return `- Distance: ${distance.min}-${distance.max} miles`;
+  } else if (distance.min) {
+    return `- Distance: At least ${distance.min} miles`;
+  } else if (distance.max) {
+    return `- Distance: Up to ${distance.max} miles`;
+  }
+  return "";
+}
+
+function formatConstraints(constraints: {
+  mustVisit?: string[];
+  avoid?: string[];
+  surfacePreferences?: string[];
+}): string {
+  const parts: string[] = [];
+  if (constraints.mustVisit?.length) {
+    parts.push(`- Must visit: ${constraints.mustVisit.join(", ")}`);
+  }
+  if (constraints.avoid?.length) {
+    parts.push(`- Avoid: ${constraints.avoid.join(", ")}`);
+  }
+  if (constraints.surfacePreferences?.length) {
+    parts.push(`- Surface: ${constraints.surfacePreferences.join(", ")}`);
+  }
+  return parts.join("\n");
+}
+
+function formatSkills(skills: SkillsNeeded): string {
+  return Object.entries(skills)
+    .filter(([, active]) => active)
+    .map(([skill]) => `- ${skill}`)
+    .join("\n");
+}
+
+function formatRouteCandidate(route: RouteCandidate, number: number): string {
+  const parts: string[] = [];
+  parts.push(`**Route ${number}: ${route.name}**`);
+  parts.push(`- Distance: ${route.distance} miles`);
+  parts.push(`- Elevation: ${route.elevation} ft`);
+  parts.push(`- Highlights: ${route.highlights.join(", ")}`);
+
+  if (route.stops?.length) {
+    parts.push(`- Stops: ${route.stops.map((s) => s.name).join(", ")}`);
   }
 
-  parts.push("Present these refinements to the user.");
-  parts.push("Ask if they'd like any changes or if this looks good.");
-  parts.push("");
-  parts.push("Based on their response:");
-  parts.push(
-    "- If approved: Use RoutePlan.setRefinedRoute() with the refined details"
-  );
-  parts.push(
-    "- If requesting changes: Make adjustments and present again"
-  );
-  parts.push(
-    "- Record their feedback: Use RoutePlan.addUserFeedback()"
-  );
+  if (route.warnings?.length) {
+    parts.push(`- Warnings: ${route.warnings.join("; ")}`);
+  }
 
   return parts.join("\n");
 }
 
-/**
- * Present Final checkpoint prompt.
- */
-export function getPresentFinalPrompt(route: RefinedRoute): string {
-  const parts: string[] = [
-    `**Final Route: ${route.name}**`,
-    "",
-    `- Distance: ${route.distance} miles`,
-    `- Elevation: ${route.elevation} ft`,
-  ];
-
-  if (route.highlights.length > 0) {
-    parts.push(`- Highlights: ${route.highlights.join(", ")}`);
-  }
+function formatFinalRoute(route: RefinedRoute): string {
+  const parts: string[] = [];
+  parts.push(`**${route.name}**`);
+  parts.push(`- Distance: ${route.distance} miles`);
+  parts.push(`- Elevation: ${route.elevation} ft`);
+  parts.push(`- Highlights: ${route.highlights.join(", ")}`);
 
   if (route.stops?.length) {
-    parts.push("");
-    parts.push("**Stops:**");
+    parts.push("\n**Stops:**");
     for (const stop of route.stops) {
       parts.push(`- ${stop.name} (${stop.type})`);
     }
   }
 
   if (route.nutritionPlan) {
-    parts.push("");
-    parts.push("**Nutrition Plan:**");
+    parts.push("\n**Nutrition:**");
     parts.push(`- Total calories: ${route.nutritionPlan.calories}`);
     for (const stop of route.nutritionPlan.stops) {
       parts.push(`- ${stop.time}: ${stop.intake}`);
@@ -254,123 +207,25 @@ export function getPresentFinalPrompt(route: RefinedRoute): string {
   }
 
   if (route.clothingRecommendations?.length) {
-    parts.push("");
-    parts.push("**Clothing:**");
+    parts.push("\n**Clothing:**");
     for (const rec of route.clothingRecommendations) {
       parts.push(`- ${rec}`);
     }
   }
 
   if (route.warnings?.length) {
-    parts.push("");
-    parts.push("**Warnings:**");
+    parts.push("\n**Warnings:**");
     for (const warning of route.warnings) {
       parts.push(`- ${warning}`);
     }
   }
 
   if (route.adjustments.length > 0) {
-    parts.push("");
-    parts.push("**Adjustments Made:**");
+    parts.push("\n**Adjustments made:**");
     for (const adj of route.adjustments) {
       parts.push(`- ${adj}`);
     }
   }
 
-  parts.push("");
-  parts.push("Present this final route to the user.");
-  parts.push("Ask if they approve and want to generate the GPX file.");
-  parts.push("");
-  parts.push("Based on their response:");
-  parts.push(
-    "- If approved: Use RoutePlan.approveFinal() then proceed to GPX generation"
-  );
-  parts.push(
-    "- If requesting changes: Use RoutePlan.resetToStage() to go back and adjust"
-  );
-  parts.push(
-    "- Record their feedback: Use RoutePlan.addUserFeedback()"
-  );
-
   return parts.join("\n");
-}
-
-/**
- * Orchestrator system prompt - guides the agent through the workflow.
- */
-export const ORCHESTRATOR_SYSTEM_PROMPT = `
-You are a route planning orchestrator agent. Your role is to guide the user through
-creating a cycling route by coordinating research skills and managing the workflow.
-
-You have access to a RoutePlan tool that tracks the current state of route planning.
-Use RoutePlan.getState() and RoutePlan.getSummary() to understand where you are.
-
-The workflow has these stages:
-1. query_received - Parse user intent
-2. intent_confirmed - User has confirmed their requirements
-3. findings_presented - Research results have been shared
-4. route_selected - User has chosen a route option
-5. route_refined - Route has been fine-tuned
-6. final_approved - User approved final route, ready for GPX
-
-At each stage, you'll receive a prompt template that tells you:
-- What information to present to the user
-- How to ask for their input
-- Which RoutePlan methods to call based on their response
-
-Key principles:
-- Always check RoutePlan.getState() to know where you are
-- Use RoutePlan methods to advance the workflow deterministically
-- Record user feedback with RoutePlan.addUserFeedback()
-- Don't hard-code logic - follow the prompt templates
-- Be flexible - users may want to go back or skip ahead
-
-Your goal is to create an excellent route through collaborative research and refinement.
-`.trim();
-
-/**
- * Get the appropriate prompt for the current workflow stage.
- */
-export function getPromptForStage(
-  stage: string,
-  data: unknown
-): string {
-  switch (stage) {
-    case "query_received": {
-      const { query, skillsNeeded } = data as {
-        query: ParsedQuery;
-        skillsNeeded: SkillsNeeded;
-      };
-      return getConfirmIntentPrompt(query, skillsNeeded);
-    }
-
-    case "intent_confirmed": {
-      const { skillResults, insights } = data as {
-        skillResults: SkillResult[];
-        insights?: string[];
-      };
-      return getPresentFindingsPrompt(skillResults, insights);
-    }
-
-    case "findings_presented": {
-      const { candidates } = data as { candidates: RouteCandidate[] };
-      return getSelectRoutePrompt(candidates);
-    }
-
-    case "route_selected": {
-      const { selected, refinements } = data as {
-        selected: RouteCandidate;
-        refinements?: string[];
-      };
-      return getRefineRoutePrompt(selected, refinements);
-    }
-
-    case "route_refined": {
-      const { route } = data as { route: RefinedRoute };
-      return getPresentFinalPrompt(route);
-    }
-
-    default:
-      throw new Error(`Unknown stage: ${stage}`);
-  }
 }

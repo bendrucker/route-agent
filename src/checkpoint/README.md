@@ -1,47 +1,47 @@
 # Checkpoint System
 
-Structured user interaction points for the Route Agent workflow.
+A single-tool approach for user interaction in route planning.
 
 ## Overview
 
-The Checkpoint system manages the interaction flow between the agent and user using a **tool-based architecture**. Instead of hard-coded manager classes, the agent uses:
+The checkpoint system uses **one simple tool** that presents route plans to users at key workflow stages. This design leverages Claude Code's permission system as the confirmation UI during testing.
 
-1. **RoutePlan** - A state container that tracks workflow progress deterministically
-2. **Prompt Templates** - Guide the agent on what to do at each stage
-3. **Agent Tools** - The agent calls RoutePlan methods to advance workflow
+### Key Concept
 
-This ensures the user stays in control throughout route planning while giving the agent flexibility to handle edge cases naturally.
+- **One tool**: `present_route_plan`
+- **Tool call = presentation**: The data passed to the tool is visible in the permission prompt
+- **Permission = approval**: User approves/rejects via Claude Code's UI
+- **No state management**: Agent manages workflow in context
+- **Interceptable**: Can be replaced with real UI in production
 
 ## Architecture
 
-The checkpoint system integrates into the orchestrator workflow as shown in `docs/architecture.md`:
-
 ```mermaid
 stateDiagram-v2
-    [*] --> QueryReceived
-    QueryReceived --> ConfirmIntent: Parse query
-    ConfirmIntent --> SkillExecution: User confirms
-    ConfirmIntent --> QueryReceived: User clarifies
+    [*] --> ConfirmIntent
+    ConfirmIntent --> PresentFindings: User confirms
+    ConfirmIntent --> ConfirmIntent: User clarifies
 
-    SkillExecution --> PresentFindings: Skills complete
-    PresentFindings --> SelectRoute: User reviews
-    PresentFindings --> SkillExecution: User requests more
+    PresentFindings --> SelectRoute: User approves
+    PresentFindings --> PresentFindings: User requests more
 
-    SelectRoute --> RefineRoute: User picks candidate
-    RefineRoute --> PresentFinal: Adjustments made
-    RefineRoute --> SelectRoute: Major changes
+    SelectRoute --> RefineRoute: User selects
+    SelectRoute --> SelectRoute: User requests changes
 
-    PresentFinal --> GenerateGPX: User approves
-    PresentFinal --> RefineRoute: User tweaks
+    RefineRoute --> PresentFinal: User approves
+    RefineRoute --> RefineRoute: User tweaks
 
-    GenerateGPX --> [*]: Output file
+    PresentFinal --> GenerateGPX: User confirms
+    PresentFinal --> RefineRoute: User modifies
+
+    GenerateGPX --> [*]
 ```
 
-## Checkpoints
+## Workflow Stages
 
 ### 1. Confirm Intent
 
-**Purpose:** Verify parsed query and skill selection before research begins.
+**Purpose:** Verify parsed query before research begins.
 
 **Data:**
 - Parsed query (destinations, distance, constraints)
@@ -49,30 +49,30 @@ stateDiagram-v2
 
 **User Actions:**
 - Confirm and proceed
-- Clarify or correct the interpretation
+- Clarify or correct
 
 ### 2. Present Findings
 
-**Purpose:** Show results from skill execution (history, climbs, weather, etc.).
+**Purpose:** Show research results from executed skills.
 
 **Data:**
 - Skill results with summaries
-- Key insights synthesized across skills
+- Key insights
 
 **User Actions:**
 - Proceed to route generation
-- Request additional research in specific areas
+- Request more research
 
 ### 3. Select Route
 
-**Purpose:** Choose from generated route candidates.
+**Purpose:** Choose from generated candidates.
 
 **Data:**
-- Route candidates with distance, elevation, highlights, stops, warnings
+- Route options with details (distance, elevation, highlights, stops, warnings)
 
 **User Actions:**
-- Select a route by number or name
-- Request regeneration with different parameters
+- Select a route
+- Request regeneration
 
 ### 4. Refine Route
 
@@ -80,12 +80,12 @@ stateDiagram-v2
 
 **Data:**
 - Selected route
-- Proposed refinements (stops, timing, adjustments)
+- Proposed refinements
 
 **User Actions:**
 - Approve refinements
-- Request specific changes
-- Go back to route selection for major changes
+- Request changes
+- Go back to selection
 
 ### 5. Present Final
 
@@ -93,187 +93,165 @@ stateDiagram-v2
 
 **Data:**
 - Final route with all details (stops, nutrition, clothing, warnings)
-- All adjustments made during refinement
 
 **User Actions:**
 - Approve and generate GPX
 - Make final tweaks
-- Return to refinement for larger changes
 
 ## Usage
 
-### New Tool-Based Architecture
+### Basic Example
 
 ```typescript
 import {
-  createRoutePlan,
-  ORCHESTRATOR_SYSTEM_PROMPT,
+  presentRoutePlanTool,
   getConfirmIntentPrompt,
+  ORCHESTRATOR_SYSTEM_PROMPT,
 } from "./checkpoint";
 
-// Create state manager
-const plan = createRoutePlan();
-
-// Orchestrator agent with RoutePlan tools
-const orchestrator = createAgent({
+// Create agent with the checkpoint tool
+const agent = createAgent({
   name: "route-planner",
   systemPrompt: ORCHESTRATOR_SYSTEM_PROMPT,
-  tools: [
-    // State query tools
-    {
-      name: "get_route_state",
-      description: "Get current route planning state",
-      fn: () => plan.getState(),
-    },
-    {
-      name: "get_route_summary",
-      description: "Get human-readable summary",
-      fn: () => plan.getSummary(),
-    },
-    // State update tools
-    {
-      name: "set_query",
-      description: "Update parsed query",
-      fn: (query) => plan.setQuery(query),
-    },
-    {
-      name: "confirm_intent",
-      description: "Confirm user intent and advance",
-      fn: () => plan.confirmIntent(),
-    },
-    {
-      name: "add_skill_results",
-      description: "Add research findings",
-      fn: (results) => plan.addSkillResults(results),
-    },
-    {
-      name: "select_route",
-      description: "Select a route by ID",
-      fn: (id) => plan.selectRoute(id),
-    },
-    // ... other RoutePlan methods
-  ],
+  tools: [presentRoutePlanTool],
 });
 
-// Agent workflow
-async function planRoute(userInput: string) {
-  // Agent parses query
-  const query = await parseQuery(userInput);
-  plan.setQuery(query);
+// Agent workflow example
+const query = {
+  destinations: ["Mount Hamilton"],
+  distance: { min: 50, max: 70 },
+};
 
-  // Agent gets prompt for current stage
-  const prompt = getConfirmIntentPrompt(query, skillsNeeded);
+const skillsNeeded = {
+  history: true,
+  climb: true,
+  weather: true,
+};
 
-  // Agent presents to user and handles response
-  const response = await askUserQuestion(prompt);
+// Get prompt template for this stage
+const prompt = getConfirmIntentPrompt(query, skillsNeeded);
 
-  // Agent interprets naturally and calls tools
-  if (response.includes("yes") || response.includes("confirm")) {
-    plan.confirmIntent();
-  } else {
-    plan.addUserFeedback(response);
-    // Agent decides what to do next based on feedback
-  }
+// Agent would then call the tool:
+// present_route_plan({
+//   presentation: {
+//     stage: "confirm_intent",
+//     query: query,
+//     skillsNeeded: skillsNeeded
+//   },
+//   prompt: "Does this match what you're looking for?"
+// })
 
-  // Continue through workflow...
+// In Claude Code, the tool call appears in permission prompt
+// User sees the presentation data and approves/rejects
+// Tool returns the user's response
+```
+
+### In Claude Code Testing
+
+When the agent calls `present_route_plan`:
+
+1. Claude Code shows permission prompt
+2. User sees the `presentation` data in the prompt
+3. User approves or denies via the UI
+4. Tool returns `{ response: { approved: true/false, feedback?: string } }`
+5. Agent processes the response and continues
+
+### In Production
+
+The same tool can be intercepted by a real application:
+
+```typescript
+// Custom implementation that shows proper UI
+async function presentRoutePlan(input) {
+  // Show presentation.stage data in your app's UI
+  // Collect user input
+  // Return structured response
+  return {
+    response: {
+      approved: userApproved,
+      feedback: userFeedback,
+      selectedRouteId: selectedId, // if selecting route
+    },
+  };
 }
 ```
 
-### Legacy CheckpointManager (Deprecated)
+## Tool Definition
 
-The old `CheckpointManager` class is still available but deprecated:
+### Input
 
 ```typescript
-import { createCheckpointManager } from "./checkpoint";
-
-const checkpointManager = createCheckpointManager(askUserQuestion);
-await checkpointManager.confirmIntent({ query, skillsNeeded });
+{
+  presentation: {
+    stage: "confirm_intent" | "present_findings" | "select_route" | "refine_route" | "present_final",
+    // Stage-specific data (query, skillResults, candidates, etc.)
+  },
+  prompt: "Human-readable question for the user"
+}
 ```
 
-**Migration:** Replace manager method calls with RoutePlan state updates and prompt-guided agent behavior.
+### Output
 
-## Key Components
+```typescript
+{
+  response: {
+    approved: boolean,
+    feedback?: string,
+    selectedRouteId?: string
+  }
+}
+```
 
-### RoutePlan State Manager (`route-plan.ts`)
+## Prompt Templates
 
-Provides deterministic tools for the agent to manage workflow:
+The checkpoint module provides prompt templates that guide the agent on what to include at each stage:
 
-- **Query state:** `getState()`, `getStage()`, `getSummary()`
-- **Data updates:** `setQuery()`, `addSkillResults()`, `setCandidates()`
-- **Workflow transitions:** `confirmIntent()`, `selectRoute()`, `approveFinal()`
-- **User tracking:** `addUserFeedback()`, `resetToStage()`
+- `getConfirmIntentPrompt()` - What to show when confirming user intent
+- `getPresentFindingsPrompt()` - How to present research findings
+- `getSelectRoutePrompt()` - How to present route candidates
+- `getRefineRoutePrompt()` - How to show refinements
+- `getPresentFinalPrompt()` - How to present final route
+- `ORCHESTRATOR_SYSTEM_PROMPT` - Overall agent guidance
 
-### Prompt Templates (`prompts.ts`)
-
-Functions that generate prompts for each workflow stage:
-
-- **Confirm Intent:** `getConfirmIntentPrompt(query, skills)`
-- **Present Findings:** `getPresentFindingsPrompt(results, insights)`
-- **Select Route:** `getSelectRoutePrompt(candidates)`
-- **Refine Route:** `getRefineRoutePrompt(selected, refinements)`
-- **Present Final:** `getPresentFinalPrompt(route)`
-- **Dynamic:** `getPromptForStage(stage, data)` - auto-selects prompt
-
-Each prompt tells the agent:
-1. What information to present to the user
-2. How to ask for their input
-3. Which RoutePlan methods to call based on responses
-
-### Orchestrator System Prompt
-
-`ORCHESTRATOR_SYSTEM_PROMPT` provides the agent with:
-- Role definition (route planning orchestrator)
-- Workflow stage overview
-- Tool usage guidelines
-- Design principles (user control, flexibility)
+These are **guidance**, not rigid templates. The agent uses them to understand what to include but presents information naturally.
 
 ## Testing
 
-Run the test suites:
-
 ```bash
-# RoutePlan state manager tests (primary)
-deno run src/checkpoint/evals/route-plan.test.ts
-
-# Legacy CheckpointManager tests (deprecated)
-deno run src/checkpoint/evals/checkpoint-manager.test.ts
+# Run checkpoint tool tests
+deno test src/checkpoint/evals/tool.test.ts
 ```
 
-RoutePlan tests validate:
-- Initial state and stage transitions
-- State updates for query, skills, results
-- Candidate selection and route refinement
-- User feedback tracking
-- Stage reset functionality
-- Complete workflow execution
+Tests validate:
+- Tool accepts correct input format for each stage
+- Tool returns properly structured output
+- All workflow stages work correctly
 
 ## Design Principles
 
-1. **Tools over methods:** Agent uses RoutePlan tools, not hard-coded manager methods
-2. **Prompts over code:** Prompt templates guide behavior instead of parsing logic
-3. **Deterministic state:** Always query state rather than relying on context recall
-4. **Agent flexibility:** Let the agent interpret responses naturally, not through regex
-5. **User control:** Agent pauses at checkpoints; user stays in command
-6. **Transparency:** State is always visible and queryable
-7. **Iteration:** Easy to reset stages and backtrack via `resetToStage()`
+1. **Simplicity**: One tool instead of complex state management
+2. **Visibility**: Tool call data is visible to user
+3. **Flexibility**: Agent manages workflow in context
+4. **Testability**: Works with Claude Code's permission system
+5. **Extensibility**: Can be replaced with real UI later
+6. **Transparency**: User sees exactly what data is being presented
 
-## Benefits Over Old Architecture
+## Benefits Over Complex State Management
 
 | Old Approach | New Approach |
 |--------------|--------------|
-| Hard-coded manager methods | Flexible agent tools |
-| String parsing for responses | Natural language interpretation |
-| Rigid workflow | Agent decides based on prompts |
-| Context-dependent state | Deterministic state queries |
-| Difficult to extend | Easy to add new tools/prompts |
-| Lots of code | More prompts, less code |
+| Complex state manager class | Single simple tool |
+| Multiple state update methods | One tool call |
+| Hard to test | Easy to test in Claude Code |
+| Rigid workflow | Flexible agent-driven |
+| Context-dependent | Self-contained presentations |
+| Lots of code | Minimal code |
 
 ## Files
 
+- `tool.ts` - Single checkpoint tool definition
+- `prompts.ts` - Guidance templates for each stage
 - `types.ts` - Shared type definitions
-- `route-plan.ts` - State manager with workflow tools ✨ **NEW**
-- `prompts.ts` - Prompt templates for each stage ✨ **NEW**
-- `index.ts` - Public exports (updated)
-- `manager.ts` - ⚠️ **DEPRECATED** Old CheckpointManager class
-- `evals/route-plan.test.ts` - State manager tests ✨ **NEW**
-- `evals/checkpoint-manager.test.ts` - ⚠️ **DEPRECATED** Legacy tests
+- `index.ts` - Public exports
+- `evals/tool.test.ts` - Tool tests
+- `README.md` - This file
