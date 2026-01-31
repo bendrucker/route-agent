@@ -31,7 +31,7 @@ for (const config of configs) {
   console.log(`\n--- ${dirname(config)} ---\n`);
 
   try {
-    execFileSync("npx", ["promptfoo", "eval", "--config", config], {
+    execFileSync("bunx", ["promptfoo", "eval", "--config", config], {
       cwd: root,
       stdio: "inherit",
     });

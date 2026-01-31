@@ -15,7 +15,7 @@ import type {
   SkillResult,
   RouteCandidate,
   RefinedRoute,
-} from "./types.ts";
+} from "./types";
 
 /**
  * Workflow stages for route planning.
