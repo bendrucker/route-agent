@@ -2,20 +2,13 @@
  * Tests for the simplified checkpoint tool.
  */
 
+import { test, expect } from "bun:test";
 import {
   presentRoutePlan,
   type PresentRoutePlanInput,
-} from "../tool.ts";
+} from "../tool";
 
-function assertEquals(actual: unknown, expected: unknown, msg?: string) {
-  if (actual !== expected) {
-    throw new Error(
-      msg || `Expected ${expected} but got ${actual}`
-    );
-  }
-}
-
-Deno.test("presentRoutePlan - confirm_intent stage", async () => {
+test("presentRoutePlan - confirm_intent stage", async () => {
   const input: PresentRoutePlanInput = {
     presentation: {
       stage: "confirm_intent",
@@ -35,11 +28,11 @@ Deno.test("presentRoutePlan - confirm_intent stage", async () => {
   const output = await presentRoutePlan(input);
 
   // Tool returns a response
-  assertEquals(typeof output.response, "object");
-  assertEquals(typeof output.response.approved, "boolean");
+  expect(typeof output.response).toBe("object");
+  expect(typeof output.response.approved).toBe("boolean");
 });
 
-Deno.test("presentRoutePlan - present_findings stage", async () => {
+test("presentRoutePlan - present_findings stage", async () => {
   const input: PresentRoutePlanInput = {
     presentation: {
       stage: "present_findings",
@@ -65,11 +58,11 @@ Deno.test("presentRoutePlan - present_findings stage", async () => {
 
   const output = await presentRoutePlan(input);
 
-  assertEquals(typeof output.response, "object");
-  assertEquals(typeof output.response.approved, "boolean");
+  expect(typeof output.response).toBe("object");
+  expect(typeof output.response.approved).toBe("boolean");
 });
 
-Deno.test("presentRoutePlan - select_route stage", async () => {
+test("presentRoutePlan - select_route stage", async () => {
   const input: PresentRoutePlanInput = {
     presentation: {
       stage: "select_route",
@@ -103,11 +96,11 @@ Deno.test("presentRoutePlan - select_route stage", async () => {
 
   const output = await presentRoutePlan(input);
 
-  assertEquals(typeof output.response, "object");
-  assertEquals(typeof output.response.approved, "boolean");
+  expect(typeof output.response).toBe("object");
+  expect(typeof output.response.approved).toBe("boolean");
 });
 
-Deno.test("presentRoutePlan - refine_route stage", async () => {
+test("presentRoutePlan - refine_route stage", async () => {
   const input: PresentRoutePlanInput = {
     presentation: {
       stage: "refine_route",
@@ -129,11 +122,11 @@ Deno.test("presentRoutePlan - refine_route stage", async () => {
 
   const output = await presentRoutePlan(input);
 
-  assertEquals(typeof output.response, "object");
-  assertEquals(typeof output.response.approved, "boolean");
+  expect(typeof output.response).toBe("object");
+  expect(typeof output.response.approved).toBe("boolean");
 });
 
-Deno.test("presentRoutePlan - present_final stage", async () => {
+test("presentRoutePlan - present_final stage", async () => {
   const input: PresentRoutePlanInput = {
     presentation: {
       stage: "present_final",
@@ -178,6 +171,6 @@ Deno.test("presentRoutePlan - present_final stage", async () => {
 
   const output = await presentRoutePlan(input);
 
-  assertEquals(typeof output.response, "object");
-  assertEquals(typeof output.response.approved, "boolean");
+  expect(typeof output.response).toBe("object");
+  expect(typeof output.response.approved).toBe("boolean");
 });

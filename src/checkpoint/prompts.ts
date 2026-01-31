@@ -11,7 +11,7 @@ import type {
   SkillResult,
   RouteCandidate,
   RefinedRoute,
-} from "./types.ts";
+} from "./types";
 
 /**
  * Get prompt guidance for the Confirm Intent stage.

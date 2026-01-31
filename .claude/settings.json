@@ -1,6 +1,11 @@
 {
   "permissions": {
     "allow": [
+      "Bash(bun install)",
+      "Bash(bun run:*)",
+      "Bash(bun test:*)",
+      "Bash(bunx tsc:*)",
+      "Bash(bunx promptfoo:*)",
       "WebFetch(domain:www.promptfoo.dev)"
     ]
   }

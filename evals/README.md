@@ -6,16 +6,16 @@ Promptfoo-based evaluations colocated with the code they test.
 
 ```bash
 # Run all colocated evals
-npm run evals
+bun run evals
 
 # Run evals matching a filter
-npm run evals -- checkpoint
+bun run evals -- checkpoint
 
 # Run a single eval config directly
-npx promptfoo eval -c src/agents/nutrition-facts/evals/promptfooconfig.yaml
+bunx promptfoo eval -c src/agents/nutrition-facts/evals/promptfooconfig.yaml
 
 # View results in web UI
-npm run evals:view
+bun run evals:view
 ```
 
 ## Directory Structure
@@ -44,7 +44,7 @@ Shared utilities live in this directory:
 
 ```
 evals/
-├── run-all.ts             # Discovery script for npm run evals
+├── run-all.ts             # Discovery script for bun run evals
 ├── scorers/               # Custom scoring functions
 ├── fixtures/              # Shared test data
 │   └── gold-standard/     # Real trip regression fixtures

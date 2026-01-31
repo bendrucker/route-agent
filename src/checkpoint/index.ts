@@ -9,14 +9,14 @@
 export {
   presentRoutePlan,
   presentRoutePlanTool,
-} from "./tool.ts";
+} from "./tool";
 export type {
   WorkflowStage,
   StagePresentationData,
   UserResponse,
   PresentRoutePlanInput,
   PresentRoutePlanOutput,
-} from "./tool.ts";
+} from "./tool";
 
 // Prompt templates (guidance for agent on what to include at each stage)
 export {
@@ -25,7 +25,7 @@ export {
   getSelectRoutePrompt,
   getRefineRoutePrompt,
   getPresentFinalPrompt,
-} from "./prompts.ts";
+} from "./prompts";
 
 // Shared types
 export type {
@@ -35,4 +35,4 @@ export type {
   SkillResult,
   RouteCandidate,
   RefinedRoute,
-} from "./types.ts";
+} from "./types";

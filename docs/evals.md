@@ -199,28 +199,28 @@ export function validateCalorieEstimate(
 ```bash
 # Run evals for a specific sub-agent
 cd src/agents/nutrition-facts/evals
-npx promptfoo eval
+bunx promptfoo eval
 
 # Run evals for a skill
 cd src/skills/clothing-planning/evals
-npx promptfoo eval
+bunx promptfoo eval
 ```
 
 ### All Evals
 
 ```bash
 # Run all evals
-npm run evals
+bun run evals
 
 # Run with filtering
-npm run evals -- --filter "nutrition"
+bun run evals -- --filter "nutrition"
 ```
 
 ### View Results
 
 ```bash
 # Open web UI to view results
-npx promptfoo view
+bunx promptfoo view
 ```
 
 ## Gold Standard Test Cases
