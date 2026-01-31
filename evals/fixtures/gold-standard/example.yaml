@@ -1,0 +1,26 @@
+name: Example Gold Standard Case
+query: "Route from Conservatory of Flowers to Tunitas Creek, ~90 miles"
+
+context:
+  start_location: "Conservatory of Flowers, San Francisco"
+  distance_target_mi: 90
+  date: "2024-07-15"
+  start_time: "7:00 AM"
+
+expected:
+  skills_invoked:
+    - History Analysis
+    - Route Optimization
+    - Climb Planning
+    - Food Stop Planning
+    - Weather Planning
+
+  key_decisions:
+    - "Should route via Pescadero for coastal approach"
+    - "Tunitas Creek climb is the main objective"
+    - "Need food stop before the climb"
+
+  output_characteristics:
+    - "GPX file with waypoints"
+    - "Climb profile for Tunitas"
+    - "Weather warnings if applicable"

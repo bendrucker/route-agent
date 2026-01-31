@@ -7,7 +7,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "evals": "promptfoo eval",
+    "evals": "tsx evals/run-all.ts",
+    "evals:run": "promptfoo eval --config",
     "evals:view": "promptfoo view"
   },
   "keywords": [
