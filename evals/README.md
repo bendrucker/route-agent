@@ -12,7 +12,7 @@ npm run evals
 npm run evals -- checkpoint
 
 # Run a single eval config directly
-npm run evals:run src/agents/nutrition-facts/evals/promptfooconfig.yaml
+npx promptfoo eval -c src/agents/nutrition-facts/evals/promptfooconfig.yaml
 
 # View results in web UI
 npm run evals:view
@@ -45,8 +45,6 @@ Shared utilities live in this directory:
 ```
 evals/
 ├── run-all.ts             # Discovery script for npm run evals
-├── examples/              # Standalone example evals
-│   └── basic.yaml
 ├── scorers/               # Custom scoring functions
 ├── fixtures/              # Shared test data
 │   └── gold-standard/     # Real trip regression fixtures

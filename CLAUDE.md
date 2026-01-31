@@ -53,7 +53,7 @@ Promptfoo evals are colocated with code. Load the `promptfoo` skill when writing
 
 - Each component has `evals/promptfooconfig.yaml` alongside its source
 - `npm run evals` discovers and runs all colocated configs
-- `npm run evals:run <path>` runs a single config
+- `npx promptfoo eval -c <path>` runs a single config
 - Gold standard fixtures live in `evals/fixtures/gold-standard/`
 - Custom scorers live in `evals/scorers/`
 - See [docs/evals.md](docs/evals.md) and [evals/README.md](evals/README.md) for details
