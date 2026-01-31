@@ -1,15 +1,18 @@
 # Evaluation Framework
 
-This directory contains the Promptfoo evaluation framework configuration and test cases.
+Promptfoo-based evaluations colocated with the code they test.
 
 ## Quick Start
 
 ```bash
-# Install dependencies (first time only)
-npm install
-
-# Run all evaluations
+# Run all colocated evals
 npm run evals
+
+# Run evals matching a filter
+npm run evals -- checkpoint
+
+# Run a single eval config directly
+npx promptfoo eval -c src/agents/nutrition-facts/evals/promptfooconfig.yaml
 
 # View results in web UI
 npm run evals:view
@@ -17,20 +20,7 @@ npm run evals:view
 
 ## Directory Structure
 
-```
-evals/
-├── examples/          # Example evaluations
-│   └── basic.yaml    # Simple setup verification
-├── scorers/          # Custom scoring functions (future)
-├── fixtures/         # Shared test data (future)
-└── results/          # Test results (gitignored)
-```
-
-## Creating New Evaluations
-
-See `evals/examples/basic.yaml` for a simple example.
-
-According to the architecture in `docs/evals.md`, evaluations should be colocated with the code they test:
+Evals live next to the code they test. Each component has an `evals/` directory with its own `promptfooconfig.yaml` and test cases:
 
 ```
 src/
@@ -40,17 +30,73 @@ src/
 │       └── evals/
 │           ├── promptfooconfig.yaml
 │           └── cases/
+│               ├── commercial-products.yaml
+│               └── generic-items.yaml
+└── skills/
+    └── clothing-planning/
+        ├── index.ts
+        └── evals/
+            ├── promptfooconfig.yaml
+            └── cases/
 ```
 
-## Configuration
+Shared utilities live in this directory:
 
-The root `promptfooconfig.yaml` contains default settings for all evaluations:
-- Provider: Claude Sonnet 4.5
-- Temperature: 0.0 for consistency
-- Max concurrency: 4
+```
+evals/
+├── run-all.ts             # Discovery script for npm run evals
+├── scorers/               # Custom scoring functions
+├── fixtures/              # Shared test data
+│   └── gold-standard/     # Real trip regression fixtures
+└── results/               # Output (gitignored)
+```
+
+## Creating Evals for a Component
+
+Each colocated `promptfooconfig.yaml` is a standalone Promptfoo config. `run-all.ts` discovers configs matching `src/**/evals/promptfooconfig.yaml` and runs them in sequence.
+
+A minimal config:
+
+```yaml
+description: "Nutrition facts agent"
+
+prompts:
+  - file://../../prompt.txt
+
+providers:
+  - anthropic:messages:claude-sonnet-4-5-20250929
+
+defaultTest:
+  options:
+    provider:
+      config:
+        temperature: 0.0
+        max_tokens: 4096
+
+tests:
+  - vars:
+      product: "Clif Bar Chocolate Chip"
+    assert:
+      - type: contains-json
+      - type: javascript
+        value: output.calories === 250
+```
+
+For larger test suites, split cases into separate YAML files and reference them:
+
+```yaml
+tests:
+  - file://cases/commercial-products.yaml
+  - file://cases/generic-items.yaml
+```
+
+## Gold Standard Cases
+
+Real trip examples used as regression fixtures. These are blocked on user input — see [#26](https://github.com/bendrucker/route-agent/issues/26).
+
+Template: `fixtures/gold-standard/example.yaml`
 
 ## Learn More
 
-- [Promptfoo Documentation](https://www.promptfoo.dev/docs/)
 - [Project eval strategy](../docs/evals.md)
-
+- [Promptfoo documentation](https://www.promptfoo.dev/docs/)

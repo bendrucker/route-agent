@@ -47,11 +47,13 @@ See `docs/architecture.md` for full design. Key concepts:
 
 This agent optimizes for **quality over speed**. It's acceptable to spend 10-20 minutes on deep research to produce an excellent route plan. The goal is to encode expert route-building knowledge.
 
-## Testing Philosophy
+## Evals
 
-Test-driven development using **Promptfoo** (TypeScript-native eval framework). See [docs/evals.md](docs/evals.md) for details.
+Promptfoo evals are colocated with code. Load the `promptfoo` skill when writing or modifying evals.
 
-- **Start narrow**: Begin with sub-agents (Nutrition Facts), then skills, then e2e
-- **Colocated evals**: Tests live next to code (`src/{component}/evals/`)
-- **Gold standard cases**: Real trips from user become regression fixtures
-- **llm-rubric**: Use LLM-as-judge for subjective quality assessment
+- Each component has `evals/promptfooconfig.yaml` alongside its source
+- `npm run evals` discovers and runs all colocated configs
+- `npx promptfoo eval -c <path>` runs a single config
+- Gold standard fixtures live in `evals/fixtures/gold-standard/`
+- Custom scorers live in `evals/scorers/`
+- See [docs/evals.md](docs/evals.md) and [evals/README.md](evals/README.md) for details
