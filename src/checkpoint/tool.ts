@@ -9,13 +9,7 @@
  * - No complex state management - agent manages workflow in context
  */
 
-import type {
-  ParsedQuery,
-  SkillsNeeded,
-  SkillResult,
-  RouteCandidate,
-  RefinedRoute,
-} from "./types";
+import type { ParsedQuery, RefinedRoute, RouteCandidate, SkillResult, SkillsNeeded } from "./types";
 
 /**
  * Workflow stages for route planning.
@@ -94,7 +88,7 @@ export interface PresentRoutePlanOutput {
  * - Same interface works for both testing and production
  */
 export async function presentRoutePlan(
-  input: PresentRoutePlanInput
+  _input: PresentRoutePlanInput,
 ): Promise<PresentRoutePlanOutput> {
   // In Claude Code, this is where the permission prompt appears
   // The input data is visible to the user
