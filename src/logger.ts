@@ -1,6 +1,6 @@
-import { createWriteStream } from "fs";
-import { mkdir } from "fs/promises";
-import { dirname } from "path";
+import { createWriteStream } from "node:fs";
+import { mkdir } from "node:fs/promises";
+import { dirname } from "node:path";
 
 export interface LogContext {
   [key: string]: unknown;
@@ -59,7 +59,7 @@ class ConsoleLogger implements Logger {
 
     // Write to file if enabled
     if (this.logFile) {
-      this.logFile.write(formatted + "\n");
+      this.logFile.write(`${formatted}\n`);
     }
   }
 
@@ -80,9 +80,7 @@ class ConsoleLogger implements Logger {
   }
 }
 
-export const logger = new ConsoleLogger(
-  (process.env.LOG_LEVEL as LogLevel) || "info"
-);
+export const logger = new ConsoleLogger((process.env.LOG_LEVEL as LogLevel) || "info");
 
 // Enable file logging if LOG_FILE is set
 if (process.env.LOG_FILE) {

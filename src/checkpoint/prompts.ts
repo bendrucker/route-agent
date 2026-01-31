@@ -5,23 +5,14 @@
  * route plans to users at each workflow stage.
  */
 
-import type {
-  ParsedQuery,
-  SkillsNeeded,
-  SkillResult,
-  RouteCandidate,
-  RefinedRoute,
-} from "./types";
+import type { ParsedQuery, RefinedRoute, RouteCandidate, SkillResult, SkillsNeeded } from "./types";
 
 /**
  * Get prompt guidance for the Confirm Intent stage.
  *
  * Tells the agent what to include when presenting the parsed query.
  */
-export function getConfirmIntentPrompt(
-  query: ParsedQuery,
-  skillsNeeded: SkillsNeeded
-): string {
+export function getConfirmIntentPrompt(query: ParsedQuery, skillsNeeded: SkillsNeeded): string {
   return `
 Present the following route planning details to the user for confirmation:
 
@@ -42,10 +33,7 @@ Ask: "Does this match what you're looking for?"
 /**
  * Get prompt guidance for the Present Findings stage.
  */
-export function getPresentFindingsPrompt(
-  skillResults: SkillResult[],
-  insights?: string[]
-): string {
+export function getPresentFindingsPrompt(skillResults: SkillResult[], insights?: string[]): string {
   return `
 Present your research findings to the user:
 
@@ -76,10 +64,7 @@ Ask: "Which route would you like to select?"
 /**
  * Get prompt guidance for the Refine Route stage.
  */
-export function getRefineRoutePrompt(
-  selected: RouteCandidate,
-  refinements?: string[]
-): string {
+export function getRefineRoutePrompt(selected: RouteCandidate, refinements?: string[]): string {
   return `
 Present refinements for the selected route:
 

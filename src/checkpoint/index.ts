@@ -5,34 +5,33 @@
  * The tool call itself becomes the presentation - visible in Claude Code's permission prompt.
  */
 
+// Prompt templates (guidance for agent on what to include at each stage)
+export {
+  getConfirmIntentPrompt,
+  getPresentFinalPrompt,
+  getPresentFindingsPrompt,
+  getRefineRoutePrompt,
+  getSelectRoutePrompt,
+} from "./prompts";
+export type {
+  PresentRoutePlanInput,
+  PresentRoutePlanOutput,
+  StagePresentationData,
+  UserResponse,
+  WorkflowStage,
+} from "./tool";
 // Main checkpoint tool
 export {
   presentRoutePlan,
   presentRoutePlanTool,
 } from "./tool";
-export type {
-  WorkflowStage,
-  StagePresentationData,
-  UserResponse,
-  PresentRoutePlanInput,
-  PresentRoutePlanOutput,
-} from "./tool";
-
-// Prompt templates (guidance for agent on what to include at each stage)
-export {
-  getConfirmIntentPrompt,
-  getPresentFindingsPrompt,
-  getSelectRoutePrompt,
-  getRefineRoutePrompt,
-  getPresentFinalPrompt,
-} from "./prompts";
 
 // Shared types
 export type {
   CheckpointName,
   ParsedQuery,
-  SkillsNeeded,
-  SkillResult,
-  RouteCandidate,
   RefinedRoute,
+  RouteCandidate,
+  SkillResult,
+  SkillsNeeded,
 } from "./types";

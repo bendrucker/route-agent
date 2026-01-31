@@ -1,7 +1,7 @@
-import { query, type Options, type Query } from "@anthropic-ai/claude-agent-sdk";
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { type Options, type Query, query } from "@anthropic-ai/claude-agent-sdk";
 import { logger } from "./logger";
 
 const __filename = fileURLToPath(import.meta.url);

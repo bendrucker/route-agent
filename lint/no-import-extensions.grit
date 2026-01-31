@@ -1,0 +1,7 @@
+`import $imports from $source` where {
+    $source <: r"\"\./.*\.(?:ts|js)\"",
+    register_diagnostic(
+        span = $source,
+        message = "Do not use file extensions in relative imports. With moduleResolution: bundler, extensionless imports are correct."
+    )
+}

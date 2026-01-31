@@ -2,11 +2,8 @@
  * Tests for the simplified checkpoint tool.
  */
 
-import { test, expect } from "bun:test";
-import {
-  presentRoutePlan,
-  type PresentRoutePlanInput,
-} from "../tool";
+import { expect, test } from "bun:test";
+import { type PresentRoutePlanInput, presentRoutePlan } from "../tool";
 
 test("presentRoutePlan - confirm_intent stage", async () => {
   const input: PresentRoutePlanInput = {
@@ -48,10 +45,7 @@ test("presentRoutePlan - present_findings stage", async () => {
           data: {},
         },
       ],
-      insights: [
-        "You usually ride this route on weekends",
-        "Weather is best in morning hours",
-      ],
+      insights: ["You usually ride this route on weekends", "Weather is best in morning hours"],
     },
     prompt: "Would you like me to generate route options?",
   };
@@ -148,10 +142,7 @@ test("presentRoutePlan - present_final stage", async () => {
             location: "Mile 30",
           },
         ],
-        adjustments: [
-          "Added Grant Ranch water stop",
-          "Included 4-hour nutrition plan",
-        ],
+        adjustments: ["Added Grant Ranch water stop", "Included 4-hour nutrition plan"],
         nutritionPlan: {
           calories: 2400,
           stops: [
@@ -159,10 +150,7 @@ test("presentRoutePlan - present_final stage", async () => {
             { time: "Mile 30", intake: "Sandwich + sports drink" },
           ],
         },
-        clothingRecommendations: [
-          "Arm warmers for descent",
-          "Light jacket recommended",
-        ],
+        clothingRecommendations: ["Arm warmers for descent", "Light jacket recommended"],
         warnings: ["Early morning fog possible"],
       },
     },
