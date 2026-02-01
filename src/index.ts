@@ -1,7 +1,12 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { type Options, type Query, query } from "@anthropic-ai/claude-agent-sdk";
+import {
+  type McpServerConfig,
+  type Options,
+  type Query,
+  query,
+} from "@anthropic-ai/claude-agent-sdk";
 import { logger } from "./logger";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,15 +22,23 @@ export interface RouteQuery {
 
 export interface RouteAgentConfig {
   model?: string;
+  mcpServers?: Record<string, McpServerConfig>;
 }
 
 export function createRouteQuery(prompt: string, config: RouteAgentConfig = {}): Query {
   const options: Options = {
     model: config.model || "claude-opus-4-5-20251101",
     systemPrompt,
+    mcpServers: config.mcpServers,
   };
 
-  logger.info({ model: options.model }, "Creating route query");
+  logger.info(
+    {
+      model: options.model,
+      ...(config.mcpServers && { mcpServers: Object.keys(config.mcpServers) }),
+    },
+    "Creating route query",
+  );
 
   return query({ prompt, options });
 }
