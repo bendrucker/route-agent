@@ -6,8 +6,8 @@ describe("findWaterSources", () => {
     const results = await findWaterSources({
       south: 37.9015,
       west: -122.6075,
-      north: 37.9060,
-      east: -122.6010,
+      north: 37.906,
+      east: -122.601,
     });
     expect(results).toMatchSnapshot();
   }, 15000);
@@ -28,8 +28,8 @@ describe("findCyclingInfrastructure", () => {
 describe("querySurfaceTypes", () => {
   test("Mill Valley - Sausalito bike path", async () => {
     const results = await querySurfaceTypes({
-      south: 37.860,
-      west: -122.510,
+      south: 37.86,
+      west: -122.51,
       north: 37.875,
       east: -122.495,
     });
