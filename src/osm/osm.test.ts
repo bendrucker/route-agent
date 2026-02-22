@@ -1,21 +1,39 @@
 import { describe, expect, test } from "bun:test";
-import { createMockOsmServer } from "./mock";
-import { createOsmServer } from "./server";
+import { findCyclingInfrastructure, findWaterSources, querySurfaceTypes } from "./overpass";
 
-describe("createOsmServer", () => {
-  test("returns sdk server config", () => {
-    const server = createOsmServer();
-    expect(server.type).toBe("sdk");
-    expect(server.name).toBe("osm");
-    expect(server.instance).toBeDefined();
-  });
+// Small area around Mitchell Park, Palo Alto — well-mapped and stable
+const bounds = {
+  south: 37.425,
+  west: -122.175,
+  north: 37.432,
+  east: -122.163,
+};
+
+// Very small area for surface query (returns many way elements)
+const surfaceBounds = {
+  south: 37.427,
+  west: -122.172,
+  north: 37.429,
+  east: -122.168,
+};
+
+describe("findWaterSources", () => {
+  test("returns water sources from Overpass API", async () => {
+    const results = await findWaterSources(bounds);
+    expect(results).toMatchSnapshot();
+  }, 15000);
 });
 
-describe("createMockOsmServer", () => {
-  test("returns sdk server config", () => {
-    const server = createMockOsmServer();
-    expect(server.type).toBe("sdk");
-    expect(server.name).toBe("osm-mock");
-    expect(server.instance).toBeDefined();
-  });
+describe("findCyclingInfrastructure", () => {
+  test("returns cycling infrastructure from Overpass API", async () => {
+    const results = await findCyclingInfrastructure(bounds);
+    expect(results).toMatchSnapshot();
+  }, 15000);
+});
+
+describe("querySurfaceTypes", () => {
+  test("returns road surface types from Overpass API", async () => {
+    const results = await querySurfaceTypes(surfaceBounds);
+    expect(results).toMatchSnapshot();
+  }, 15000);
 });

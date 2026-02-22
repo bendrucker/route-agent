@@ -1,0 +1,361 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`findWaterSources returns water sources from Overpass API 1`] = `
+[
+  {
+    "id": 4706017889,
+    "lat": 37.4273662,
+    "lon": -122.1713451,
+    "type": "drinking_water",
+  },
+  {
+    "id": 5555953402,
+    "lat": 37.4269234,
+    "lon": -122.1693749,
+    "type": "drinking_water",
+  },
+  {
+    "id": 11916484100,
+    "lat": 37.4285451,
+    "lon": -122.1700825,
+    "type": "drinking_water",
+  },
+]
+`;
+
+exports[`findCyclingInfrastructure returns cycling infrastructure from Overpass API 1`] = `
+[
+  {
+    "id": 612019963,
+    "lat": 37.4250595,
+    "lon": -122.1651844,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 612020213,
+    "lat": 37.4266313,
+    "lon": -122.1687459,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 1255957253,
+    "lat": 37.430492,
+    "lon": -122.164192,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 1255982833,
+    "lat": 37.430368,
+    "lon": -122.164664,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 3368725170,
+    "lat": 37.4256029,
+    "lon": -122.1662481,
+    "type": "bicycle_repair_station",
+  },
+  {
+    "id": 4216740693,
+    "lat": 37.4278234,
+    "lon": -122.1665308,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 4216740694,
+    "lat": 37.4279703,
+    "lon": -122.1671885,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 4742742360,
+    "lat": 37.4253393,
+    "lon": -122.1695645,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5086696111,
+    "lat": 37.4271777,
+    "lon": -122.1734812,
+    "type": "bicycle_repair_station",
+  },
+  {
+    "id": 5553140606,
+    "lat": 37.4269502,
+    "lon": -122.1721836,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553140607,
+    "lat": 37.4279812,
+    "lon": -122.171792,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553140608,
+    "lat": 37.4275466,
+    "lon": -122.1719207,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553314733,
+    "lat": 37.4269712,
+    "lon": -122.1701593,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553314734,
+    "lat": 37.4263598,
+    "lon": -122.1694475,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553314735,
+    "lat": 37.4268156,
+    "lon": -122.1716067,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553314736,
+    "lat": 37.4279078,
+    "lon": -122.168999,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5553314737,
+    "lat": 37.4281021,
+    "lon": -122.1692973,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5555811954,
+    "lat": 37.4260084,
+    "lon": -122.1683932,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5555811995,
+    "lat": 37.4256479,
+    "lon": -122.1659313,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5555812023,
+    "lat": 37.4277204,
+    "lon": -122.168352,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5555953382,
+    "lat": 37.4292108,
+    "lon": -122.1747643,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5555953383,
+    "lat": 37.4290021,
+    "lon": -122.1733883,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5969769894,
+    "lat": 37.4288307,
+    "lon": -122.1726358,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 5969769895,
+    "lat": 37.428821,
+    "lon": -122.1725544,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 6461239793,
+    "lat": 37.4258586,
+    "lon": -122.1711226,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 6461239794,
+    "lat": 37.4257289,
+    "lon": -122.1704361,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 6604017519,
+    "lat": 37.4255595,
+    "lon": -122.165692,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 6919493512,
+    "lat": 37.428772,
+    "lon": -122.1634063,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 8246201539,
+    "lat": 37.4255177,
+    "lon": -122.1702246,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 8518728023,
+    "lat": 37.4271906,
+    "lon": -122.1685284,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 8518728024,
+    "lat": 37.4272818,
+    "lon": -122.1685033,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 8518728025,
+    "lat": 37.4273621,
+    "lon": -122.1684745,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 8908038711,
+    "lat": 37.4310426,
+    "lon": -122.1749928,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 10731731839,
+    "lat": 37.429632,
+    "lon": -122.1647006,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064314979,
+    "lat": 37.4312623,
+    "lon": -122.1645095,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064314980,
+    "lat": 37.4308848,
+    "lon": -122.1645538,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064314986,
+    "lat": 37.4304127,
+    "lon": -122.1647375,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064315004,
+    "lat": 37.4283749,
+    "lon": -122.1646378,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064315016,
+    "lat": 37.4280258,
+    "lon": -122.16398,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064315067,
+    "lat": 37.4276879,
+    "lon": -122.1642627,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064315068,
+    "lat": 37.4278129,
+    "lon": -122.1648951,
+    "type": "bicycle_parking",
+  },
+  {
+    "id": 12064315069,
+    "lat": 37.4276625,
+    "lon": -122.1649395,
+    "type": "bicycle_parking",
+  },
+]
+`;
+
+exports[`querySurfaceTypes returns road surface types from Overpass API 1`] = `
+[
+  {
+    "highway": "pedestrian",
+    "id": 31705913,
+    "surface": "paving_stones",
+  },
+  {
+    "highway": "cycleway",
+    "id": 31711837,
+    "surface": "asphalt",
+  },
+  {
+    "highway": "footway",
+    "id": 591686705,
+    "surface": "concrete",
+  },
+  {
+    "highway": "unclassified",
+    "id": 676154806,
+    "name": "Jane Stanford Way",
+    "surface": "asphalt",
+  },
+  {
+    "highway": "footway",
+    "id": 689427787,
+    "surface": "asphalt",
+  },
+  {
+    "highway": "cycleway",
+    "id": 694397287,
+    "surface": "asphalt",
+  },
+  {
+    "highway": "unclassified",
+    "id": 696196339,
+    "name": "Jane Stanford Way/ Serra mall",
+    "surface": "asphalt",
+  },
+  {
+    "highway": "pedestrian",
+    "id": 696250798,
+    "surface": "paving_stones",
+  },
+  {
+    "highway": "footway",
+    "id": 917164996,
+    "surface": "fine_gravel",
+  },
+  {
+    "highway": "footway",
+    "id": 917164997,
+    "surface": "fine_gravel",
+  },
+  {
+    "highway": "footway",
+    "id": 917164998,
+    "surface": "fine_gravel",
+  },
+  {
+    "highway": "pedestrian",
+    "id": 1171322649,
+    "name": "East-West Axis",
+    "surface": "paving_stones",
+  },
+  {
+    "highway": "pedestrian",
+    "id": 1171322650,
+    "name": "East-West Axis",
+    "surface": "concrete",
+  },
+  {
+    "highway": "pedestrian",
+    "id": 1171322651,
+    "name": "East-West Axis",
+    "surface": "asphalt",
+  },
+]
+`;
