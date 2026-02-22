@@ -1,2 +1,8 @@
 export { createMockGraphHopperServer } from "./mock";
-export { createGraphHopperServer } from "./server";
+export {
+  createGraphHopperServer,
+  fetchGeocode,
+  fetchRoute,
+  type GeocodeHit,
+  type RoutePath,
+} from "./server";
