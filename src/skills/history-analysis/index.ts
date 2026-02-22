@@ -1,5 +1,5 @@
 export { analyzeHistory } from "./analyze";
-export { historyAnalysisPrompt } from "./prompt";
+export { buildHistoryPrompt } from "./prompt";
 export type {
   ActivitySummary,
   GeographicBounds,

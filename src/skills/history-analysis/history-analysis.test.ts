@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { analyzeHistory } from "./analyze";
-import { historyAnalysisPrompt } from "./prompt";
+import { buildHistoryPrompt } from "./prompt";
 import type {
   ActivitySummary,
   GeographicBounds,
@@ -151,16 +151,49 @@ describe("analyzeHistory", () => {
   });
 });
 
-describe("historyAnalysisPrompt", () => {
-  test("exports a non-empty prompt string", () => {
-    expect(typeof historyAnalysisPrompt).toBe("string");
-    expect(historyAnalysisPrompt.length).toBeGreaterThan(0);
+describe("buildHistoryPrompt", () => {
+  test("includes familiarity context for new territory", () => {
+    const output = analyzeHistory(createInput(sacramentoArea));
+    const prompt = buildHistoryPrompt(output);
+    expect(prompt).toContain("No prior rides");
   });
 
-  test("covers key domain concepts", () => {
-    expect(historyAnalysisPrompt).toContain("familiar");
-    expect(historyAnalysisPrompt).toContain("New territory");
-    expect(historyAnalysisPrompt).toContain("preferences");
-    expect(historyAnalysisPrompt).toContain("segment");
+  test("includes familiarity context for few rides", () => {
+    const output = analyzeHistory({
+      area: paloAltoArea,
+      activities: [activities[0]],
+      segments,
+      routes,
+    });
+    const prompt = buildHistoryPrompt(output);
+    expect(prompt).toContain("Few prior rides");
+  });
+
+  test("omits familiarity context for well-covered area", () => {
+    const output = analyzeHistory({
+      area: paloAltoArea,
+      activities: [...activities, { ...activities[0], id: 12347, name: "Morning Ride" }],
+      segments,
+      routes,
+    });
+    const prompt = buildHistoryPrompt(output);
+    expect(prompt).not.toContain("prior rides");
+  });
+
+  test("includes segment context when segments exist", () => {
+    const output = analyzeHistory(createInput(paloAltoArea));
+    const prompt = buildHistoryPrompt(output);
+    expect(prompt).toContain("2 known segments");
+  });
+
+  test("omits segment context when no segments", () => {
+    const output = analyzeHistory({
+      area: paloAltoArea,
+      activities,
+      segments: [],
+      routes,
+    });
+    const prompt = buildHistoryPrompt(output);
+    expect(prompt).not.toContain("segments");
   });
 });
