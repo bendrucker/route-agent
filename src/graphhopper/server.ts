@@ -10,10 +10,9 @@ function text(content: string) {
 }
 
 const profileMap: Record<string, string> = {
-  road: "racingbike",
-  mountain: "mtb",
-  racing: "racingbike",
-  default: "bike",
+  road: "bike",
+  mountain: "bike",
+  racing: "bike",
 };
 
 export interface RoutePath {

@@ -1,0 +1,98 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`fetchRoute Palo Alto to Half Moon Bay 1`] = `
+{
+  "coordinateCount": 1036,
+  "distance": 39505,
+  "firstCoord": [
+    -122.14292,
+    37.441977,
+    8.27,
+  ],
+  "instructionCount": 41,
+  "instructions": [
+    "Continue onto Middlefield Road",
+    "Turn left onto Embarcadero Road",
+    "Turn sharp left",
+    "Turn right",
+    "Turn right onto Cowper Street",
+    "Turn left onto Churchill Avenue",
+    "Turn right",
+    "Turn left",
+    "Turn right onto Churchill Avenue",
+    "Turn right onto Stanford Perimeter Trail",
+    "Turn left onto Stanford Perimeter Trail",
+    "Turn right",
+    "At roundabout, take exit 1",
+    "Turn right",
+    "Keep left",
+    "Keep left",
+    "Keep left",
+    "Turn right",
+    "Turn left",
+    "Turn right onto Stock Farm Road",
+    "Turn left",
+    "Turn right",
+    "Turn left",
+    "Turn left",
+    "Turn right",
+    "Turn left onto Sand Hill Road",
+    "Keep left onto Sand Hill Road and drive toward San Jose",
+    "Turn right onto Whiskey Hill Road",
+    "Turn left onto Woodside Road",
+    "Keep left onto Woodside Road",
+    "Turn right onto Kings Mountain Road",
+    "Turn sharp right onto Skyline Boulevard",
+    "Turn sharp left",
+    "Continue onto Purisima Creek Trail",
+    "Keep right onto Purisima Creek Trail",
+    "Turn right onto Purisima Creek Road",
+    "Turn left onto Main Street",
+    "Turn right onto Cabrillo Highway South",
+    "Keep right onto Cabrillo Highway South",
+    "Turn right onto Kelly Street",
+    "Arrive at destination",
+  ],
+  "lastCoord": [
+    -122.428604,
+    37.463572,
+    22.49,
+  ],
+  "time": 9042702,
+}
+`;
+
+exports[`fetchGeocode Palo Alto, CA 1`] = `
+[
+  {
+    "country": "United States",
+    "lat": 37.444,
+    "lng": -122.16,
+    "name": "Palo Alto",
+  },
+  {
+    "country": "United States",
+    "lat": 37.472,
+    "lng": -122.14,
+    "name": "East Palo Alto City Hall",
+  },
+  {
+    "country": "United States",
+    "lat": 37.469,
+    "lng": -122.141,
+    "name": "East Palo Alto",
+  },
+  {
+    "country": "United States",
+    "lat": 37.443,
+    "lng": -122.165,
+    "name": "Palo Alto",
+  },
+  {
+    "country": "United States",
+    "lat": 37.436,
+    "lng": -122.155,
+    "name": "Palo Alto High School",
+  },
+]
+`;
