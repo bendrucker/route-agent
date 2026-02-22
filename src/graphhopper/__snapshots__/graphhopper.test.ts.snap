@@ -1,0 +1,54 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`fetchRoute Mill Valley to Sausalito via bike path 1`] = `
+{
+  "coordinateCount": 135,
+  "distance": 8181,
+  "firstCoord": [
+    -122.547304,
+    37.906024,
+    19.39,
+  ],
+  "instructionCount": 15,
+  "instructions": [
+    "Continue",
+    "Turn right onto Sunnyside Avenue",
+    "Keep right onto Sunnyside Avenue",
+    "Turn left onto Miller Avenue",
+    "Keep right",
+    "Turn left onto Gomez Way",
+    "Turn right onto Miller Avenue",
+    "Continue onto Almonte Boulevard",
+    "Turn left",
+    "Turn right onto Mill Valley - Sausalito Path",
+    "Turn right onto Harbor Drive",
+    "Turn left onto Bridgeway",
+    "Turn slight right onto Bridgeway",
+    "Turn right onto Johnson Street",
+    "Arrive at destination",
+  ],
+  "lastCoord": [
+    -122.485036,
+    37.85756,
+    12.41,
+  ],
+  "time": 1658034,
+}
+`;
+
+exports[`fetchGeocode Pantoll Ranger Station 1`] = `
+[
+  {
+    "country": "United States",
+    "lat": 37.904,
+    "lng": -122.604,
+    "name": "Pantoll Ranger Station",
+  },
+  {
+    "country": "United States",
+    "lat": 37.904,
+    "lng": -122.604,
+    "name": "Pantoll Ranger Station",
+  },
+]
+`;
