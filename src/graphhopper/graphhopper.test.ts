@@ -5,15 +5,11 @@ const apiKey = process.env.GRAPHHOPPER_API_KEY;
 const hasKey = Boolean(apiKey);
 
 describe.skipIf(!hasKey)("fetchRoute", () => {
-  test("Palo Alto to Half Moon Bay", async () => {
-    const path = await fetchRoute(
-      apiKey!,
-      [
-        [37.4419, -122.143],
-        [37.4636, -122.4286],
-      ],
-      "road",
-    );
+  test("Mill Valley to Sausalito via bike path", async () => {
+    const path = await fetchRoute(apiKey!, [
+      [37.906, -122.5474],
+      [37.8577, -122.4853],
+    ]);
 
     expect(path.distance).toBeGreaterThan(0);
     expect(path.time).toBeGreaterThan(0);
@@ -35,8 +31,8 @@ describe.skipIf(!hasKey)("fetchRoute", () => {
 });
 
 describe.skipIf(!hasKey)("fetchGeocode", () => {
-  test("Palo Alto, CA", async () => {
-    const hits = await fetchGeocode(apiKey!, "Palo Alto, CA");
+  test("Pantoll Ranger Station", async () => {
+    const hits = await fetchGeocode(apiKey!, "Pantoll Ranger Station, Mill Valley, CA");
 
     expect(hits.length).toBeGreaterThan(0);
 
