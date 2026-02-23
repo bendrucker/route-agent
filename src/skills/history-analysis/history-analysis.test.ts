@@ -8,55 +8,55 @@ import type {
   SegmentSummary,
 } from "./types";
 
-const paloAltoArea: GeographicBounds = {
-  sw: { lat: 37.3, lng: -122.2 },
-  ne: { lat: 37.5, lng: -122.0 },
+const marinArea: GeographicBounds = {
+  sw: { lat: 37.82, lng: -122.6 },
+  ne: { lat: 37.95, lng: -122.45 },
 };
 
-const sacramentoArea: GeographicBounds = {
-  sw: { lat: 38.4, lng: -121.6 },
-  ne: { lat: 38.7, lng: -121.3 },
+const santaCruzArea: GeographicBounds = {
+  sw: { lat: 36.9, lng: -122.1 },
+  ne: { lat: 37.0, lng: -121.9 },
 };
 
 const activities: ActivitySummary[] = [
   {
     id: 12345,
-    name: "Pescadero Loop via Tunitas Creek",
-    distance: 105000,
-    elevationGain: 1800,
-    movingTime: 14400,
-    startLatLng: [37.4419, -122.143],
+    name: "Mt Tam via Panoramic Highway",
+    distance: 65000,
+    elevationGain: 1200,
+    movingTime: 10800,
+    startLatLng: [37.906, -122.5474],
   },
   {
     id: 12346,
-    name: "Conservatory Drive Climb",
-    distance: 45000,
-    elevationGain: 900,
+    name: "Hawk Hill and Marin Headlands",
+    distance: 42000,
+    elevationGain: 750,
     movingTime: 7200,
-    startLatLng: [37.4419, -122.143],
+    startLatLng: [37.8577, -122.4853],
   },
 ];
 
 const segments: SegmentSummary[] = [
   {
     id: 98765,
-    name: "Tunitas Creek Road Climb",
-    distance: 8500,
-    avgGrade: 5.2,
-    elevDifference: 442,
+    name: "Hawk Hill Climb",
+    distance: 2100,
+    avgGrade: 8.5,
+    elevDifference: 178,
   },
   {
     id: 98766,
-    name: "Stage Road South",
-    distance: 12000,
-    avgGrade: 2.1,
-    elevDifference: 252,
+    name: "Panoramic Highway to Pantoll",
+    distance: 5200,
+    avgGrade: 5.8,
+    elevDifference: 302,
   },
 ];
 
 const routes = [
-  { id: 55555, name: "Pescadero Lunch Ride", distance: 105000, elevationGain: 1800 },
-  { id: 55556, name: "Quick Conservatory Loop", distance: 45000, elevationGain: 900 },
+  { id: 55555, name: "Mt Tam Loop", distance: 65000, elevationGain: 1200 },
+  { id: 55556, name: "Headlands Out and Back", distance: 42000, elevationGain: 750 },
 ];
 
 function createInput(area: GeographicBounds): HistoryAnalysisInput {
@@ -65,31 +65,31 @@ function createInput(area: GeographicBounds): HistoryAnalysisInput {
 
 describe("analyzeHistory", () => {
   test("filters activities within the bounding box", () => {
-    const result = analyzeHistory(createInput(paloAltoArea));
+    const result = analyzeHistory(createInput(marinArea));
     expect(result.relevantActivities).toHaveLength(2);
     expect(result.relevantActivities.map((a) => a.id)).toEqual([12345, 12346]);
   });
 
   test("returns no relevant activities for an area with no rides", () => {
-    const result = analyzeHistory(createInput(sacramentoArea));
+    const result = analyzeHistory(createInput(santaCruzArea));
     expect(result.relevantActivities).toHaveLength(0);
   });
 
   test("passes all segments through as reusable", () => {
-    const result = analyzeHistory(createInput(paloAltoArea));
+    const result = analyzeHistory(createInput(marinArea));
     expect(result.reusableSegments).toEqual(segments);
   });
 
   test("describes familiar roads from matching activities", () => {
-    const result = analyzeHistory(createInput(paloAltoArea));
+    const result = analyzeHistory(createInput(marinArea));
     expect(result.familiarRoads).toHaveLength(2);
-    expect(result.familiarRoads[0]).toContain("Pescadero Loop via Tunitas Creek");
-    expect(result.familiarRoads[0]).toContain("105.0km");
-    expect(result.familiarRoads[0]).toContain("1800m gain");
+    expect(result.familiarRoads[0]).toContain("Mt Tam via Panoramic Highway");
+    expect(result.familiarRoads[0]).toContain("65.0km");
+    expect(result.familiarRoads[0]).toContain("1200m gain");
   });
 
   test("reports new territory when no activities match", () => {
-    const result = analyzeHistory(createInput(sacramentoArea));
+    const result = analyzeHistory(createInput(santaCruzArea));
     expect(result.familiarRoads).toHaveLength(0);
     expect(result.newOpportunities).toHaveLength(1);
     expect(result.newOpportunities[0]).toContain("new territory");
@@ -98,7 +98,7 @@ describe("analyzeHistory", () => {
   test("reports few rides when under threshold", () => {
     const singleActivity: ActivitySummary[] = [activities[0]];
     const result = analyzeHistory({
-      area: paloAltoArea,
+      area: marinArea,
       activities: singleActivity,
       segments,
       routes,
@@ -110,10 +110,10 @@ describe("analyzeHistory", () => {
   test("reports no new opportunities when area is well-covered", () => {
     const manyActivities: ActivitySummary[] = [
       ...activities,
-      { ...activities[0], id: 12347, name: "Morning Ride" },
+      { ...activities[0], id: 12347, name: "Camino Alto to Paradise Loop" },
     ];
     const result = analyzeHistory({
-      area: paloAltoArea,
+      area: marinArea,
       activities: manyActivities,
       segments,
       routes,
@@ -122,21 +122,21 @@ describe("analyzeHistory", () => {
   });
 
   test("computes preferences from all activities", () => {
-    const result = analyzeHistory(createInput(paloAltoArea));
-    expect(result.preferences.avgDistance).toBe(75000);
-    expect(result.preferences.avgElevation).toBe(1350);
-    expect(result.preferences.avgDuration).toBe(10800);
+    const result = analyzeHistory(createInput(marinArea));
+    expect(result.preferences.avgDistance).toBe(53500);
+    expect(result.preferences.avgElevation).toBe(975);
+    expect(result.preferences.avgDuration).toBe(9000);
   });
 
   test("computes preferences even when no activities match the area", () => {
-    const result = analyzeHistory(createInput(sacramentoArea));
-    expect(result.preferences.avgDistance).toBe(75000);
-    expect(result.preferences.avgElevation).toBe(1350);
+    const result = analyzeHistory(createInput(santaCruzArea));
+    expect(result.preferences.avgDistance).toBe(53500);
+    expect(result.preferences.avgElevation).toBe(975);
   });
 
   test("handles empty activities", () => {
     const result = analyzeHistory({
-      area: paloAltoArea,
+      area: marinArea,
       activities: [],
       segments: [],
       routes: [],
@@ -153,14 +153,14 @@ describe("analyzeHistory", () => {
 
 describe("buildHistoryPrompt", () => {
   test("includes familiarity context for new territory", () => {
-    const output = analyzeHistory(createInput(sacramentoArea));
+    const output = analyzeHistory(createInput(santaCruzArea));
     const prompt = buildHistoryPrompt(output);
     expect(prompt).toContain("No prior rides");
   });
 
   test("includes familiarity context for few rides", () => {
     const output = analyzeHistory({
-      area: paloAltoArea,
+      area: marinArea,
       activities: [activities[0]],
       segments,
       routes,
@@ -171,8 +171,11 @@ describe("buildHistoryPrompt", () => {
 
   test("omits familiarity context for well-covered area", () => {
     const output = analyzeHistory({
-      area: paloAltoArea,
-      activities: [...activities, { ...activities[0], id: 12347, name: "Morning Ride" }],
+      area: marinArea,
+      activities: [
+        ...activities,
+        { ...activities[0], id: 12347, name: "Camino Alto to Paradise Loop" },
+      ],
       segments,
       routes,
     });
@@ -181,14 +184,14 @@ describe("buildHistoryPrompt", () => {
   });
 
   test("includes segment context when segments exist", () => {
-    const output = analyzeHistory(createInput(paloAltoArea));
+    const output = analyzeHistory(createInput(marinArea));
     const prompt = buildHistoryPrompt(output);
     expect(prompt).toContain("2 known segments");
   });
 
   test("omits segment context when no segments", () => {
     const output = analyzeHistory({
-      area: paloAltoArea,
+      area: marinArea,
       activities,
       segments: [],
       routes,
