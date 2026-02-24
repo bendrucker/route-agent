@@ -5,6 +5,7 @@ import type {
   ActivitySummary,
   GeographicBounds,
   HistoryAnalysisInput,
+  RidingPreferences,
   SegmentSummary,
 } from "./types";
 
@@ -35,6 +36,22 @@ const activities: ActivitySummary[] = [
     movingTime: 7200,
     startLatLng: [37.8577, -122.4853],
   },
+  {
+    id: 12347,
+    name: "Camino Alto to Paradise Loop",
+    distance: 55000,
+    elevationGain: 600,
+    movingTime: 9000,
+    startLatLng: [37.906, -122.5474],
+  },
+  {
+    id: 12348,
+    name: "Bolinas Ridge Epic",
+    distance: 110000,
+    elevationGain: 2200,
+    movingTime: 18000,
+    startLatLng: [37.906, -122.5474],
+  },
 ];
 
 const segments: SegmentSummary[] = [
@@ -59,15 +76,22 @@ const routes = [
   { id: 55556, name: "Headlands Out and Back", distance: 42000, elevationGain: 750 },
 ];
 
+const preferences: RidingPreferences = {
+  rideCount: 150,
+  distance: { avg: 54000, max: 110000 },
+  elevation: { avg: 850, max: 2200 },
+  duration: { avg: 9000, max: 18000 },
+};
+
 function createInput(area: GeographicBounds): HistoryAnalysisInput {
-  return { area, activities, segments, routes };
+  return { area, activities, segments, routes, preferences };
 }
 
 describe("analyzeHistory", () => {
   test("filters activities within the bounding box", () => {
     const result = analyzeHistory(createInput(marinArea));
-    expect(result.relevantActivities).toHaveLength(2);
-    expect(result.relevantActivities.map((a) => a.id)).toEqual([12345, 12346]);
+    expect(result.relevantActivities).toHaveLength(4);
+    expect(result.relevantActivities.map((a) => a.id)).toEqual([12345, 12346, 12347, 12348]);
   });
 
   test("returns no relevant activities for an area with no rides", () => {
@@ -80,74 +104,28 @@ describe("analyzeHistory", () => {
     expect(result.reusableSegments).toEqual(segments);
   });
 
-  test("describes familiar roads from matching activities", () => {
+  test("passes preferences through from input", () => {
     const result = analyzeHistory(createInput(marinArea));
-    expect(result.familiarRoads).toHaveLength(2);
-    expect(result.familiarRoads[0]).toContain("Mt Tam via Panoramic Highway");
-    expect(result.familiarRoads[0]).toContain("65.0km");
-    expect(result.familiarRoads[0]).toContain("1200m gain");
-  });
-
-  test("reports new territory when no activities match", () => {
-    const result = analyzeHistory(createInput(santaCruzArea));
-    expect(result.familiarRoads).toHaveLength(0);
-    expect(result.newOpportunities).toHaveLength(1);
-    expect(result.newOpportunities[0]).toContain("new territory");
-  });
-
-  test("reports few rides when under threshold", () => {
-    const singleActivity: ActivitySummary[] = [activities[0]];
-    const result = analyzeHistory({
-      area: marinArea,
-      activities: singleActivity,
-      segments,
-      routes,
-    });
-    expect(result.newOpportunities).toHaveLength(1);
-    expect(result.newOpportunities[0]).toContain("Few rides");
-  });
-
-  test("reports no new opportunities when area is well-covered", () => {
-    const manyActivities: ActivitySummary[] = [
-      ...activities,
-      { ...activities[0], id: 12347, name: "Camino Alto to Paradise Loop" },
-    ];
-    const result = analyzeHistory({
-      area: marinArea,
-      activities: manyActivities,
-      segments,
-      routes,
-    });
-    expect(result.newOpportunities).toHaveLength(0);
-  });
-
-  test("computes preferences from all activities", () => {
-    const result = analyzeHistory(createInput(marinArea));
-    expect(result.preferences.avgDistance).toBe(53500);
-    expect(result.preferences.avgElevation).toBe(975);
-    expect(result.preferences.avgDuration).toBe(9000);
-  });
-
-  test("computes preferences even when no activities match the area", () => {
-    const result = analyzeHistory(createInput(santaCruzArea));
-    expect(result.preferences.avgDistance).toBe(53500);
-    expect(result.preferences.avgElevation).toBe(975);
+    expect(result.preferences).toEqual(preferences);
   });
 
   test("handles empty activities", () => {
+    const emptyPreferences: RidingPreferences = {
+      rideCount: 0,
+      distance: { avg: 0, max: 0 },
+      elevation: { avg: 0, max: 0 },
+      duration: { avg: 0, max: 0 },
+    };
     const result = analyzeHistory({
       area: marinArea,
       activities: [],
       segments: [],
       routes: [],
+      preferences: emptyPreferences,
     });
     expect(result.relevantActivities).toHaveLength(0);
     expect(result.reusableSegments).toHaveLength(0);
-    expect(result.familiarRoads).toHaveLength(0);
-    expect(result.newOpportunities).toHaveLength(1);
-    expect(result.preferences.avgDistance).toBe(0);
-    expect(result.preferences.avgElevation).toBe(0);
-    expect(result.preferences.avgDuration).toBe(0);
+    expect(result.preferences).toEqual(emptyPreferences);
   });
 });
 
@@ -164,21 +142,14 @@ describe("buildHistoryPrompt", () => {
       activities: [activities[0]],
       segments,
       routes,
+      preferences,
     });
     const prompt = buildHistoryPrompt(output);
     expect(prompt).toContain("Few prior rides");
   });
 
   test("omits familiarity context for well-covered area", () => {
-    const output = analyzeHistory({
-      area: marinArea,
-      activities: [
-        ...activities,
-        { ...activities[0], id: 12347, name: "Camino Alto to Paradise Loop" },
-      ],
-      segments,
-      routes,
-    });
+    const output = analyzeHistory(createInput(marinArea));
     const prompt = buildHistoryPrompt(output);
     expect(prompt).not.toContain("prior rides");
   });
@@ -195,6 +166,7 @@ describe("buildHistoryPrompt", () => {
       activities,
       segments: [],
       routes,
+      preferences,
     });
     const prompt = buildHistoryPrompt(output);
     expect(prompt).not.toContain("segments");

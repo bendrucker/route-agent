@@ -27,23 +27,28 @@ export interface RouteSummary {
   elevationGain: number;
 }
 
+export interface MetricSummary {
+  avg: number;
+  max: number;
+}
+
+export interface RidingPreferences {
+  rideCount: number;
+  distance: MetricSummary;
+  elevation: MetricSummary;
+  duration: MetricSummary;
+}
+
 export interface HistoryAnalysisInput {
   area: GeographicBounds;
   activities: ActivitySummary[];
   segments: SegmentSummary[];
   routes: RouteSummary[];
-}
-
-export interface RidingPreferences {
-  avgDistance: number;
-  avgElevation: number;
-  avgDuration: number;
+  preferences: RidingPreferences;
 }
 
 export interface HistoryAnalysisOutput {
   relevantActivities: ActivitySummary[];
   reusableSegments: SegmentSummary[];
-  familiarRoads: string[];
-  newOpportunities: string[];
   preferences: RidingPreferences;
 }

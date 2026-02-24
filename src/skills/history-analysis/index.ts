@@ -5,6 +5,7 @@ export type {
   GeographicBounds,
   HistoryAnalysisInput,
   HistoryAnalysisOutput,
+  MetricSummary,
   RidingPreferences,
   RouteSummary,
   SegmentSummary,
