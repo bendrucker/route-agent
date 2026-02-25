@@ -1,0 +1,93 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.10 2d4cfc48",
+  "osm3s": {
+    "timestamp_osm_base": "2026-02-25T02:02:45Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 2408177402,
+  "lat": 37.8567128,
+  "lon": -122.4799055,
+  "tags": {
+    "amenity": "bicycle_parking"
+  }
+},
+{
+  "type": "node",
+  "id": 4037455556,
+  "lat": 37.8578273,
+  "lon": -122.4814116,
+  "tags": {
+    "amenity": "bicycle_parking"
+  }
+},
+{
+  "type": "node",
+  "id": 4037463046,
+  "lat": 37.8561315,
+  "lon": -122.4791980,
+  "tags": {
+    "amenity": "bicycle_parking",
+    "name": "Valet bike parking"
+  }
+},
+{
+  "type": "node",
+  "id": 9092889903,
+  "lat": 37.8589986,
+  "lon": -122.4834080,
+  "tags": {
+    "amenity": "bicycle_parking",
+    "covered": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10139145366,
+  "lat": 37.8565298,
+  "lon": -122.4796413,
+  "tags": {
+    "amenity": "bicycle_parking"
+  }
+},
+{
+  "type": "node",
+  "id": 10139145367,
+  "lat": 37.8559996,
+  "lon": -122.4787168,
+  "tags": {
+    "amenity": "bicycle_parking",
+    "fee": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10139145395,
+  "lat": 37.8578131,
+  "lon": -122.4814388,
+  "tags": {
+    "amenity": "bicycle_parking"
+  }
+},
+{
+  "type": "node",
+  "id": 13124392663,
+  "lat": 37.8585617,
+  "lon": -122.4849762,
+  "tags": {
+    "addr:housenumber": "42 1/2",
+    "addr:street": "Caledonia Street",
+    "check_date": "2025-09-06",
+    "name": "Above Category",
+    "opening_hours": "Mo,Su off; Tu-Fr 11:00-18:00; Sa 11:00-17:00",
+    "phone": "+1 415-339-9250",
+    "shop": "bicycle"
+  }
+}
+
+  ]
+}

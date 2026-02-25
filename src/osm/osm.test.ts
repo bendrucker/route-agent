@@ -1,9 +1,22 @@
-import { describe, expect, test } from "bun:test";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
+import { join } from "node:path";
+import fetchVCR from "fetch-vcr";
 import { findCyclingInfrastructure, findWaterSources, querySurfaceTypes } from "./overpass";
 
-const live = describe.skipIf(!process.env.LIVE_API);
+fetchVCR.configure({
+  fixturePath: join(import.meta.dir, "fixtures"),
+  mode: process.env.LIVE_API ? "record" : "playback",
+});
 
-live("findWaterSources", () => {
+const realFetch = globalThis.fetch;
+beforeAll(() => {
+  globalThis.fetch = fetchVCR as unknown as typeof fetch;
+});
+afterAll(() => {
+  globalThis.fetch = realFetch;
+});
+
+describe("findWaterSources", () => {
   test("Pantoll Ranger Station area", async () => {
     const results = await findWaterSources({
       south: 37.9015,
@@ -12,10 +25,10 @@ live("findWaterSources", () => {
       east: -122.601,
     });
     expect(results).toMatchSnapshot();
-  }, 15000);
+  });
 });
 
-live("findCyclingInfrastructure", () => {
+describe("findCyclingInfrastructure", () => {
   test("Sausalito near Bridgeway", async () => {
     const results = await findCyclingInfrastructure({
       south: 37.855,
@@ -24,10 +37,10 @@ live("findCyclingInfrastructure", () => {
       east: -122.475,
     });
     expect(results).toMatchSnapshot();
-  }, 15000);
+  });
 });
 
-live("querySurfaceTypes", () => {
+describe("querySurfaceTypes", () => {
   test("Mill Valley - Sausalito bike path", async () => {
     const results = await querySurfaceTypes({
       south: 37.86,
@@ -36,5 +49,5 @@ live("querySurfaceTypes", () => {
       east: -122.495,
     });
     expect(results).toMatchSnapshot();
-  }, 15000);
+  });
 });
