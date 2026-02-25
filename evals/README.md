@@ -90,6 +90,47 @@ tests:
   - file://cases/generic-items.yaml
 ```
 
+## Custom Scorers
+
+Reusable scoring functions in `scorers/` for domain-specific eval assertions. Reference them from any colocated `promptfooconfig.yaml` using the `file://` prefix with a named export:
+
+```yaml
+assert:
+  - type: javascript
+    value: file://../../evals/scorers/nutrition.ts:calorieEstimate
+    config:
+      min: 200
+      max: 300
+```
+
+The path is relative to the config file's location. Adjust the `../` depth to match.
+
+### Available Scorers
+
+**JSON** (`scorers/json.ts`)
+- `hasKeys` — assert required keys exist in JSON output
+- `numericRanges` — assert numeric fields fall within expected ranges
+
+**Nutrition** (`scorers/nutrition.ts`)
+- `completeNutrition` — validate all nutrition fields are present
+- `calorieEstimate` — partial-credit scoring for calorie accuracy
+- `macroConsistency` — check that macro grams are consistent with calorie count
+- `confidenceLevel` — assert `confidence` matches expected value (`"exact"` or `"estimated"`)
+
+**Route** (`scorers/route.ts`)
+- `mentionsLocations` — assert output references specific geographic locations
+- `invokesSkills` — assert output references expected skill names
+- `distanceInRange` — validate route distance against a target with tolerance
+
+**Cycling** (`scorers/cycling.ts`)
+- `foodStopSpacing` — validate food stops are spaced within safe intervals
+- `clothingForConditions` — assert clothing recommendations match temperature range
+- `climbAwareness` — validate effort management and sequencing for climbs
+
+### Scorer Return Values
+
+Each scorer returns a `GradingResult` with `pass`, `score` (0-1), and `reason`. Many scorers award partial credit rather than binary pass/fail.
+
 ## Gold Standard Cases
 
 Real trip examples used as regression fixtures. These are blocked on user input — see [#26](https://github.com/bendrucker/route-agent/issues/26).
