@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "History analysis skill — does the prompt produce useful route planning guidance?"
+
+prompts:
+  - file://prompt.txt
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-6
+    config:
+      temperature: 0.0
+      max_tokens: 1024
+
+defaultTest:
+  options:
+    provider: anthropic:messages:claude-sonnet-4-6
+
+tests: file://cases/scenarios.yaml

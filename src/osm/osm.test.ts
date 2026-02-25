@@ -1,7 +1,9 @@
 import { describe, expect, test } from "bun:test";
 import { findCyclingInfrastructure, findWaterSources, querySurfaceTypes } from "./overpass";
 
-describe("findWaterSources", () => {
+const live = describe.skipIf(!process.env.LIVE_API);
+
+live("findWaterSources", () => {
   test("Pantoll Ranger Station area", async () => {
     const results = await findWaterSources({
       south: 37.9015,
@@ -13,7 +15,7 @@ describe("findWaterSources", () => {
   }, 15000);
 });
 
-describe("findCyclingInfrastructure", () => {
+live("findCyclingInfrastructure", () => {
   test("Sausalito near Bridgeway", async () => {
     const results = await findCyclingInfrastructure({
       south: 37.855,
@@ -25,7 +27,7 @@ describe("findCyclingInfrastructure", () => {
   }, 15000);
 });
 
-describe("querySurfaceTypes", () => {
+live("querySurfaceTypes", () => {
   test("Mill Valley - Sausalito bike path", async () => {
     const results = await querySurfaceTypes({
       south: 37.86,

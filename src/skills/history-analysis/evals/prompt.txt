@@ -1,0 +1,13 @@
+{{history_prompt}}
+
+## Analysis Data
+
+```json
+{{analysis_data}}
+```
+
+## Route Planning Request
+
+{{query}}
+
+Based on the history analysis above, provide route planning guidance for this request. Focus on how the rider's history should inform the route plan.

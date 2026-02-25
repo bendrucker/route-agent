@@ -1,0 +1,76 @@
+- description: "New territory — no prior rides in area"
+  vars:
+    history_prompt: |-
+      Analyze this cyclist's ride history to inform route planning. Use familiar roads as reliable building blocks and flag new territory as exploration opportunities.
+
+      No prior rides in this area — all roads are new. Prioritize well-known routes and flag uncertainty about conditions.
+    analysis_data: |
+      {
+        "relevantActivities": [],
+        "reusableSegments": [],
+        "preferences": { "rideCount": 0, "distance": { "avg": 72000, "max": 160000 }, "elevation": { "avg": 1100, "max": 2500 }, "duration": { "avg": 10800, "max": 21600 } }
+      }
+    query: "Plan a 60km ride around Santa Cruz"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Acknowledge that the rider has no prior rides in this area
+        - Express appropriate caution about unfamiliar roads or conditions
+        - NOT claim familiarity with roads the rider hasn't ridden
+
+- description: "Familiar area — Marin County with segments"
+  vars:
+    history_prompt: |-
+      Analyze this cyclist's ride history to inform route planning. Use familiar roads as reliable building blocks and flag new territory as exploration opportunities.
+
+      2 known segments available — prefer incorporating these as they mark interesting road sections with benchmark data.
+    analysis_data: |
+      {
+        "relevantActivities": [
+          { "id": 12345, "name": "Mt Tam via Panoramic Highway", "distance": 65000, "elevationGain": 1200, "movingTime": 10800, "startLatLng": [37.906, -122.5474] },
+          { "id": 12346, "name": "Hawk Hill and Marin Headlands", "distance": 42000, "elevationGain": 750, "movingTime": 7200, "startLatLng": [37.8577, -122.4853] },
+          { "id": 12347, "name": "Camino Alto to Paradise Loop", "distance": 55000, "elevationGain": 600, "movingTime": 9000, "startLatLng": [37.906, -122.5474] }
+        ],
+        "reusableSegments": [
+          { "id": 98765, "name": "Hawk Hill Climb", "distance": 2100, "avgGrade": 8.5, "elevDifference": 178 },
+          { "id": 98766, "name": "Panoramic Highway to Pantoll", "distance": 5200, "avgGrade": 5.8, "elevDifference": 302 }
+        ],
+        "preferences": { "rideCount": 150, "distance": { "avg": 54000, "max": 110000 }, "elevation": { "avg": 850, "max": 2200 }, "duration": { "avg": 9000, "max": 18000 } }
+      }
+    query: "Plan a hilly 60km ride from Mill Valley"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Reference specific roads or segments the rider has ridden before (e.g. Panoramic Highway, Hawk Hill, Camino Alto)
+        - Suggest incorporating known segments as route building blocks
+        - Treat the rider's history as an asset for planning, not a constraint
+
+- description: "Few rides — partial Marin coverage"
+  vars:
+    history_prompt: |-
+      Analyze this cyclist's ride history to inform route planning. Use familiar roads as reliable building blocks and flag new territory as exploration opportunities.
+
+      Few prior rides in this area. Mix familiar roads with new ones for a balanced route.
+
+      1 known segments available — prefer incorporating these as they mark interesting road sections with benchmark data.
+    analysis_data: |
+      {
+        "relevantActivities": [
+          { "id": 12345, "name": "Mill Valley to Sausalito via bike path", "distance": 25000, "elevationGain": 200, "movingTime": 4500, "startLatLng": [37.906, -122.5474] }
+        ],
+        "reusableSegments": [
+          { "id": 98765, "name": "Mill Valley - Sausalito Path", "distance": 6200, "avgGrade": 0.5, "elevDifference": 31 }
+        ],
+        "preferences": { "rideCount": 5, "distance": { "avg": 25000, "max": 35000 }, "elevation": { "avg": 200, "max": 400 }, "duration": { "avg": 4500, "max": 7200 } }
+      }
+    query: "Plan a 50km ride exploring Mt Tam from Mill Valley"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Acknowledge limited but existing familiarity with the area
+        - Reference the known Mill Valley - Sausalito bike path
+        - Suggest exploring new roads beyond what the rider has already done, such as climbing Mt Tam
+        - Balance reusing the known bike path segment with discovering new territory
