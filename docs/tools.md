@@ -15,9 +15,9 @@ Three data sources have code today. The rest are design specs on the roadmap.
 | 5. Weather (WeatherKit) | 🔜 Planned | - |
 | 6. Water & Infrastructure (OSM) | ✅ Implemented | `src/osm/` |
 | 7. Elevation | 🔜 Planned | - |
-| 8. Street Imagery | 🔜 Deferred | - |
-| 9. Road Surface | 🔜 Deferred | - |
-| 10. Traffic & Safety | 🔜 Deferred | - |
+| 8. Street Imagery | ⏸️ Deferred | - |
+| 9. Road Surface | ⏸️ Deferred | - |
+| 10. Traffic & Safety | ⏸️ Deferred | - |
 
 GPX output, the final route format, is implemented in `src/gpx/`. It is not a data source, so it has no section below.
 
