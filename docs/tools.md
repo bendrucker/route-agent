@@ -2,6 +2,25 @@
 
 Tools abstract access to external data sources. Each tool provides a consistent interface to an API or data service.
 
+## Implementation Status
+
+Three data sources have code today. The rest are design specs on the roadmap.
+
+| Tool | Status | Location |
+|------|--------|----------|
+| 1. Activity History (Strava) | ✅ Implemented | `src/strava/` |
+| 2. Routing Engine (GraphHopper) | ✅ Implemented | `src/graphhopper/` |
+| 3. Place Search (Google Maps) | 🔜 Planned | - |
+| 4. Climb Data (PJAMM) | 🔜 Planned | - |
+| 5. Weather (WeatherKit) | 🔜 Planned | - |
+| 6. Water & Infrastructure (OSM) | ✅ Implemented | `src/osm/` |
+| 7. Elevation | 🔜 Planned | - |
+| 8. Street Imagery | 🔜 Deferred | - |
+| 9. Road Surface | 🔜 Deferred | - |
+| 10. Traffic & Safety | 🔜 Deferred | - |
+
+GPX output, the final route format, is implemented in `src/gpx/`. It is not a data source, so it has no section below.
+
 ## Tool Categories
 
 ```mermaid

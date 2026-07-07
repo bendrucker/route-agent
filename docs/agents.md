@@ -4,6 +4,10 @@ Sub-agents are focused, stateless helpers that skills invoke for specific data r
 
 See [architecture.md](architecture.md#skills-vs-sub-agents) for when to use skills vs sub-agents.
 
+## Implementation Status
+
+No sub-agents are implemented yet. The Nutrition Facts Agent below is a design spec on the roadmap.
+
 ## Skills vs Sub-agents
 
 | Characteristic | Skill | Sub-agent |
