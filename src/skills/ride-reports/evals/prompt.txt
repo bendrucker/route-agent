@@ -1,0 +1,7 @@
+{{ride_reports_prompt}}
+
+## Web Search Results
+
+{{search_results}}
+
+Based on the web search results above, produce a summary of local knowledge for this area, organized into hazards, conditions, and recommendations. Attribute every finding to the source it came from.
