@@ -4,6 +4,25 @@ Skills are composable research patterns that use [tools](tools.md) to accomplish
 
 See [architecture.md](architecture.md) for orchestration model and design decisions.
 
+## Implementation Status {#implementation-status}
+
+Only History Analysis has code today. The rest are design specs on the roadmap.
+
+| Skill | Status | Location |
+|-------|--------|----------|
+| History Analysis | ✅ Implemented | `src/skills/history-analysis/` |
+| Route Optimization | 🔜 Planned | - |
+| Climb Planning | 🔜 Planned | - |
+| Weather Planning | 🔜 Planned | - |
+| Food Stop Planning | 🔜 Planned | - |
+| Water Stop Planning | 🔜 Planned | - |
+| Narrative Research | 🔜 Planned | - |
+| Safety Assessment | 🔜 Planned | - |
+| Nutrition Planning | 🔜 Planned | - |
+| Clothing Planning | 🔜 Planned | - |
+
+Route Optimization depends on the GraphHopper tool, which exists in `src/graphhopper/`. The skill that drives it does not exist yet.
+
 ## Skill Architecture {#skill-architecture}
 
 ```mermaid

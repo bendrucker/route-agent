@@ -2,6 +2,10 @@
 
 Promptfoo-based evaluations colocated with the code they test.
 
+## Implementation Status
+
+One component ships a colocated config today: `src/skills/history-analysis/evals/promptfooconfig.yaml`. The scorers in `scorers/` all exist (`json`, `nutrition`, `route`, `cycling`). The `src/agents/nutrition-facts/` and `src/skills/clothing-planning/` trees in the examples below are illustrative and do not exist yet.
+
 ## Quick Start
 
 ```bash

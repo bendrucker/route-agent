@@ -2,6 +2,10 @@
 
 Test-driven development for the route agent using structured evaluations.
 
+## Implementation Status
+
+The colocated layout below is the target. Today one component ships a config: `src/skills/history-analysis/evals/promptfooconfig.yaml`. Shared scorers exist in `evals/scorers/` (`json`, `nutrition`, `route`, `cycling`). The `src/agents/`, other `src/skills/*/`, and `src/orchestrator/` eval directories shown in examples do not exist yet.
+
 ## Framework Choice: Promptfoo
 
 [Promptfoo](https://github.com/promptfoo/promptfoo) is a TypeScript-native evaluation framework that fits our needs:

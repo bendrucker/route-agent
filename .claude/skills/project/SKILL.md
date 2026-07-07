@@ -13,6 +13,10 @@ allowed-tools:
 
 Assess project status, find ready tasks, and orchestrate parallel work.
 
+## Merge Convention
+
+PRs merge via squash. Commit subjects on `main` read `Title (#NN)`, where `NN` is the PR number.
+
 ## Commands
 
 | Command | Action |
@@ -70,10 +74,12 @@ Issue: <title>
 
 ## Milestone Priority
 
-1. Foundation
-2. Eval Setup (parallel)
-3. Strava Integration
-4. GraphHopper Integration
+Complete: Foundation, Eval Setup, Strava Integration, GraphHopper Integration. Verify against `gh api repos/bendrucker/route-agent/milestones` before relying on this list.
+
+1. Foundation ✅
+2. Eval Setup (parallel) ✅
+3. Strava Integration ✅
+4. GraphHopper Integration ✅
 5. Route Synthesis
 6. Place Search, Water Stops, Climb Integration, Weather Integration
 7. Ride Preparation, Narrative Research
