@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "Narrative research skill. Are local knowledge notes woven into the route presentation as narrative, and does the agent degrade gracefully when there's nothing to weave in?"
+
+prompts:
+  - file://prompt.txt
+
+providers:
+  - id: anthropic:messages:claude-sonnet-5
+    config:
+      temperature: 0.0
+      max_tokens: 1024
+
+defaultTest:
+  options:
+    provider: anthropic:messages:claude-sonnet-5
+
+tests: file://cases/scenarios.yaml

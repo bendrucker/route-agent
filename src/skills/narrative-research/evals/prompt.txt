@@ -1,0 +1,7 @@
+{{narrative_prompt}}
+
+## Route Context
+
+{{route_summary}}
+
+Present the final route plan, incorporating the notes above naturally into the write-up.
