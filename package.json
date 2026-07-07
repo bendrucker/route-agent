@@ -12,7 +12,7 @@
     "lint:fix": "bunx @biomejs/biome check --write .",
     "typecheck": "tsc --noEmit",
     "evals": "bun evals/run-all.ts",
-    "evals:view": "promptfoo view"
+    "evals:view": "bunx promptfoo view"
   },
   "keywords": [
     "cycling",
