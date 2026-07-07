@@ -74,7 +74,7 @@ Issue: <title>
 
 ## Milestone Priority
 
-Complete: Foundation, Eval Setup, Strava Integration, GraphHopper Integration. Verify against `gh api repos/bendrucker/route-agent/milestones` before relying on this list.
+Verify against `gh api repos/bendrucker/route-agent/milestones` before relying on this list.
 
 1. Foundation ✅
 2. Eval Setup (parallel) ✅
