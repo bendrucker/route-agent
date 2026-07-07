@@ -4,13 +4,13 @@ Tools abstract access to external data sources. Each tool provides a consistent 
 
 ## Implementation Status
 
-Three data sources have code today. The rest are design specs on the roadmap.
+Four data sources have code today. The rest are design specs on the roadmap.
 
 | Tool | Status | Location |
 |------|--------|----------|
 | 1. Activity History (Strava) | ✅ Implemented | `src/strava/` |
 | 2. Routing Engine (GraphHopper) | ✅ Implemented | `src/graphhopper/` |
-| 3. Place Search (Google Maps) | 🔜 Planned | - |
+| 3. Place Search (Google Maps) | ✅ Implemented | `src/google-places/` |
 | 4. Climb Data (PJAMM) | 🔜 Planned | - |
 | 5. Weather (WeatherKit) | 🔜 Planned | - |
 | 6. Water & Infrastructure (OSM) | ✅ Implemented | `src/osm/` |
@@ -107,15 +107,16 @@ graph LR
 
 **Purpose**: Find cafes, grocery stores, bike shops, points of interest
 
-**Implementation**: Google Maps MCP
+**Implementation**: In-repo client + MCP server wrapping the Places API (New) Text Search endpoint (`src/google-places/`)
 
 **Used by**: [Food Stop Planning](skills.md#food-stop-planning), [Water Stop Planning](skills.md#water-stop-planning), [Safety Assessment](skills.md#safety-assessment)
 
 **Capabilities**:
-- Search by type within radius
-- Search along a route corridor
-- Get hours, ratings, photos
+- Search by text query within a bounding box
+- Get hours, ratings, place types
 - Filter by currently open
+
+**Scope cuts**: Corridor search is approximated as a bounding box, not Google's route-polyline search (callers should pad a route-derived bbox by ~1km). Photos are cut entirely since retrieving them requires embedding the API key in returned URLs. Text Search only, no Nearby Search or Place Details.
 
 ---
 

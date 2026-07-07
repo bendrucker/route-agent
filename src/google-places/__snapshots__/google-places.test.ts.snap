@@ -1,0 +1,48 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`findPlaces coffee near Pescadero 1`] = `
+[
+  {
+    "address": "213 Stage Rd, Pescadero, CA 94060, USA",
+    "id": "ChIJt1J0HzQHj4ARcofFT1Jsrls",
+    "lat": 37.252276099999996,
+    "lng": -122.38317860000001,
+    "name": "Downtown Local",
+    "openNow": false,
+    "rating": 4.6,
+    "types": [
+      "coffee_shop",
+      "cafe",
+      "food_store",
+      "store",
+      "food",
+      "point_of_interest",
+      "establishment",
+    ],
+    "userRatingCount": 330,
+  },
+  {
+    "address": "213 Stage Rd, Pescadero, CA 94060, USA",
+    "id": "ChIJg4EAQVUHj4ARZcV6jyCcwiM",
+    "lat": 37.252238399999996,
+    "lng": -122.3831717,
+    "name": "The Sunshine",
+    "openNow": false,
+    "rating": 4.7,
+    "types": [
+      "grocery_store",
+      "food_delivery",
+      "food_store",
+      "store",
+      "food",
+      "point_of_interest",
+      "establishment",
+    ],
+    "userRatingCount": 39,
+  },
+]
+`;
+
+exports[`findPlaces no results for a nonsense query 1`] = `[]`;
+
+exports[`findPlaces open now near Pescadero 1`] = `[]`;

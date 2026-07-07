@@ -1,0 +1,56 @@
+{
+  "places": [
+    {
+      "id": "ChIJt1J0HzQHj4ARcofFT1Jsrls",
+      "types": [
+        "coffee_shop",
+        "cafe",
+        "food_store",
+        "store",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "213 Stage Rd, Pescadero, CA 94060, USA",
+      "location": {
+        "latitude": 37.252276099999996,
+        "longitude": -122.38317860000001
+      },
+      "rating": 4.6,
+      "userRatingCount": 330,
+      "displayName": {
+        "text": "Downtown Local",
+        "languageCode": "en"
+      },
+      "currentOpeningHours": {
+        "openNow": false
+      }
+    },
+    {
+      "id": "ChIJg4EAQVUHj4ARZcV6jyCcwiM",
+      "types": [
+        "grocery_store",
+        "food_delivery",
+        "food_store",
+        "store",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "213 Stage Rd, Pescadero, CA 94060, USA",
+      "location": {
+        "latitude": 37.252238399999996,
+        "longitude": -122.3831717
+      },
+      "rating": 4.7,
+      "userRatingCount": 39,
+      "displayName": {
+        "text": "The Sunshine",
+        "languageCode": "en"
+      },
+      "currentOpeningHours": {
+        "openNow": false
+      }
+    }
+  ]
+}
