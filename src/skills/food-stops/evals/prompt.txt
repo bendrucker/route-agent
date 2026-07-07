@@ -1,0 +1,13 @@
+{{food_prompt}}
+
+## Food Stop Data
+
+```json
+{{stop_data}}
+```
+
+## Route Planning Request
+
+{{query}}
+
+Based on the food stop data above, provide meal/snack guidance for this request. Focus on where and when the rider should eat.
