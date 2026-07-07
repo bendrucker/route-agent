@@ -6,22 +6,20 @@ See [architecture.md](architecture.md) for orchestration model and design decisi
 
 ## Implementation Status {#implementation-status}
 
-History Analysis, Narrative Research, and Food Stop Planning have code today. The rest are design specs on the roadmap.
+Implemented skills link to their code below. The rest are design specs on the roadmap.
 
 | Skill | Status | Location |
 |-------|--------|----------|
 | History Analysis | ✅ Implemented | `src/skills/history-analysis/` |
-| Route Optimization | 🔜 Planned | - |
+| Route Optimization | ✅ Implemented | `src/skills/route-optimization/` |
 | Climb Planning | 🔜 Planned | - |
 | Weather Planning | 🔜 Planned | - |
 | Food Stop Planning | ✅ Implemented | `src/skills/food-stops/` |
-| Water Stop Planning | 🔜 Planned | - |
+| Water Stop Planning | ✅ Implemented | `src/skills/water-stops/` |
 | Narrative Research | ✅ Implemented | `src/skills/ride-reports/`, `src/skills/narrative-research/` |
 | Safety Assessment | 🔜 Planned | - |
 | Nutrition Planning | 🔜 Planned | - |
 | Clothing Planning | 🔜 Planned | - |
-
-Route Optimization depends on the GraphHopper tool, which exists in `src/graphhopper/`. The skill that drives it does not exist yet.
 
 Narrative Research splits across two packages: `ride-reports/` runs the web search step, covering ride reports and forum posts only, and `narrative-research/` synthesizes its findings plus named route places into rider-facing notes and a presentation prompt. PJAMM narrative synthesis (step 2 of its research pattern) is cut pending the PJAMM API spike ([#15](https://github.com/bendrucker/route-agent/issues/15)).
 
