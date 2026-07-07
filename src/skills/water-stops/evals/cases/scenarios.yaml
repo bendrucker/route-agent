@@ -1,0 +1,75 @@
+- description: "Remote hot-weather route with sparse coverage"
+  vars:
+    water_prompt: |-
+      Plan drinking-water refill stops along this route for hydration. Recommend fountains, water points, and stores for topping up.
+
+      Hot weather. Emphasize hydration and have riders refill at every recommended stop even if not yet thirsty.
+
+      Refill at Furnace Creek Visitor Center: 0.0 km
+      Refill at Stovepipe Wells: 40.0 km (unmarked source, verify it's flowing)
+    stop_data: |
+      {
+        "stops": [
+          { "source": { "name": "Furnace Creek Visitor Center", "type": "drinking_water" }, "distanceAlongRouteM": 0 },
+          { "source": { "name": "Stovepipe Wells", "type": "water_point" }, "distanceAlongRouteM": 40030 }
+        ],
+        "isHotWeather": true,
+        "totalDistanceM": 80060
+      }
+    query: "Plan an 80km hot-weather ride through Death Valley"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Reference both Furnace Creek Visitor Center and Stovepipe Wells as refill points
+        - Emphasize proactive hydration given the hot conditions
+        - Flag that Stovepipe Wells is an unmarked source that should be verified before relying on it
+
+- description: "Well-covered normal-weather route"
+  vars:
+    water_prompt: |-
+      Plan drinking-water refill stops along this route for hydration. Recommend fountains, water points, and stores for topping up.
+
+      Refill at Dolores Park Fountain: 0.0 km
+      Refill at San Rafael Fountain: 40.0 km
+      Refill at Sausalito Plaza Fountain: 80.1 km
+    stop_data: |
+      {
+        "stops": [
+          { "source": { "name": "Dolores Park Fountain", "type": "drinking_water" }, "distanceAlongRouteM": 0 },
+          { "source": { "name": "San Rafael Fountain", "type": "drinking_water" }, "distanceAlongRouteM": 40030 },
+          { "source": { "name": "Sausalito Plaza Fountain", "type": "drinking_water" }, "distanceAlongRouteM": 80060 }
+        ],
+        "isHotWeather": false,
+        "totalDistanceM": 80060
+      }
+    query: "Plan an 80km ride from San Francisco to Sausalito via San Rafael"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Reference all three fountains as refill points, in route order
+        - NOT suggest extra caution or emergency water carrying since conditions are normal and coverage is good
+
+- description: "No water sources in a hot, remote corridor"
+  vars:
+    water_prompt: |-
+      Plan drinking-water refill stops along this route for hydration. Recommend fountains, water points, and stores for topping up.
+
+      Hot weather. Emphasize hydration and have riders refill at every recommended stop even if not yet thirsty.
+
+      No water sources found within the route corridor over 80 km in hot conditions. Advise carrying extra water or rerouting through a town.
+    stop_data: |
+      {
+        "stops": [],
+        "isHotWeather": true,
+        "totalDistanceM": 80060
+      }
+    query: "Plan an 80km ride through a remote desert stretch in summer"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Clearly warn that no water sources were found on this route
+        - Advise carrying enough water for the full 80km given the hot conditions
+        - Suggest an alternative such as rerouting through a town or carrying extra capacity

@@ -1,0 +1,13 @@
+{{water_prompt}}
+
+## Water Stop Data
+
+```json
+{{stop_data}}
+```
+
+## Route Planning Request
+
+{{query}}
+
+Based on the water stop data above, provide hydration guidance for this request. Focus on where and when the rider should refill.
