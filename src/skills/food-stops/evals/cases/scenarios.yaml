@@ -1,0 +1,79 @@
+- description: "Well-covered route with a lunch cafe open at arrival"
+  vars:
+    food_prompt: |-
+      Plan food stops along this route based on projected arrival times and business hours. Distinguish full meals from quick snacks.
+
+      Lunch at Cafe Roma: 20.0 km (arrive ~12:15 PM), open, 4.7★
+    stop_data: |
+      {
+        "stops": [
+          {
+            "place": { "name": "Cafe Roma", "rating": 4.7 },
+            "distanceAlongRouteM": 20020,
+            "arrivalTime": "2024-06-10T12:15:00Z",
+            "isOpenAtArrival": true,
+            "mealType": "meal",
+            "isBackup": false
+          }
+        ],
+        "totalDistanceM": 40030,
+        "averageSpeedKmh": 20
+      }
+    query: "Plan a 40km ride with a stop for lunch around the halfway point"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Reference Cafe Roma as the lunch stop
+        - Frame it as lunch, consistent with the ~12:15 PM arrival
+        - NOT suggest extra caution or backup planning, since it's open and highly rated
+
+- description: "Early-morning ride with the only cafe closed at projected arrival"
+  vars:
+    food_prompt: |-
+      Plan food stops along this route based on projected arrival times and business hours. Distinguish full meals from quick snacks.
+
+      Backup only, closed at arrival: Sunrise Bakery: 10.0 km (arrive ~6:00 AM), consider packing food for this stretch
+    stop_data: |
+      {
+        "stops": [
+          {
+            "place": { "name": "Sunrise Bakery", "rating": 4.4 },
+            "distanceAlongRouteM": 10010,
+            "arrivalTime": "2024-06-10T06:00:00Z",
+            "isOpenAtArrival": false,
+            "mealType": "meal",
+            "isBackup": true
+          }
+        ],
+        "totalDistanceM": 80060,
+        "averageSpeedKmh": 20
+      }
+    query: "Plan an early morning 80km ride starting before sunrise"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Flag that Sunrise Bakery will be closed at the projected 6:00 AM arrival
+        - Suggest either riding on to a later stop or packing food for that stretch
+        - NOT claim Sunrise Bakery will be open when the rider arrives
+
+- description: "No food places in the route corridor"
+  vars:
+    food_prompt: |-
+      Plan food stops along this route based on projected arrival times and business hours. Distinguish full meals from quick snacks.
+
+      No food stops found along the route corridor. Advise the rider to pack enough food for the full ride.
+    stop_data: |
+      {
+        "stops": [],
+        "totalDistanceM": 40030,
+        "averageSpeedKmh": 20
+      }
+    query: "Plan a 40km ride through a stretch with no listed food stops"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Clearly state that no food stops were found along the route
+        - Advise packing enough food for the full 40km ride

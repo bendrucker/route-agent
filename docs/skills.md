@@ -6,7 +6,7 @@ See [architecture.md](architecture.md) for orchestration model and design decisi
 
 ## Implementation Status {#implementation-status}
 
-History Analysis and Narrative Research have code today. The rest are design specs on the roadmap.
+History Analysis, Narrative Research, and Food Stop Planning have code today. The rest are design specs on the roadmap.
 
 | Skill | Status | Location |
 |-------|--------|----------|
@@ -14,7 +14,7 @@ History Analysis and Narrative Research have code today. The rest are design spe
 | Route Optimization | 🔜 Planned | - |
 | Climb Planning | 🔜 Planned | - |
 | Weather Planning | 🔜 Planned | - |
-| Food Stop Planning | 🔜 Planned | - |
+| Food Stop Planning | ✅ Implemented | `src/skills/food-stops/` |
 | Water Stop Planning | 🔜 Planned | - |
 | Narrative Research | ✅ Implemented | `src/skills/ride-reports/` |
 | Safety Assessment | 🔜 Planned | - |
