@@ -2,7 +2,7 @@
   "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
   "plugins": ["./lint/no-import-extensions.grit"],
   "files": {
-    "includes": ["**", "!**/dist", "!**/worktrees", "!**/*.grit"]
+    "includes": ["**", "!**/dist", "!**/worktrees", "!**/*.grit", "!**/fixtures"]
   },
   "formatter": {
     "indentStyle": "space",

@@ -1,0 +1,48 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.10 2d4cfc48",
+  "osm3s": {
+    "timestamp_osm_base": "2026-02-25T02:02:45Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 2351681898,
+  "lat": 37.9044700,
+  "lon": -122.6037500,
+  "tags": {
+    "amenity": "drinking_water",
+    "description": "Pantoll Ranger Station weak stream",
+    "source": "wetap.org",
+    "wetap:status": "working"
+  }
+},
+{
+  "type": "node",
+  "id": 4734491647,
+  "lat": 37.9035681,
+  "lon": -122.6038932,
+  "tags": {
+    "access": "yes",
+    "amenity": "drinking_water",
+    "fee": "no",
+    "fountain": "bubbler"
+  }
+},
+{
+  "type": "node",
+  "id": 8996298917,
+  "lat": 37.9037514,
+  "lon": -122.6035968,
+  "tags": {
+    "access": "yes",
+    "amenity": "drinking_water",
+    "bottle": "yes",
+    "man_made": "water_tap"
+  }
+}
+
+  ]
+}

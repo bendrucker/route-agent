@@ -47,6 +47,19 @@ See `docs/architecture.md` for full design. Key concepts:
 
 This agent optimizes for **quality over speed**. It's acceptable to spend 10-20 minutes on deep research to produce an excellent route plan. The goal is to encode expert route-building knowledge.
 
+## HTTP Fixtures
+
+Tests use [fetch-vcr](https://github.com/philschatz/fetch-vcr) for HTTP record/replay. Fixtures are committed to git alongside tests (e.g. `src/osm/fixtures/`).
+
+- **Playback** (default, CI): `bun test` — reads from fixture files, no network
+- **Record**: `LIVE_API=1 bun test --timeout 15000` — hits real APIs, writes fixtures to disk
+
+When adding tests for a new HTTP client:
+1. Configure `fetchVCR` with `fixturePath` pointing to a `fixtures/` dir next to the test
+2. Set mode based on `process.env.LIVE_API` (`"record"` or `"playback"`)
+3. Replace `globalThis.fetch` in `beforeAll`, restore in `afterAll`
+4. See `src/osm/osm.test.ts` for the pattern
+
 ## Evals
 
 Promptfoo evals are colocated with code. Load the `promptfoo` skill when writing or modifying evals.

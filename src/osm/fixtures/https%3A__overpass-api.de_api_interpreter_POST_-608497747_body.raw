@@ -1,0 +1,3878 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.10 2d4cfc48",
+  "osm3s": {
+    "timestamp_osm_base": "2026-02-25T02:02:45Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 12169928,
+  "nodes": [
+    257678056,
+    8444064108,
+    5019467067,
+    8444076732,
+    312124613,
+    8444064115,
+    8444076719,
+    5019467032,
+    312124614,
+    8444076743,
+    8444076725,
+    5019467082,
+    8444076741,
+    318560052,
+    5019467061,
+    8444076727,
+    5019467079,
+    110345607,
+    5019467048,
+    8444064110,
+    318560051,
+    8444076734,
+    5019466160,
+    5019466211,
+    5019467035,
+    8444076717,
+    312124615
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Marin City;Sausalito",
+    "highway": "motorway_link",
+    "junction:ref": "445A",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 12172550,
+  "nodes": [
+    312126210,
+    318560041,
+    8416850962,
+    110366744,
+    8416850961,
+    5019466193,
+    8442251619,
+    318560038,
+    8442251621,
+    5019466156,
+    8442251620,
+    110366745,
+    8442251618,
+    318560037,
+    8442197194,
+    8442197195,
+    8442197196,
+    5021267534,
+    8443464842,
+    5021267495,
+    8443464838,
+    9953972717,
+    9256293030,
+    9953902510,
+    9953972729,
+    8443464840
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Sausalito;Marin City",
+    "highway": "motorway_link",
+    "lanes": "2",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA",
+    "turn:lanes": "left;through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 12173768,
+  "nodes": [
+    257669936,
+    9340963000,
+    5021267484,
+    5021267501,
+    318557064,
+    2220880575,
+    8407624062,
+    2220880419,
+    8407624060,
+    10264491636,
+    318557063,
+    2220880309,
+    8407624058,
+    318557062,
+    2220880274,
+    318557061,
+    8407624056,
+    2220880572,
+    5021223280,
+    318557060,
+    2220880394,
+    5021267567,
+    5021223320,
+    110374055
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Rodeo Avenue",
+    "highway": "motorway_link",
+    "junction:ref": "444",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 12173781,
+  "nodes": [
+    110374055,
+    8407624065,
+    8407624066,
+    5021267474,
+    8407624068,
+    318557058,
+    8407624070,
+    318557057,
+    2220880533,
+    318557056,
+    2220880416,
+    2220880253,
+    2220880406,
+    8407577632,
+    318557055,
+    8407577633,
+    2220880458,
+    8407577636,
+    2220880272,
+    8407577635,
+    110374104,
+    8407577634,
+    318557054,
+    8407577637,
+    5021267431,
+    8407577638,
+    5021267440
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "San Francisco",
+    "destination:ref": "US 101 South",
+    "highway": "motorway_link",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 12173811,
+  "nodes": [
+    110374244,
+    5021267515,
+    5021267464,
+    7838174173,
+    312117905,
+    5021267479,
+    13417443337,
+    312117904,
+    5019377136,
+    5019377147,
+    8414332323,
+    318557071,
+    110374245
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination:ref": "US 101 North;CA 1 North",
+    "highway": "motorway_link",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 12173812,
+  "nodes": [
+    110374250,
+    5021223283,
+    2220880540,
+    8414334449,
+    318557047,
+    8414334444,
+    5019377134,
+    8414334454,
+    5021267524,
+    8414334446,
+    312117903,
+    8414334451,
+    5021223274,
+    8414334443,
+    318557046,
+    8414334448,
+    5021223288,
+    8414334453,
+    5021267547,
+    8414334445,
+    312117902,
+    8414334450,
+    318557079,
+    8414334455,
+    5021267559,
+    8414334447,
+    110374244
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Rodeo Avenue",
+    "highway": "motorway_link",
+    "junction:ref": "444",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed:advisory": "20 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 12174356,
+  "nodes": [
+    5021267502,
+    5021267465,
+    110349715,
+    110376770
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "1",
+    "lanes:forward": "3",
+    "name": "Donahue Street",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "North Bridge",
+    "tiger:name_type": "Blvd",
+    "tiger:reviewed": "yes",
+    "turn:lanes:forward": "left|left;through|right|right"
+  }
+},
+{
+  "type": "way",
+  "id": 12176545,
+  "nodes": [
+    110390336,
+    5482635484,
+    8822871138,
+    110390339,
+    6328261075,
+    6328261074,
+    3949471377,
+    8820044340,
+    8822868406,
+    110390340,
+    1273172745,
+    1585988042,
+    8741696483,
+    5482567591
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Testa Street",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Testa",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 12177501,
+  "nodes": [
+    1273240800,
+    110398335,
+    8751845930,
+    312126203,
+    318856551,
+    5482671339,
+    110398336
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "4",
+    "lanes:backward": "3",
+    "lanes:forward": "1",
+    "name": "Gate 6 Road",
+    "source:lanes": "in-person observation 2021; new construction",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Gate 6",
+    "tiger:name_type": "Rd",
+    "turn:lanes:backward": "left|through|right"
+  }
+},
+{
+  "type": "way",
+  "id": 12180951,
+  "nodes": [
+    110416206,
+    8749363456,
+    110416208
+  ],
+  "tags": {
+    "highway": "residential",
+    "lane_markings": "no",
+    "name": "Marin Avenue",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Marin",
+    "tiger:name_type": "Ave"
+  }
+},
+{
+  "type": "way",
+  "id": 12183735,
+  "nodes": [
+    110398336,
+    2302020544,
+    4931854508,
+    9954001055,
+    9953978337,
+    9953978326,
+    9147057007,
+    312126207,
+    9953978330,
+    6145791194,
+    9953978015,
+    312126206,
+    9953978323,
+    9953978321,
+    9953978325,
+    4931854511,
+    9953902516,
+    9953972720,
+    9953972722,
+    6145791193,
+    9841432955,
+    12125991180,
+    9953978334,
+    312126204,
+    9953978012,
+    9953978331,
+    9953978336,
+    110426627,
+    9953972737,
+    9953972725,
+    9953972739,
+    9953972718,
+    9953972736,
+    9953972726,
+    9953972721,
+    9953902515,
+    9953972730
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Gate 6 1/2 Road",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Gate 6 1/2",
+    "tiger:name_type": "Rd"
+  }
+},
+{
+  "type": "way",
+  "id": 12186552,
+  "nodes": [
+    1273240819,
+    1273240806
+  ],
+  "tags": {
+    "highway": "residential",
+    "lane_markings": "no",
+    "name": "Olive Street",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Olive",
+    "tiger:name_type": "St"
+  }
+},
+{
+  "type": "way",
+  "id": 12190303,
+  "nodes": [
+    110418022,
+    110457416,
+    110457418
+  ],
+  "tags": {
+    "highway": "service",
+    "name": "South Forty Pier",
+    "name_1": "E Dock",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Forty Pier",
+    "tiger:name_base_1": "E Dock",
+    "tiger:name_direction_prefix": "S",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 12191503,
+  "nodes": [
+    110418025,
+    312121578,
+    12128826741,
+    12134961717,
+    110465144
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "residential",
+    "name": "Varda Landing Road",
+    "name_1": "Varda Landing",
+    "surface": "gravel",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Varda Landing",
+    "tiger:name_base_1": "Varda Lndg",
+    "tiger:name_type": "Rd",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 25823390,
+  "nodes": [
+    318856550,
+    318560030,
+    5021267573,
+    5021267466,
+    318560032,
+    312124616
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "1",
+    "layer": "-1",
+    "maxheight": "15'4\"",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "no",
+    "start_date": "1943",
+    "surface": "asphalt",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 28414665,
+  "nodes": [
+    110345583,
+    9953611976,
+    2492463281,
+    9953624376,
+    5021267566,
+    110376385,
+    9953624375,
+    5021223295
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "name": "Donahue Street",
+    "sidewalk": "right",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "turn:lanes:backward": "through|through|right",
+    "turn:lanes:forward": "none|right"
+  }
+},
+{
+  "type": "way",
+  "id": 28414778,
+  "nodes": [
+    1273240800,
+    9119308689,
+    8463087834,
+    3974715533,
+    8463087831,
+    8463087832,
+    8463087833,
+    110411721,
+    5021267556,
+    318560043,
+    5021223284,
+    8620798955
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Eureka",
+    "destination:ref": "US 101 North",
+    "highway": "motorway_link",
+    "lanes": "2",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point",
+    "turn:lanes": "through|merge_to_left"
+  }
+},
+{
+  "type": "way",
+  "id": 28971051,
+  "nodes": [
+    110345583,
+    9953611977,
+    5021267462,
+    318560029,
+    5021267540,
+    8444021881,
+    8444021873,
+    318560028,
+    8444021878,
+    318560027,
+    8444010905,
+    8444010911,
+    5021267509,
+    5021267517,
+    8444010916,
+    8444010908,
+    318560026,
+    8444010914,
+    318560025,
+    8444010906,
+    110345587,
+    8444010912,
+    5021223282,
+    8444026417,
+    8444010915,
+    8444010909,
+    110345589,
+    8444010907,
+    5021223281,
+    8444026418,
+    110345591,
+    8444010910,
+    5021267570,
+    8444010913,
+    110345593,
+    8444021875,
+    5019466175,
+    8444021870,
+    318560023,
+    8444021877,
+    5019467029,
+    8444021880,
+    8444021872,
+    110345595,
+    8444021874,
+    5019467085,
+    8444021876,
+    5019467051,
+    8444021871,
+    318560022,
+    8444021869,
+    312124624,
+    5019466208,
+    5019467044,
+    8444021879,
+    5019467068
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "San Francisco",
+    "destination:ref": "US 101 South",
+    "highway": "motorway_link",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 30681848,
+  "nodes": [
+    110398335,
+    9119308688,
+    2302020540,
+    312126202,
+    9953902514,
+    9953972728,
+    9953972738,
+    9841432943,
+    9953902511,
+    9953972735,
+    9953902512,
+    9953972731,
+    110398881,
+    9953902509,
+    9953972723,
+    9953972724,
+    9953972719,
+    9953972744,
+    9953972741,
+    9953972727,
+    9953972734,
+    110398879,
+    9953972742,
+    9953902513,
+    312124638,
+    9953974141,
+    110398877,
+    318565701,
+    12123776954,
+    12123776937,
+    9953974146,
+    5016881780,
+    9953974142,
+    318560073,
+    9953974143,
+    318560075
+  ],
+  "tags": {
+    "abandoned:railway": "rail",
+    "flood_prone": "yes",
+    "foot": "yes",
+    "highway": "cycleway",
+    "lit": "yes",
+    "maxspeed": "15 mph",
+    "motor_vehicle": "no",
+    "name": "Mill Valley - Sausalito Path",
+    "old_railway_operator": "Northwestern Pacific Railroad",
+    "oneway": "no",
+    "owner": "Marin County",
+    "railway": "abandoned",
+    "segregated": "no",
+    "smoothness": "excellent",
+    "surface": "asphalt",
+    "tiger:cfcc": "A71"
+  }
+},
+{
+  "type": "way",
+  "id": 90942400,
+  "nodes": [
+    110416451,
+    12452758759,
+    312121558,
+    5862959533,
+    12452758754,
+    110440893,
+    12452758760,
+    12452758750,
+    312121559,
+    5862959534,
+    312121561,
+    5862959535,
+    312121562,
+    12452758742,
+    312121564,
+    110440895,
+    4931854470,
+    312121565,
+    312121567,
+    110440898,
+    312121571,
+    4931854464,
+    312121568,
+    5862959536,
+    312121573,
+    5862959537,
+    312121574,
+    312121576,
+    8749363448,
+    110416206
+  ],
+  "tags": {
+    "highway": "residential",
+    "lane_markings": "no",
+    "name": "Lincoln Drive",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Lincoln",
+    "tiger:name_type": "Dr"
+  }
+},
+{
+  "type": "way",
+  "id": 90942424,
+  "nodes": [
+    1273240811,
+    8749755803,
+    8745476660,
+    8493269935,
+    7301601985,
+    8493269936,
+    10920278786,
+    110416265,
+    8748881838,
+    110451534,
+    8749363443,
+    8749363445,
+    110451536,
+    312117906,
+    8748881829,
+    312117907,
+    7013789982,
+    8749363453,
+    312117908,
+    8749363447,
+    312117909,
+    110451541,
+    10870167816,
+    110451543,
+    8749363461,
+    8749363436,
+    110451545,
+    8749363458,
+    110416206,
+    8749363455,
+    8749363437,
+    110451547,
+    8749363434,
+    110451550,
+    8749363435,
+    110428752,
+    8749363439,
+    8749363452,
+    8749363431,
+    312117918,
+    8749363459,
+    8749363444,
+    312117919,
+    8749363432,
+    8492003126,
+    8492003123,
+    110451554,
+    8492003129,
+    8492003127,
+    8492003124,
+    8492003130,
+    312117897,
+    8492003128,
+    8492003125,
+    5862959540,
+    110394067
+  ],
+  "tags": {
+    "cycleway:both": "lane",
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Nevada Street",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Nevada",
+    "tiger:name_type": "St"
+  }
+},
+{
+  "type": "way",
+  "id": 90951345,
+  "nodes": [
+    110374244,
+    8414334452,
+    13249168217,
+    8492059417,
+    8492059422,
+    8492059427,
+    8492058816,
+    8492059421,
+    110394083,
+    8492059423,
+    8492059418,
+    8492059428,
+    110394081,
+    8492059424,
+    8492059419,
+    8492059426,
+    110394076,
+    8492059429,
+    110394074,
+    8492059425,
+    110394072,
+    8492058815,
+    110394069,
+    8749363460,
+    8492059420,
+    110394067
+  ],
+  "tags": {
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Rodeo Avenue",
+    "oneway": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Rodeo",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 90958870,
+  "nodes": [
+    6883801067,
+    6883801066,
+    4931854437,
+    8824521926,
+    110423692,
+    8823546141,
+    4931854434,
+    8828809080,
+    110423693,
+    6437082581,
+    8824515882,
+    110423694,
+    8824515892,
+    110423695,
+    6437082582,
+    8727333791
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Drake Avenue",
+    "sidewalk": "both",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Drake",
+    "tiger:name_type": "Ave"
+  }
+},
+{
+  "type": "way",
+  "id": 111833266,
+  "nodes": [
+    1273240881,
+    1273240870,
+    4931854527,
+    1273240827,
+    8548704806
+  ],
+  "tags": {
+    "cycleway:right": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point"
+  }
+},
+{
+  "type": "way",
+  "id": 111833267,
+  "nodes": [
+    1273240811,
+    7138775111,
+    8059012435,
+    8059012395,
+    8059012491,
+    8059012475,
+    8059012514,
+    1273240844,
+    8059012420,
+    3951180959,
+    8059012460,
+    3951179456,
+    8059012500,
+    3951180962,
+    8059012405,
+    8059012445,
+    1273240810,
+    8059012410,
+    1273240806
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 111833268,
+  "nodes": [
+    1273240808,
+    9119308690,
+    8751845920,
+    1273240875,
+    8059012432
+  ],
+  "tags": {
+    "cycleway:right": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "30 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point"
+  }
+},
+{
+  "type": "way",
+  "id": 186406408,
+  "nodes": [
+    110394067,
+    7113567699,
+    312117899,
+    312117898,
+    110394065,
+    110394063,
+    110394061,
+    312117896,
+    110394059,
+    312117895,
+    110394057,
+    312117893,
+    312117894,
+    110394054,
+    1585376016,
+    10139145407,
+    110394053,
+    110394051,
+    10139145406,
+    110394049,
+    110394047
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Rodeo Avenue",
+    "oneway": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Rodeo",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 239203051,
+  "nodes": [
+    281669904,
+    2470156116,
+    2470156031,
+    2470156122,
+    2470156136,
+    2470156025,
+    2470156128,
+    2470156086,
+    2470156018,
+    2470156048,
+    2470156062,
+    2470156134,
+    2470156088,
+    2470156015,
+    2470156052,
+    2470156046,
+    2470156094,
+    2470156112,
+    2470156020,
+    2470156132,
+    2470156060,
+    2470156058,
+    2470156033,
+    2470156126,
+    2470156040,
+    2470156038,
+    2470156138,
+    2470156074,
+    2470156096,
+    2470156090,
+    2470156050,
+    2470156023,
+    2470156114,
+    2470156092,
+    2470156064,
+    2470156124,
+    2470156072,
+    2470156066,
+    2470156044,
+    2470156098,
+    2470156078
+  ],
+  "tags": {
+    "bicycle": "no",
+    "foot": "yes",
+    "highway": "footway",
+    "horse": "no",
+    "motor_vehicle": "no",
+    "name": "Orchard Fire Road",
+    "surface": "ground"
+  }
+},
+{
+  "type": "way",
+  "id": 239206716,
+  "nodes": [
+    2470181284,
+    2470181280,
+    2470181286,
+    2470181281,
+    3809250159,
+    2470181279,
+    2470181285,
+    2470181282,
+    2470181289,
+    2470181276,
+    3809250160,
+    3809250161,
+    3809250162,
+    3809250163,
+    3809250164,
+    3809250165,
+    3809250166,
+    3809250167,
+    2470181275,
+    2470181288,
+    3809250168,
+    3809250169,
+    3809250170,
+    3809250171,
+    3809250172,
+    3809250173,
+    3809250174,
+    3809250175,
+    3809250176,
+    3809250177,
+    2470181278,
+    3809250178,
+    3809250179,
+    3809250180,
+    3809250181,
+    3809250182,
+    3809250183,
+    3809250184,
+    3809250185,
+    3809250186,
+    3809250187,
+    3809250188,
+    2470189138
+  ],
+  "tags": {
+    "bicycle": "no",
+    "dog": "yes",
+    "fixme": "this trail added from GGNRA map not seen on bing",
+    "foot": "yes",
+    "highway": "footway",
+    "horse": "yes",
+    "motor_vehicle": "no",
+    "name": "Oakwood Valley Trail",
+    "surface": "unpaved"
+  }
+},
+{
+  "type": "way",
+  "id": 365593461,
+  "nodes": [
+    5482671341,
+    3695926745,
+    3695926742,
+    110457416
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 385148761,
+  "nodes": [
+    3885039202,
+    12118345152,
+    3885039203,
+    3885039204,
+    6328261076,
+    3885039205
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 394152292,
+  "nodes": [
+    312124615,
+    8444076721,
+    110345585,
+    8444064112,
+    8444064105,
+    8444076729,
+    5019466171,
+    8444076736,
+    5019467075,
+    8444064109,
+    110345584
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Marin City;Sausalito",
+    "highway": "motorway_link",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "turn:lanes": "left|left;right"
+  }
+},
+{
+  "type": "way",
+  "id": 394152296,
+  "nodes": [
+    110345584,
+    8444076740,
+    8444064116,
+    8444076724
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Marin City;Sausalito",
+    "highway": "motorway_link",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "turn:lanes": "left|left;right"
+  }
+},
+{
+  "type": "way",
+  "id": 394152298,
+  "nodes": [
+    110345598,
+    5019466195,
+    5019466213,
+    5019377130,
+    8416851710,
+    318560039,
+    8416851708,
+    8416851707,
+    5019466212,
+    8416851706,
+    312126211,
+    8416851705,
+    5019466172,
+    5019466191,
+    8416851709,
+    8416851711,
+    5019466201,
+    5019466157,
+    8443464845,
+    312124619,
+    8443464839,
+    312126210
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Sausalito;Marin City",
+    "highway": "motorway_link",
+    "lanes": "1",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 394152301,
+  "nodes": [
+    8443464840,
+    8443464841,
+    318560035,
+    8443464837,
+    318856533
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Sausalito;Marin City",
+    "destination:lanes": "|Sausalito|Sausalito;Marin City",
+    "highway": "motorway_link",
+    "lanes": "3",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 394469511,
+  "nodes": [
+    318856533,
+    8443464843,
+    1273240808
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Sausalito",
+    "highway": "motorway_link",
+    "lanes": "4",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A63",
+    "tiger:county": "Marin, CA",
+    "turn:lanes": "left|through|through|right"
+  }
+},
+{
+  "type": "way",
+  "id": 502813830,
+  "nodes": [
+    4931854511,
+    9953972740,
+    4931854510,
+    9147057009,
+    4931854509
+  ],
+  "tags": {
+    "highway": "service",
+    "source": "bing",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 502813857,
+  "nodes": [
+    4931854589,
+    8823215831,
+    8823215830,
+    4931854588,
+    12133725761
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "service": "driveway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 513522358,
+  "nodes": [
+    5019467068,
+    8407380442,
+    5019467046,
+    8407380445,
+    3005824916,
+    318560003,
+    318560001,
+    8407380451,
+    5019467033,
+    8407380447,
+    5021267544,
+    8407380450,
+    5021267545,
+    5021267531,
+    8407380457,
+    5021267444,
+    5021267533,
+    8407380439,
+    5021267491,
+    5021267539,
+    8407380453,
+    5021267542,
+    8407380455,
+    5021267483,
+    5021267508,
+    8407380443,
+    5021223297,
+    8407380446,
+    5021267459,
+    5021267504,
+    8407380448,
+    5021267477,
+    5021267541,
+    8407387150,
+    5021267486,
+    5021223316,
+    5021223311
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "cycleway:both": "no",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "no",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 521308618,
+  "nodes": [
+    1273240800,
+    9119308687,
+    1273240808
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lane_markings": "no",
+    "name": "Donahue Street",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "North Bridge",
+    "tiger:name_type": "Blvd",
+    "tiger:reviewed": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 521311176,
+  "nodes": [
+    1273240852,
+    8059012397,
+    8059012503,
+    1273240814,
+    8059012462,
+    8059012493,
+    8059012516,
+    1273240897,
+    8059012422,
+    8059012453,
+    8751881851,
+    1273240830
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway",
+    "turn:lanes": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 570253799,
+  "nodes": [
+    5482567584,
+    2430666678
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 570253800,
+  "nodes": [
+    5482567586,
+    5482567585
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 570253801,
+  "nodes": [
+    5482567589,
+    12118312778,
+    5482567584,
+    3885039202,
+    5482567586,
+    5482567588,
+    5482567587
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 570253802,
+  "nodes": [
+    2430666677,
+    5482567589
+  ],
+  "tags": {
+    "highway": "service",
+    "oneway": "yes",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 570268232,
+  "nodes": [
+    5482671326,
+    10060943608,
+    10060943609,
+    5482671325,
+    10060943605,
+    10060943606,
+    10060943607,
+    5482671322,
+    110377295
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 573557311,
+  "nodes": [
+    1273240806,
+    9130911047
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 573557315,
+  "nodes": [
+    1273240819,
+    8754964741
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "30 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "sidewalk:right:smoothness": "bad",
+    "sidewalk:right:wheelchair": "limited",
+    "source:maxspeed": "sign and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 620169775,
+  "nodes": [
+    110376389,
+    110376386,
+    9953611982,
+    9953611981,
+    110345583
+  ],
+  "tags": {
+    "highway": "tertiary",
+    "lanes": "3",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "turn:lanes": "left|through|through"
+  }
+},
+{
+  "type": "way",
+  "id": 620169776,
+  "nodes": [
+    9772130327,
+    8444076723,
+    8444064107,
+    2492463268,
+    8444076731,
+    8444064114,
+    8444076738,
+    2492463255
+  ],
+  "tags": {
+    "highway": "tertiary",
+    "lanes": "3",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "parking:both": "no",
+    "parking:both:restriction": "no_stopping",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "turn:lanes": "left|none|merge_to_left"
+  }
+},
+{
+  "type": "way",
+  "id": 620169777,
+  "nodes": [
+    2492463255,
+    110376389
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Drake Avenue",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Drake",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 620247561,
+  "nodes": [
+    257678056,
+    8407380449,
+    5019467049,
+    5019467056,
+    5019466181,
+    8407380452,
+    5019467055,
+    8407380454,
+    5019466207,
+    5019466189,
+    5019466205,
+    8407380456,
+    5019467052,
+    8407380438,
+    5019466183,
+    5019467074,
+    8407380440,
+    5019466165,
+    8370815583,
+    5019467058,
+    5019467030,
+    8370815581,
+    5019467073,
+    8370815579,
+    5019467065,
+    5019467054,
+    5019466210,
+    8370815584,
+    5019466187,
+    8370815582,
+    8370815580,
+    5019467072,
+    5019467068
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 620247562,
+  "nodes": [
+    110376770,
+    12778825515
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "1",
+    "lanes:forward": "4",
+    "name": "Donahue Street",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "North Bridge",
+    "tiger:name_type": "Blvd",
+    "tiger:reviewed": "yes",
+    "turn:lanes:forward": "left|left;through|right|right"
+  }
+},
+{
+  "type": "way",
+  "id": 620247563,
+  "nodes": [
+    110345598,
+    8407519766,
+    5019377145,
+    8407519768,
+    5019377124,
+    8407519770,
+    318560009,
+    318560010,
+    318560011,
+    8407519772,
+    5019377076,
+    312124620,
+    318560012,
+    8407519774,
+    5019377084,
+    8407519777,
+    318560013,
+    8407519780,
+    318560014,
+    8407519783,
+    110345605,
+    5019377082,
+    8407519786,
+    318560015,
+    8407519764,
+    5019377162,
+    318560016,
+    312126221,
+    8407519787,
+    5019377119,
+    8407519765,
+    318560017,
+    318560062,
+    8407519767,
+    5019377115,
+    8407519769,
+    5019377090,
+    8407519771,
+    8407519773,
+    8407519776,
+    318560066
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 650434175,
+  "nodes": [
+    110465144,
+    6101776163,
+    6101776164,
+    6101776165,
+    6101776166,
+    6101776167,
+    12128826789,
+    12128826777
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "driveway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 650434176,
+  "nodes": [
+    110465144,
+    12134961715,
+    6101776168,
+    6101776169,
+    6101776170,
+    6101776171,
+    6101776172,
+    12134961702,
+    4931854551
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 656014657,
+  "nodes": [
+    4931854509,
+    12128037442,
+    4931854508
+  ],
+  "tags": {
+    "highway": "service",
+    "oneway": "yes",
+    "source": "bing",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 666542436,
+  "nodes": [
+    6240582297,
+    6240582084,
+    5021267532
+  ],
+  "tags": {
+    "foot": "no",
+    "highway": "secondary",
+    "lanes": "1",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 666542437,
+  "nodes": [
+    5021267532,
+    6240582285,
+    6240582291
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "1",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "yes",
+    "turn:lanes": "right"
+  }
+},
+{
+  "type": "way",
+  "id": 666542438,
+  "nodes": [
+    6240582291,
+    6240582290,
+    6240582289,
+    6240582288,
+    6240582287,
+    6240582286
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "1",
+    "layer": "-1",
+    "maxheight": "15'4\"",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "start_date": "1943",
+    "surface": "asphalt",
+    "tunnel": "yes",
+    "turn:lanes": "right"
+  }
+},
+{
+  "type": "way",
+  "id": 666542439,
+  "nodes": [
+    6240582296,
+    6240582292,
+    6240582293,
+    6240582294,
+    6240582295,
+    6240582297
+  ],
+  "tags": {
+    "foot": "no",
+    "highway": "secondary",
+    "lanes": "1",
+    "layer": "-1",
+    "maxheight": "15'4\"",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "no",
+    "start_date": "1943",
+    "surface": "asphalt",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 666542440,
+  "nodes": [
+    5021267532,
+    6240582298,
+    318856550
+  ],
+  "tags": {
+    "foot": "no",
+    "highway": "secondary",
+    "lanes": "1",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 707534153,
+  "nodes": [
+    6648979947,
+    9147074052,
+    6648979948,
+    9147074047,
+    6648979949,
+    6648979950
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "name": "Public Shore",
+    "segregated": "no",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 707536279,
+  "nodes": [
+    12128100211,
+    11577803013,
+    3908963300
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "name": "Public Shore",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 756670290,
+  "nodes": [
+    3936977978,
+    3936977979,
+    8745476661,
+    3936977980,
+    8745476675,
+    3936977981,
+    3936977982
+  ],
+  "tags": {
+    "highway": "service",
+    "lanes": "1",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 761381433,
+  "nodes": [
+    7113567699,
+    7113567700,
+    7113567701,
+    7113567702,
+    7113567703,
+    7113567704,
+    7113567705,
+    7113567706,
+    10938526300,
+    10938526301,
+    10938526302,
+    10938526303,
+    10938568326,
+    7113567707
+  ],
+  "tags": {
+    "access": "private",
+    "foot": "yes",
+    "highway": "service",
+    "surface": "grass_paver"
+  }
+},
+{
+  "type": "way",
+  "id": 776883956,
+  "nodes": [
+    110376389,
+    8751900958,
+    8444076726,
+    8444076742,
+    8444076718,
+    6883801067
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Drake Avenue",
+    "sidewalk": "both",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Drake",
+    "tiger:name_type": "Ave"
+  }
+},
+{
+  "type": "way",
+  "id": 836580749,
+  "nodes": [
+    5021223311,
+    8407387149,
+    257669936
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "destination:lanes": "none|none|none|none;Rodeo Avenue",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "no",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt",
+    "turn:lanes": "none|none|none|through;slight_right"
+  }
+},
+{
+  "type": "way",
+  "id": 920719520,
+  "nodes": [
+    8548704806,
+    8059012402,
+    8059012472,
+    1273240884,
+    8059012511,
+    1273240872,
+    8059012417,
+    8059012457,
+    1273240879,
+    8059012497,
+    8751845928,
+    1273240800
+  ],
+  "tags": {
+    "cycleway:right": "lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point",
+    "turn:lanes": "left|through|"
+  }
+},
+{
+  "type": "way",
+  "id": 926760278,
+  "nodes": [
+    1273240912,
+    8059012450,
+    8059012510,
+    8059012416,
+    8742262079
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "30 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "source:maxspeed": "sign and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 927598294,
+  "nodes": [
+    8444076724,
+    318560024,
+    5021223318,
+    9953611978,
+    110345583
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Marin City;Sausalito",
+    "highway": "motorway_link",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "turn:lanes": "left|left|right"
+  }
+},
+{
+  "type": "way",
+  "id": 928259923,
+  "nodes": [
+    257669936,
+    8407387151,
+    5021267561,
+    5021267549,
+    8407562675,
+    5021267522,
+    5021267551,
+    8407562674,
+    5021267424,
+    5021267425,
+    8407562673,
+    5021223314,
+    8407562671,
+    8407562672,
+    5021223312,
+    5021267488,
+    8407562670,
+    8407562669,
+    5021267440
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 929559293,
+  "nodes": [
+    8620798955,
+    312126213,
+    5021267426,
+    5021223273,
+    312126218,
+    9953972733,
+    8463122622,
+    5019377112,
+    5019377073,
+    5019377158,
+    318560066
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Eureka",
+    "destination:ref": "US 101 North;CA 1 North",
+    "highway": "motorway_link",
+    "lanes": "1",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point"
+  }
+},
+{
+  "type": "way",
+  "id": 929741975,
+  "nodes": [
+    110374245,
+    2220880425,
+    8407562668,
+    318557075,
+    5019377123,
+    110374051,
+    318557077,
+    8407562677,
+    8407562676,
+    110394651,
+    318557078,
+    5019377163,
+    8407486131,
+    318559988,
+    110394653,
+    8407486133,
+    5019377107,
+    318559989,
+    5019377078,
+    8407486135,
+    110394657,
+    5019377091,
+    8407486137,
+    318559990,
+    5019377125,
+    8407486139,
+    318559997,
+    110394659,
+    8407486141,
+    318559991,
+    5019377141,
+    8407486143,
+    8407486145,
+    110394666,
+    5019377164,
+    8407486134,
+    318559992,
+    5019377093,
+    8407486136,
+    110394677,
+    5019377106,
+    8407486138,
+    318559993,
+    5019377144,
+    8407486140,
+    5019377166,
+    8407486142,
+    318559994,
+    8407486144,
+    110394683,
+    8407486132,
+    110345598
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "cycleway:both": "no",
+    "destination:lanes": "none|none|none|Mill Valley;Stinson Beach;Sausalito;Marin City",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "no",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt",
+    "tiger:county": "Marin, CA",
+    "turn:lanes": "none|none|none|through;slight_right"
+  }
+},
+{
+  "type": "way",
+  "id": 940965230,
+  "nodes": [
+    5021223295,
+    9953624374,
+    5021267532
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "name": "Donahue Street",
+    "sidewalk": "right",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St",
+    "turn:lanes:backward": "through|through|right",
+    "turn:lanes:forward": "none|right"
+  }
+},
+{
+  "type": "way",
+  "id": 942466501,
+  "nodes": [
+    8727333791,
+    110419697,
+    110423696,
+    8727333770,
+    110423697,
+    8727333789,
+    4931854446,
+    110423699,
+    4931854449,
+    110423701,
+    110419717,
+    6883801064,
+    6437082583,
+    6883801065,
+    6437082584,
+    110423703,
+    8727333803,
+    5482590919,
+    5482590915,
+    8727333783,
+    6437082985,
+    7088365151,
+    110423705,
+    6883801063,
+    6883801062,
+    13019718043,
+    8727333787
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Drake Avenue",
+    "sidewalk": "separate",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Drake",
+    "tiger:name_type": "Ave"
+  }
+},
+{
+  "type": "way",
+  "id": 943395127,
+  "nodes": [
+    6294802935,
+    8735053385,
+    8735053389,
+    8735053388,
+    8735053387,
+    110416274
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "surface": "gravel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 944089718,
+  "nodes": [
+    1273240846,
+    8059012446,
+    8740957588,
+    8059012515,
+    8059012476,
+    8059012436,
+    8059012492,
+    8059012452,
+    1273240914,
+    8059012411,
+    4931854570,
+    8059012505,
+    8059012466,
+    8059012396,
+    4931854539,
+    8745526319
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 944106824,
+  "nodes": [
+    110398336,
+    9953978317,
+    9953978329,
+    2447362987,
+    3908963295,
+    9954001052,
+    9954001047,
+    3908963299,
+    9954001042,
+    110398352,
+    9954001028,
+    312126999,
+    4931854513,
+    9954001051,
+    4931854512,
+    9954001041,
+    12126175171,
+    3908963296
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Gate 6 Road",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Gate 6",
+    "tiger:name_type": "Rd"
+  }
+},
+{
+  "type": "way",
+  "id": 944165911,
+  "nodes": [
+    8741696455,
+    5482567605
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 944165912,
+  "nodes": [
+    5482567597,
+    8741696465
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 944165916,
+  "nodes": [
+    8741696477,
+    8741696456,
+    8741696458,
+    8741696472,
+    8741696451,
+    8835758491,
+    8741696473,
+    8741696455,
+    8741696487,
+    8741696463
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 944165917,
+  "nodes": [
+    8741696487,
+    8741696467
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 944233522,
+  "nodes": [
+    8742262079,
+    1273240819
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "maxspeed": "30 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "sidewalk": "right",
+    "source:maxspeed": "sign and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway",
+    "turn:lanes": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 944612754,
+  "nodes": [
+    8745476689,
+    1394039564,
+    5674851796,
+    8745490717,
+    5674851414,
+    1394039569,
+    8745490718,
+    8751881852,
+    8745477616,
+    1394039571,
+    8751881855,
+    3936977980,
+    1394039576,
+    1394039573,
+    1394039578,
+    6328313876,
+    1394039581,
+    110398885,
+    110398884,
+    6648979940,
+    110398335
+  ],
+  "tags": {
+    "abandoned:railway": "rail",
+    "foot": "yes",
+    "highway": "cycleway",
+    "name": "Mill Valley - Sausalito Path",
+    "old_railway_operator": "Northwestern Pacific Railroad",
+    "railway": "abandoned",
+    "sidewalk": "yes",
+    "surface": "concrete",
+    "tiger:cfcc": "A71"
+  }
+},
+{
+  "type": "way",
+  "id": 944617279,
+  "nodes": [
+    1273240813,
+    8751881853,
+    3936977982,
+    1273240927,
+    8059012427,
+    6883783087,
+    8059012386,
+    1273240926,
+    8059012442,
+    1273240881
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 944617280,
+  "nodes": [
+    8745526319,
+    1273240848,
+    8745476673,
+    8751881854,
+    1273240813
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway",
+    "turn:lanes": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 945342794,
+  "nodes": [
+    8059012432,
+    8059012392,
+    1273240869,
+    8059012488,
+    8059012448,
+    8059012408,
+    8754967383
+  ],
+  "tags": {
+    "cycleway:right": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "30 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point"
+  }
+},
+{
+  "type": "way",
+  "id": 945342795,
+  "nodes": [
+    8751845926,
+    8751845920,
+    8751845928,
+    6648979940
+  ],
+  "tags": {
+    "footway": "crossing",
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 945702011,
+  "nodes": [
+    8754964741,
+    8059012502,
+    1273240864,
+    8059012407,
+    8059012447,
+    8059012487,
+    3951179453,
+    8059012391,
+    3951180964,
+    8059012431,
+    3951180957,
+    8059012471,
+    1273240924,
+    8059012456,
+    8059012496,
+    8059012401,
+    8059012441,
+    8059012481,
+    8754806964,
+    8745476669
+  ],
+  "tags": {
+    "cycleway": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "sidewalk:right:smoothness": "bad",
+    "sidewalk:right:wheelchair": "limited",
+    "source:maxspeed": "sign and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Bridgeway"
+  }
+},
+{
+  "type": "way",
+  "id": 945704325,
+  "nodes": [
+    8754967383,
+    1273240903,
+    8059012477,
+    1273240833,
+    1273240930,
+    8059012437,
+    8745526321,
+    1273240852
+  ],
+  "tags": {
+    "cycleway:right": "lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "maxspeed": "35 mph",
+    "name": "Bridgeway",
+    "oneway": "yes",
+    "sidewalk": "right",
+    "source:maxspeed": "multiple signs and street markings",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Waldo Point"
+  }
+},
+{
+  "type": "way",
+  "id": 953192639,
+  "nodes": [
+    8741696463,
+    8741696465,
+    8741696482,
+    12118345144,
+    8741696479,
+    8741696474,
+    1273172745
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 953200516,
+  "nodes": [
+    12118312778,
+    12118312777,
+    8822658486,
+    3885039205,
+    8820044340
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "surface": "sand"
+  }
+},
+{
+  "type": "way",
+  "id": 953219267,
+  "nodes": [
+    8822871136,
+    8822868399,
+    8822871158,
+    8822871117,
+    8822871148
+  ],
+  "tags": {
+    "bicycle": "permissive",
+    "dog": "yes",
+    "foot": "permissive",
+    "highway": "path",
+    "smoothness": "intermediate",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 953219269,
+  "nodes": [
+    8822871134,
+    8822871121,
+    8822871146,
+    12118290393,
+    12118290392,
+    12118290391,
+    12118290390,
+    8822871132,
+    8822868402,
+    8822868394,
+    8822871137
+  ],
+  "tags": {
+    "bicycle": "permissive",
+    "dog": "yes",
+    "foot": "permissive",
+    "highway": "path",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 953219271,
+  "nodes": [
+    8822868406,
+    8822871130,
+    8822871135,
+    8822871161,
+    8822868411,
+    8822871136,
+    8822871129,
+    8822871157,
+    8822871137
+  ],
+  "tags": {
+    "bicycle": "permissive",
+    "dog": "yes",
+    "foot": "permissive",
+    "highway": "path",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 964806009,
+  "nodes": [
+    281670456,
+    281670457,
+    281670458,
+    281670318,
+    110348317,
+    281670785,
+    110451262,
+    2470181284,
+    281670460,
+    281670470,
+    110451264,
+    281670322,
+    281670323,
+    110451266,
+    281670324,
+    281670325,
+    110451270,
+    260698554,
+    260698555,
+    2410464275,
+    110451272,
+    260698556,
+    260698557,
+    260698558,
+    8526082080,
+    8526082081,
+    110394210
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "track",
+    "horse": "yes",
+    "motor_vehicle": "no",
+    "name": "Alta Trail",
+    "sidewalk": "no",
+    "surface": "dirt",
+    "tiger:cfcc": "A41;A51",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Alta",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 985363946,
+  "nodes": [
+    9085887711,
+    9109477098
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 985832533,
+  "nodes": [
+    5021267440,
+    5021267494,
+    5021223279,
+    5021267523,
+    5021223290,
+    8407580969,
+    5021267562,
+    5021267482,
+    8414260051,
+    5021267487,
+    5021267493,
+    8414260053,
+    5021267485,
+    5021267576,
+    8414260052,
+    5021267560,
+    5021267511,
+    5021267489,
+    5021267579,
+    5021267558,
+    5021223315,
+    5021267490,
+    5021267471,
+    5021223317,
+    5021267507,
+    5021267554,
+    5021267454,
+    5021267436,
+    5021223303,
+    5021267430,
+    5021267578,
+    5021267497,
+    5021267577,
+    5021267438,
+    5021223304,
+    8414231266,
+    5021223294,
+    5021267458,
+    5021267427,
+    5021267514,
+    5021223305,
+    5021267435,
+    5021267557,
+    5021223287,
+    5021267434,
+    5021267461,
+    5021223308,
+    5021267437,
+    5021267530,
+    5021267453,
+    5021223286,
+    5021267496,
+    5021267439,
+    5021267441,
+    5021267516,
+    6760160505,
+    257669902
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "cycleway:both": "no",
+    "destination:lanes": "|||none;Spencer Avenue;Monte Mar Drive",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "no",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt",
+    "turn:lanes": "|||through;slight_right"
+  }
+},
+{
+  "type": "way",
+  "id": 986128175,
+  "nodes": [
+    110374250,
+    5019377121,
+    5019377154,
+    8414284144,
+    2220880486,
+    8414284143,
+    318557048,
+    318557049,
+    5019377096,
+    8407580970,
+    318557050,
+    318557074,
+    8407580968,
+    5019377143,
+    8407580973,
+    5019377087,
+    2220880546,
+    8407580972,
+    8407580971,
+    110374245
+  ],
+  "tags": {
+    "NHS": "STRAHNET",
+    "alt_name": "William T. Bagley Freeway",
+    "bicycle": "no",
+    "cycleway:both": "no",
+    "hgv": "designated",
+    "hgv:state_network": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "55 mph",
+    "name": "Redwood Highway",
+    "name:etymology:wikidata": "Q21176130",
+    "name:etymology:wikipedia": "en:Bill Bagley",
+    "oneway": "yes",
+    "ref": "US 101;CA 1",
+    "source:hgv:state_network": "Caltrans http://www.dot.ca.gov/hq/traffops/trucks/truckmap/",
+    "surface": "asphalt",
+    "tiger:county": "Marin, CA"
+  }
+},
+{
+  "type": "way",
+  "id": 986569391,
+  "nodes": [
+    9119308688,
+    9119308689,
+    9119308687,
+    9119308690,
+    9119308686
+  ],
+  "tags": {
+    "bicycle": "designated",
+    "crossing:markings": "zebra",
+    "cycleway": "crossing",
+    "foot": "no",
+    "highway": "cycleway",
+    "oneway": "yes",
+    "source": "in-person observation 2021;new construction",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 989761634,
+  "nodes": [
+    6648979947,
+    9147074050,
+    9147078849
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "name": "Public Shore",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 989762367,
+  "nodes": [
+    6648979947,
+    12127215339,
+    12127215338
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "name": "Public Shore",
+    "segregated": "no",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 989762368,
+  "nodes": [
+    9147078849,
+    9147074051,
+    9147074046,
+    9147074049,
+    9147074053,
+    9147074048,
+    9147067807,
+    6648979976,
+    6648979977,
+    6648979978,
+    12128100210,
+    6648979979,
+    6648979980,
+    6648979981,
+    6648979982,
+    12128100224,
+    12128100212,
+    11577803013
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "name": "Public Shore",
+    "segregated": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 989762369,
+  "nodes": [
+    6648979950,
+    6648979968,
+    6648979969,
+    12127215339,
+    6648979970,
+    6648979971,
+    6648979972,
+    6648979973,
+    6648979974,
+    6648979975,
+    6648979976
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "name": "Public Shore",
+    "segregated": "no",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1063948282,
+  "nodes": [
+    110345583,
+    9953611980,
+    9953611979,
+    2492463278,
+    9772130327
+  ],
+  "tags": {
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Donahue Street",
+    "oneway": "yes",
+    "parking:both": "no",
+    "parking:both:restriction": "no_stopping",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Donahue",
+    "tiger:name_type": "St"
+  }
+},
+{
+  "type": "way",
+  "id": 1086310689,
+  "nodes": [
+    110345584,
+    9953685784,
+    9953685780,
+    9953685785,
+    9953685786,
+    9953685781,
+    9953685782,
+    9953685783,
+    9953685779,
+    9772130327
+  ],
+  "tags": {
+    "bicycle": "no",
+    "destination": "Marin City",
+    "highway": "motorway_link",
+    "lanes": "1",
+    "lit": "yes",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1175188611,
+  "nodes": [
+    10920278786,
+    10920278788,
+    10920278787
+  ],
+  "tags": {
+    "foot": "designated",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "name": "Tomales Steps",
+    "step_count": "83",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "1.5"
+  }
+},
+{
+  "type": "way",
+  "id": 1175188983,
+  "nodes": [
+    10920289726,
+    10920289727
+  ],
+  "tags": {
+    "access": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "name": "Tomales Steps",
+    "step_count": "32",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "1.5"
+  }
+},
+{
+  "type": "way",
+  "id": 1298901064,
+  "nodes": [
+    9119308686,
+    8751845926,
+    12032193584,
+    12032193585,
+    12032193586,
+    12032193587,
+    12032193588,
+    12032193589,
+    12032193590,
+    12032193591,
+    12032193592
+  ],
+  "tags": {
+    "footway": "sidewalk",
+    "highway": "footway",
+    "name": "Donahue Street Path",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1308591953,
+  "nodes": [
+    5482567588,
+    12118345150,
+    12118345151,
+    12118345144,
+    12118345143
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1309545107,
+  "nodes": [
+    9953972730,
+    9953978327,
+    9953972732,
+    9953890067,
+    9953890065,
+    312126222,
+    9953890066,
+    110426629
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "Gate 6 1/2",
+    "tiger:name_type": "Rd"
+  }
+},
+{
+  "type": "way",
+  "id": 1309545109,
+  "nodes": [
+    12125991180,
+    12125991181,
+    12125991182,
+    12125991183,
+    12125991184,
+    12125991185,
+    12125991186,
+    12125991187,
+    12125991188,
+    12125991189,
+    12125991190,
+    12125991191,
+    12125991192
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 1309570129,
+  "nodes": [
+    12126175155,
+    12126175157,
+    12126175156
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1309570130,
+  "nodes": [
+    12126175157,
+    12126175158,
+    12126175159
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1309764486,
+  "nodes": [
+    3743690141,
+    12127193972
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1309764488,
+  "nodes": [
+    12127193973,
+    12127193974,
+    12127193975,
+    12127193976,
+    12127193977,
+    12127193978,
+    12127193979,
+    12127193980,
+    12127193981,
+    12127193982,
+    12127193983,
+    12127193984,
+    12127193985,
+    12127193986,
+    12127193987,
+    12127193988,
+    12127193989,
+    12127193990,
+    12127193991,
+    12127193992,
+    12127193993,
+    12127193994
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1309764497,
+  "nodes": [
+    6648979955,
+    3908963297
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982069,
+  "nodes": [
+    110457416,
+    3695926743,
+    11577802985,
+    3695926747,
+    3695926745
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982078,
+  "nodes": [
+    12128826741,
+    12128826742,
+    12128826743,
+    12128826744,
+    12128826745
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "driveway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982079,
+  "nodes": [
+    12128826742,
+    12128826746,
+    12128826747,
+    12128826748,
+    12128826749,
+    12778754188,
+    12128826750
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "service": "driveway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982113,
+  "nodes": [
+    6101776167,
+    12128836727,
+    12128836728,
+    12128836731,
+    12128836723
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982114,
+  "nodes": [
+    12128836728,
+    12128836729,
+    12128836730
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982115,
+  "nodes": [
+    12128836731,
+    12128836732,
+    12128836733,
+    12128836719
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982116,
+  "nodes": [
+    12128836732,
+    12128836721
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982117,
+  "nodes": [
+    6101776166,
+    12128836734
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "driveway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1309982119,
+  "nodes": [
+    12128836734,
+    12128836737,
+    12128836735
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1310829456,
+  "nodes": [
+    4931854596,
+    4931854592,
+    12133725769,
+    110418032
+  ],
+  "tags": {
+    "highway": "service",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1310840579,
+  "nodes": [
+    12133826991,
+    12133826992,
+    12133827000,
+    12133826993,
+    12133826994,
+    12133826995,
+    12133826996
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1310840580,
+  "nodes": [
+    12133826997,
+    12133826998,
+    12133826999
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1310840582,
+  "nodes": [
+    12133826996,
+    12133845701,
+    12132766315,
+    12132766318,
+    12132766317,
+    12133845702,
+    12133845703,
+    12133845704,
+    12133845705,
+    12133845706,
+    12133845707,
+    12133845708,
+    12133845709,
+    12133845710,
+    12133845711,
+    12133845712,
+    12133845713,
+    12133845714,
+    12133845715,
+    12133845717,
+    12133845718,
+    12133845719,
+    12133845720,
+    12133845721,
+    12133845722,
+    12133845723,
+    12133845724,
+    12133845725,
+    12133845726,
+    12133845727,
+    12133845728,
+    12133845729,
+    12133845730,
+    12132766361,
+    12133845731,
+    12133845732,
+    12133845733,
+    12133845734,
+    12133845735,
+    12133845736,
+    12133845737,
+    12133845738,
+    12133845739,
+    12133845740,
+    12133845741,
+    12133845742,
+    12133845743,
+    12133845744,
+    12133845745,
+    12133845746,
+    12133845747,
+    12778754174,
+    12132760768
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1310840583,
+  "nodes": [
+    12132760768,
+    12133845748
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1310840584,
+  "nodes": [
+    12133845748,
+    12133845749,
+    12133845750,
+    12133845751,
+    12133845754,
+    12133845752,
+    12133845753
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1311022857,
+  "nodes": [
+    8822871119,
+    12135612800,
+    12135624601,
+    12135624602,
+    12135624603
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "ground"
+  }
+},
+{
+  "type": "way",
+  "id": 1311027750,
+  "nodes": [
+    6127477253,
+    6127477252
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "driveway",
+    "surface": "grass"
+  }
+},
+{
+  "type": "way",
+  "id": 1311029651,
+  "nodes": [
+    6127477252,
+    12135680271,
+    3908953582
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "gravel"
+  }
+},
+{
+  "type": "way",
+  "id": 1311029666,
+  "nodes": [
+    12135688325,
+    12135688327,
+    12135688326
+  ],
+  "tags": {
+    "access": "permit",
+    "highway": "footway",
+    "surface": "wood"
+  }
+},
+{
+  "type": "way",
+  "id": 1380309241,
+  "nodes": [
+    12778825515,
+    5021223319,
+    9954016802,
+    1273240808
+  ],
+  "tags": {
+    "highway": "secondary",
+    "lanes": "6",
+    "lanes:backward": "2",
+    "lanes:forward": "4",
+    "name": "Donahue Street",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Marin, CA",
+    "tiger:name_base": "North Bridge",
+    "tiger:name_type": "Blvd",
+    "tiger:reviewed": "yes",
+    "turn:lanes:forward": "left|left;through|right|right"
+  }
+},
+{
+  "type": "way",
+  "id": 1443855418,
+  "nodes": [
+    13249130863,
+    13249130862,
+    13249130861,
+    13249130860,
+    13249130859,
+    13249130858,
+    13249130857,
+    7113567707
+  ],
+  "tags": {
+    "highway": "path",
+    "surface": "unpaved"
+  }
+},
+{
+  "type": "way",
+  "id": 1443855420,
+  "nodes": [
+    13249168216,
+    13249168212,
+    13249130863,
+    13249168211,
+    13249168210,
+    13249168209,
+    13249168208,
+    13249168207,
+    13249168206,
+    13249168205,
+    13249168204,
+    13249168203,
+    13249168202,
+    13249168201,
+    13249130900,
+    13249130899,
+    13249130898,
+    13249130897,
+    13249130896,
+    13249130895,
+    13249130894,
+    13249130893,
+    13249130892,
+    13249130891,
+    13249130890,
+    13249130889,
+    13249130888,
+    13249130887,
+    13249130886
+  ],
+  "tags": {
+    "highway": "track",
+    "surface": "dirt"
+  }
+},
+{
+  "type": "way",
+  "id": 1443855421,
+  "nodes": [
+    13249168216,
+    13249168215,
+    13249168214,
+    13249168220,
+    13249168213,
+    13249168219,
+    13249168218,
+    13249168217
+  ],
+  "tags": {
+    "access": "private",
+    "foot": "yes",
+    "highway": "service",
+    "surface": "grass_paver"
+  }
+}
+
+  ]
+}
