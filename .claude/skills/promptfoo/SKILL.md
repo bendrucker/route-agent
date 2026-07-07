@@ -4,8 +4,8 @@ description: |
   Promptfoo evaluation framework for testing and comparing LLM outputs.
   Use when writing eval configs, creating test cases, debugging eval runs, or working with assertions.
 allowed-tools:
-  - Bash(npx promptfoo:*)
-  - Bash(npm run evals:*)
+  - Bash(bunx promptfoo:*)
+  - Bash(bun run evals:*)
   - WebFetch(domain:www.promptfoo.dev)
 ---
 
@@ -139,11 +139,11 @@ Each case file contains a YAML array of test objects.
 ## CLI
 
 ```bash
-npx promptfoo eval                         # Run with auto-discovered config
-npx promptfoo eval -c path/to/config.yaml  # Specific config
-npx promptfoo eval --filter-metadata key=v # Filter tests
-npx promptfoo view                         # Web UI for results
-npx promptfoo cache clear                  # Clear result cache
+bunx promptfoo eval                         # Run with auto-discovered config
+bunx promptfoo eval -c path/to/config.yaml  # Specific config
+bunx promptfoo eval --filter-metadata key=v # Filter tests
+bunx promptfoo view                         # Web UI for results
+bunx promptfoo cache clear                  # Clear result cache
 ```
 
 ## References

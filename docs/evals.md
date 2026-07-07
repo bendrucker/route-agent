@@ -65,7 +65,7 @@ prompts:
   - file://../../prompt.txt
 
 providers:
-  - anthropic:messages:claude-sonnet-4-5-20250929
+  - anthropic:messages:claude-sonnet-5
 
 tests:
   # Commercial products - exact values
@@ -100,7 +100,7 @@ prompts:
   - file://../../prompt.txt
 
 providers:
-  - anthropic:messages:claude-sonnet-4-5-20250929
+  - anthropic:messages:claude-sonnet-5
 
 tests:
   - vars:
@@ -140,7 +140,7 @@ prompts:
   - file://../../prompt.txt
 
 providers:
-  - anthropic:messages:claude-sonnet-4-5-20250929
+  - anthropic:messages:claude-sonnet-5
 
 tests:
   # Gold standard case from user
