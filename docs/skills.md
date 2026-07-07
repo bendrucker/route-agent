@@ -16,14 +16,14 @@ History Analysis and Narrative Research have code today. The rest are design spe
 | Weather Planning | 🔜 Planned | - |
 | Food Stop Planning | 🔜 Planned | - |
 | Water Stop Planning | 🔜 Planned | - |
-| Narrative Research | ✅ Implemented | `src/skills/ride-reports/` |
+| Narrative Research | ✅ Implemented | `src/skills/ride-reports/`, `src/skills/narrative-research/` |
 | Safety Assessment | 🔜 Planned | - |
 | Nutrition Planning | 🔜 Planned | - |
 | Clothing Planning | 🔜 Planned | - |
 
 Route Optimization depends on the GraphHopper tool, which exists in `src/graphhopper/`. The skill that drives it does not exist yet.
 
-Narrative Research's web search step covers ride reports and forum posts only. PJAMM narrative synthesis (step 2 of its research pattern) is not yet built.
+Narrative Research splits across two packages: `ride-reports/` runs the web search step, covering ride reports and forum posts only, and `narrative-research/` synthesizes its findings plus named route places into rider-facing notes and a presentation prompt. PJAMM narrative synthesis (step 2 of its research pattern) is cut pending the PJAMM API spike ([#15](https://github.com/bendrucker/route-agent/issues/15)).
 
 ## Skill Architecture {#skill-architecture}
 

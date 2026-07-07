@@ -1,0 +1,35 @@
+- description: "Findings with a matched place: notes woven into the route narrative"
+  vars:
+    narrative_prompt: |-
+      Weave local knowledge into the final route presentation as narrative notes, not a research appendix. Write in a local-intel voice ("watch for...", "locals recommend...") and integrate each note at the point in the write-up where it's relevant, rather than listing them separately at the end.
+
+      hazard near North Gate: Loose gravel on the descent past the North Gate (per Mt Diablo north gate descent, watch the gravel)
+      condition: Summit road closed to cars on weekend mornings (per Climbing Mt Diablo: a complete guide)
+      recommendation near ranger station: Fill water bottles at the ranger station near the base before the climb (per Climbing Mt Diablo: a complete guide)
+    route_summary: |
+      A 42-mile loop up Mount Diablo via the North Gate entrance, past the ranger station, to the summit and back down South Gate Road.
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Mention the loose gravel hazard at the point in the write-up describing the North Gate descent, not in a separate bulleted "local knowledge" section
+        - Mention the weekend morning car closure and the ranger station water fill as part of the narrative flow of the route description
+        - Present the hazard prominently enough that a rider would not miss it
+        - Attribute notes to their sources (by name, not necessarily a raw URL)
+        - NOT fabricate any additional hazards, conditions, or recommendations beyond what's given
+
+- description: "No narrative notes: route presented without a fabricated local-intel section"
+  vars:
+    narrative_prompt: |-
+      Weave local knowledge into the final route presentation as narrative notes, not a research appendix. Write in a local-intel voice ("watch for...", "locals recommend...") and integrate each note at the point in the write-up where it's relevant, rather than listing them separately at the end.
+
+      No narrative notes were found for this route. Skip narrative notes entirely rather than inventing local intel, and present the route on the strength of the other research.
+    route_summary: |
+      A 28-mile out-and-back along Willow Creek Flats, through rural farmland with no significant climbs.
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Present the route plan normally, based on the route context given
+        - NOT invent hazards, conditions, recommendations, or any "local knowledge" section to fill the gap
+        - NOT hedge repeatedly or apologize at length about the absence of local intel; a brief or no mention is fine
