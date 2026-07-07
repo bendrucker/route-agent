@@ -1,0 +1,32 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`generateGpx snapshot 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="route-agent"
+  xmlns="http://www.topografix.com/GPX/1/1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Skyline Boulevard</name>
+    <desc>Palo Alto to Half Moon Bay</desc>
+  </metadata>
+  <trk>
+    <name>Skyline Boulevard</name>
+    <trkseg>
+      <trkpt lat="37.4419" lon="-122.143">
+        <ele>10</ele>
+        <time>2026-03-15T08:00:00.000Z</time>
+      </trkpt>
+      <trkpt lat="37.41" lon="-122.2">
+        <ele>45</ele>
+        <time>2026-03-15T08:18:28.376Z</time>
+      </trkpt>
+      <trkpt lat="37.32" lon="-122.35">
+        <ele>180</ele>
+        <time>2026-03-15T09:08:18.128Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+"
+`;
