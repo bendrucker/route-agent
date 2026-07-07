@@ -1,0 +1,56 @@
+- description: "Forum posts with hazards, conditions, and recommendations"
+  vars:
+    ride_reports_prompt: |-
+      Search the web for ride reports and forum posts about cycling in this area. Use your native web search to find first-hand accounts from cyclists who have ridden here.
+
+      Try queries like "Mount Diablo cycling ride report", "Mount Diablo bike route reddit", "Mount Diablo cycling club forum", and "Mount Diablo strava ride review". Check cycling forums (e.g. Reddit r/cycling, r/bicycling, local subreddits), local bike club sites, and cyclist blogs.
+
+      From each report, extract:
+      - Hazards: dangerous intersections, unmarked construction, aggressive dogs, poor pavement, high-traffic segments
+      - Conditions: current road/trail conditions, seasonal closures, surface quality
+      - Recommendations: suggested detours, best times to ride, scenic stops, parking
+
+      Attribute every finding to the source URL and title it came from. Do not invent findings that aren't grounded in a specific report.
+
+      If no relevant ride reports or forum posts turn up, say so plainly and proceed with route planning using other sources. Do not fabricate local knowledge to fill the gap.
+    search_results: |
+      Result 1: "Mt Diablo north gate descent, watch the gravel" (reddit.com/r/cycling/xyz123)
+      Posted 3 months ago: "Did the summit loop last weekend. Heads up, the descent past the north gate has a lot of loose gravel this time of year, took it slow. Otherwise road surface was great."
+
+      Result 2: "Climbing Mt Diablo: a complete guide" (example-cycling-blog.com/mt-diablo)
+      "The summit road closes to car traffic on weekend mornings until 9am, so early starts are quieter and safer for cyclists. Fill your water bottles at the ranger station near the base. There's no water past that point."
+    query: "Plan a route up Mount Diablo"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Flag the loose gravel on the north gate descent as a hazard, attributed to the Reddit post
+        - Note the weekend morning car closure as a condition, attributed to the cycling blog
+        - Recommend filling water at the ranger station as a recommendation, attributed to the cycling blog
+        - NOT invent hazards, conditions, or recommendations not present in the search results
+
+- description: "No relevant ride reports found: graceful degradation"
+  vars:
+    ride_reports_prompt: |-
+      Search the web for ride reports and forum posts about cycling in this area. Use your native web search to find first-hand accounts from cyclists who have ridden here.
+
+      Try queries like "Willow Creek Flats cycling ride report", "Willow Creek Flats bike route reddit", "Willow Creek Flats cycling club forum", and "Willow Creek Flats strava ride review". Check cycling forums (e.g. Reddit r/cycling, r/bicycling, local subreddits), local bike club sites, and cyclist blogs.
+
+      From each report, extract:
+      - Hazards: dangerous intersections, unmarked construction, aggressive dogs, poor pavement, high-traffic segments
+      - Conditions: current road/trail conditions, seasonal closures, surface quality
+      - Recommendations: suggested detours, best times to ride, scenic stops, parking
+
+      Attribute every finding to the source URL and title it came from. Do not invent findings that aren't grounded in a specific report.
+
+      If no relevant ride reports or forum posts turn up, say so plainly and proceed with route planning using other sources. Do not fabricate local knowledge to fill the gap.
+    search_results: |
+      No search results returned. This is a sparsely populated rural area with no indexed cycling forum posts, ride reports, or blog coverage found.
+    query: "Plan a route through Willow Creek Flats"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Plainly state that no relevant ride reports or forum posts were found for this area
+        - NOT fabricate hazards, conditions, or recommendations to fill the gap
+        - Suggest proceeding with route planning using other available sources

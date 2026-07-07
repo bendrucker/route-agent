@@ -6,7 +6,7 @@ See [architecture.md](architecture.md) for orchestration model and design decisi
 
 ## Implementation Status {#implementation-status}
 
-Only History Analysis has code today. The rest are design specs on the roadmap.
+History Analysis and Narrative Research have code today. The rest are design specs on the roadmap.
 
 | Skill | Status | Location |
 |-------|--------|----------|
@@ -16,12 +16,14 @@ Only History Analysis has code today. The rest are design specs on the roadmap.
 | Weather Planning | 🔜 Planned | - |
 | Food Stop Planning | 🔜 Planned | - |
 | Water Stop Planning | 🔜 Planned | - |
-| Narrative Research | 🔜 Planned | - |
+| Narrative Research | ✅ Implemented | `src/skills/ride-reports/` |
 | Safety Assessment | 🔜 Planned | - |
 | Nutrition Planning | 🔜 Planned | - |
 | Clothing Planning | 🔜 Planned | - |
 
 Route Optimization depends on the GraphHopper tool, which exists in `src/graphhopper/`. The skill that drives it does not exist yet.
+
+Narrative Research's web search step covers ride reports and forum posts only. PJAMM narrative synthesis (step 2 of its research pattern) is not yet built.
 
 ## Skill Architecture {#skill-architecture}
 
