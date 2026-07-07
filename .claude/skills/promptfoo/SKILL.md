@@ -31,7 +31,7 @@ prompts:
     Inline prompt with {{variable}} substitution
 
 providers:
-  - anthropic:messages:claude-sonnet-4-5-20250929
+  - anthropic:messages:claude-sonnet-5
 
 defaultTest:
   options:
@@ -62,9 +62,9 @@ evaluateOptions:
 
 | Model | ID |
 |-------|----|
-| Opus 4.5 | `anthropic:messages:claude-opus-4-5-20251101` |
-| Sonnet 4.5 | `anthropic:messages:claude-sonnet-4-5-20250929` |
-| Haiku 4.5 | `anthropic:messages:claude-haiku-4-5-20251001` |
+| Opus 4.8 | `anthropic:messages:claude-opus-4-8` |
+| Sonnet 5 | `anthropic:messages:claude-sonnet-5` |
+| Haiku 4.5 | `anthropic:messages:claude-haiku-4-5` |
 
 Provider config: `temperature`, `max_tokens`, `top_p`, `top_k`, `tools`, `tool_choice`
 
@@ -107,7 +107,7 @@ assert:
       - Mention at least 3 factors
       - Include specific examples
     threshold: 0.7
-    provider: anthropic:messages:claude-sonnet-4-5-20250929
+    provider: anthropic:messages:claude-sonnet-5
 ```
 
 ### javascript
