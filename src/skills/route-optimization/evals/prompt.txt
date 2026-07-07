@@ -1,0 +1,11 @@
+{{findings_prompt}}
+
+## Route Options
+
+{{select_route_prompt}}
+
+## Route Planning Request
+
+{{query}}
+
+Based on the findings and route options above, write the message you would show the user to help them choose a route.

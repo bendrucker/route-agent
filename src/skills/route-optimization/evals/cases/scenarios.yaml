@@ -1,0 +1,121 @@
+- description: "Familiar area, reuse from history"
+  vars:
+    findings_prompt: |-
+      Present the History Analysis research findings to the user:
+
+      - Relevant past rides in this area: 3
+      - Reusable segments: 2
+      - Typical distance from history: 54.0 km (max 110.0 km)
+
+      Use the present_route_plan tool with stage "present_findings".
+      Ask: "Would you like me to generate route options based on these findings?"
+    select_route_prompt: |-
+      Present the following synthesized route options to the user:
+
+      **Option 1** (road, 3 waypoints)
+      - Reusing "Panoramic Highway Loop" as a waypoint. It's a similar ride done before.
+      - Reusing "Hawk Hill Climb" as a waypoint. It's a similar ride done before.
+      - 2 known segment(s) available nearby as route building blocks.
+
+      **Option 2** (road, 1 waypoints)
+      - No prior rides matched the requested distance/elevation. The plan only anchors on the start point and needs additional waypoints (e.g. via geocoding) before routing.
+
+      Use the present_route_plan tool with stage "select_route".
+      Ask: "Which route would you like to select?"
+    query: "Plan a 60km ride from Mill Valley, prefer roads I know"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Recommend the option that reuses the rider's history (Option 1)
+        - Reference specific reused roads (Panoramic Highway Loop and/or Hawk Hill Climb)
+        - Mention the requested distance of about 60km
+        - Treat the rider's history as an asset for planning, not a constraint
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:invokesSkills
+      config:
+        skills: ["History Analysis"]
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:mentionsLocations
+      config:
+        locations: ["Panoramic Highway Loop", "Hawk Hill Climb"]
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:distanceInRange
+      config:
+        target_km: 60
+        tolerance: 0.15
+
+- description: "New territory, no history match"
+  vars:
+    findings_prompt: |-
+      Present the History Analysis research findings to the user:
+
+      - Relevant past rides in this area: 0
+      - Reusable segments: 0
+      - Typical distance from history: 72.0 km (max 160.0 km)
+
+      Use the present_route_plan tool with stage "present_findings".
+      Ask: "Would you like me to generate route options based on these findings?"
+    select_route_prompt: |-
+      Present the following synthesized route options to the user:
+
+      **Option 1** (road, 1 waypoints)
+      - No prior rides matched the requested distance/elevation. The plan only anchors on the start point and needs additional waypoints (e.g. via geocoding) before routing.
+
+      Use the present_route_plan tool with stage "select_route".
+      Ask: "Which route would you like to select?"
+    query: "Plan a 70km ride around Santa Cruz"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Acknowledge that the rider has no prior rides in this area
+        - NOT claim familiarity with roads the rider hasn't ridden
+        - Note that more waypoints are needed before a route can be generated
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:invokesSkills
+      config:
+        skills: ["History Analysis"]
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:distanceInRange
+      config:
+        target_km: 70
+        tolerance: 0.15
+
+- description: "Partial reuse, gravel ride from Fairfax"
+  vars:
+    findings_prompt: |-
+      Present the History Analysis research findings to the user:
+
+      - Relevant past rides in this area: 1
+      - Reusable segments: 1
+      - Typical distance from history: 25.0 km (max 35.0 km)
+
+      Use the present_route_plan tool with stage "present_findings".
+      Ask: "Would you like me to generate route options based on these findings?"
+    select_route_prompt: |-
+      Present the following synthesized route options to the user:
+
+      **Option 1** (mountain, 2 waypoints)
+      - Reusing "Fairfax Ridge Connector" as a waypoint. It's a similar ride done before.
+      - 1 known segment(s) available nearby as route building blocks.
+
+      Use the present_route_plan tool with stage "select_route".
+      Ask: "Which route would you like to select?"
+    query: "Plan a 50km gravel ride from Fairfax, use familiar climbs where you can"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Acknowledge limited but existing familiarity with the area (one prior ride)
+        - Reference the known Fairfax Ridge Connector
+        - Suggest the gravel/mountain profile fits the request
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:mentionsLocations
+      config:
+        locations: ["Fairfax Ridge Connector"]
+    - type: javascript
+      value: file://../../../../evals/scorers/route.ts:distanceInRange
+      config:
+        target_km: 50
+        tolerance: 0.15
