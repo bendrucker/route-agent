@@ -31,8 +31,11 @@ for (const config of configs) {
   console.log(`\n--- ${dirname(config)} ---\n`);
 
   try {
-    execFileSync("bunx", ["promptfoo", "eval", "--config", config], {
-      cwd: root,
+    // promptfoo resolves file:// refs nested inside test cases (e.g. scorer
+    // functions) relative to the process cwd rather than the config file's
+    // directory, so run from there.
+    execFileSync("bunx", ["promptfoo", "eval", "--config", "promptfooconfig.yaml"], {
+      cwd: join(root, dirname(config)),
       stdio: "inherit",
     });
     passed++;
