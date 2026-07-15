@@ -72,7 +72,7 @@ See [docs/architecture.md](docs/architecture.md) for detailed design.
 | Routing | GraphHopper | Selected |
 | Places | Google Maps MCP | Available |
 | Weather | Apple WeatherKit | Selected |
-| Climb Data | PJAMM | Selected (API investigation needed) |
+| Climb Data | PJAMM | Available |
 | Water/Infrastructure | OSM Overpass | To build |
 
 See [docs/tools.md](docs/tools.md) and [docs/skills.md](docs/skills.md) for details.

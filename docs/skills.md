@@ -12,7 +12,7 @@ Implemented skills link to their code below. The rest are design specs on the ro
 |-------|--------|----------|
 | History Analysis | ✅ Implemented | `src/skills/history-analysis/` |
 | Route Optimization | ✅ Implemented | `src/skills/route-optimization/` |
-| Climb Planning | 🔜 Planned | - |
+| Climb Planning | ✅ Implemented | `src/skills/climb-planning/` |
 | Weather Planning | 🔜 Planned | - |
 | Food Stop Planning | ✅ Implemented | `src/skills/food-stops/` |
 | Water Stop Planning | ✅ Implemented | `src/skills/water-stops/` |
@@ -21,7 +21,7 @@ Implemented skills link to their code below. The rest are design specs on the ro
 | Nutrition Planning | 🔜 Planned | - |
 | Clothing Planning | 🔜 Planned | - |
 
-Narrative Research splits across two packages: `ride-reports/` runs the web search step, covering ride reports and forum posts only, and `narrative-research/` synthesizes its findings plus named route places into rider-facing notes and a presentation prompt. PJAMM narrative synthesis (step 2 of its research pattern) is cut pending the PJAMM API spike ([#15](https://github.com/bendrucker/route-agent/issues/15)).
+Narrative Research splits across two packages: `ride-reports/` runs the web search step, covering ride reports and forum posts only, and `narrative-research/` synthesizes its findings plus named route places into rider-facing notes and a presentation prompt. PJAMM narrative synthesis (step 2 of its research pattern) is unblocked now that the PJAMM tool (`src/pjamm/`) exposes climb narratives, but it is not wired in yet.
 
 ## Skill Architecture {#skill-architecture}
 
