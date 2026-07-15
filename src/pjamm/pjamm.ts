@@ -222,7 +222,7 @@ function contains(bounds: BoundingBox, lat: number, lng: number): boolean {
 }
 
 export async function searchClimbs(bounds: BoundingBox): Promise<ClimbSummary[]> {
-  const zones = COUNTRY_ZONES.filter((zone) => intersects(zone.bounds, bounds));
+  const zones = COUNTRY_ZONES.filter((zone) => zone.boxes.some((box) => intersects(box, bounds)));
   const zoneClimbs = await Promise.all(zones.map((zone) => cachedZoneClimbs(zone.id)));
   const results = new Map<number, ClimbSummary>();
   for (const climbs of zoneClimbs) {

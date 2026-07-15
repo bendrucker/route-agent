@@ -136,7 +136,7 @@ No account, credentials, or API keys are involved ([#15](https://github.com/bend
 
 `src/pjamm/` exposes two MCP tools:
 
-- `search-climbs`: bounding box → climb summaries. The box is matched against a static index of PJAMM's country-level zone pages (compiled from the sitemap), so a search fetches only the few zone pages whose bounds cover the area, then filters their embedded climbs by exact start coordinates. Zone pages are cached per process.
+- `search-climbs`: bounding box → climb summaries. The box is matched against a static index of PJAMM's country-level zone pages (ids from the sitemap, bounds generated from Natural Earth country polygons by `src/pjamm/generate-zones.ts`), so a search fetches only the few zone pages whose bounds cover the area, then filters their embedded climbs by exact start coordinates. Zone pages are cached per process.
 - `get-climb`: climb id → full detail (narratives, ratings, photos) from that climb's page.
 
 Request discipline matters: a full planning session touches PJAMM about as much as one person browsing the site. Nothing enumerates pages, and tests replay committed fixtures with no network. The fixtures are synthetic (see `src/pjamm/fixtures/generate.ts`): PJAMM's narrative prose, photo captions, and full climb database are copyrighted, so only a small sample of factual stats plus placeholder text is committed.
