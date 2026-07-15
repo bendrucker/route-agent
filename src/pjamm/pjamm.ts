@@ -99,18 +99,37 @@ function toPhotos(id: number, slideshows: RawClimbPage["slideshows"]): ClimbPhot
   return (slideshows ?? []).flatMap((slideshow) =>
     (slideshow.slides ?? [])
       .filter((slide) => slide.picURL)
-      .map((slide) => ({
-        // Only the small_ rendition is publicly hosted. Originals 404.
-        url: `${BASE_URL}/images/rides/ride${id}/small_${slide.picURL}`,
-        comment: slide.picComment ?? "",
-        ...(toOptionalNumber(slide.lat) !== undefined ? { lat: toOptionalNumber(slide.lat) } : {}),
-        ...(toOptionalNumber(slide.lng) !== undefined ? { lng: toOptionalNumber(slide.lng) } : {}),
-      })),
+      .map((slide) => {
+        const photo: ClimbPhoto = {
+          // Only the small_ rendition is publicly hosted. Originals 404.
+          url: `${BASE_URL}/images/rides/ride${id}/small_${slide.picURL}`,
+          comment: slide.picComment ?? "",
+        };
+        const lat = toOptionalNumber(slide.lat);
+        const lng = toOptionalNumber(slide.lng);
+        if (lat !== undefined) photo.lat = lat;
+        if (lng !== undefined) photo.lng = lng;
+        return photo;
+      }),
   );
+}
+
+function toRatings(raw: RawClimbPage): Climb["ratings"] {
+  const ratings: Climb["ratings"] = {};
+  const difficulty = toOptionalNumber(raw.difficultyRating);
+  const road = toOptionalNumber(raw.roadRating);
+  const traffic = toOptionalNumber(raw.trafficRating);
+  const scenery = toOptionalNumber(raw.sceneryRating);
+  if (difficulty !== undefined) ratings.difficulty = difficulty;
+  if (road !== undefined) ratings.road = road;
+  if (traffic !== undefined) ratings.traffic = traffic;
+  if (scenery !== undefined) ratings.scenery = scenery;
+  return ratings;
 }
 
 function toClimb(raw: RawClimbPage): Climb {
   const id = toNumber(raw.id);
+  const worldRank = toOptionalNumber(raw.wrldRank);
   return {
     id,
     name: raw.title ?? "",
@@ -124,27 +143,12 @@ function toClimb(raw: RawClimbPage): Climb {
     avgGradePercent: toNumber(raw.avgGrad),
     fiets: toNumber(raw.fiets),
     pdi: toNumber(raw.pdi),
-    ...(toOptionalNumber(raw.wrldRank) !== undefined
-      ? { worldRank: toOptionalNumber(raw.wrldRank) }
-      : {}),
+    ...(worldRank !== undefined ? { worldRank } : {}),
     endLat: toNumber(raw.latEnd),
     endLng: toNumber(raw.longEnd),
     elevStartFt: toNumber(raw.elevStart),
     elevEndFt: toNumber(raw.elevEnd),
-    ratings: {
-      ...(toOptionalNumber(raw.difficultyRating) !== undefined
-        ? { difficulty: toOptionalNumber(raw.difficultyRating) }
-        : {}),
-      ...(toOptionalNumber(raw.roadRating) !== undefined
-        ? { road: toOptionalNumber(raw.roadRating) }
-        : {}),
-      ...(toOptionalNumber(raw.trafficRating) !== undefined
-        ? { traffic: toOptionalNumber(raw.trafficRating) }
-        : {}),
-      ...(toOptionalNumber(raw.sceneryRating) !== undefined
-        ? { scenery: toOptionalNumber(raw.sceneryRating) }
-        : {}),
-    },
+    ratings: toRatings(raw),
     narratives: {
       summary: cleanText(raw.summary),
       gradient: cleanText(raw.gradientText),
@@ -158,6 +162,7 @@ function toClimb(raw: RawClimbPage): Climb {
 }
 
 function toClimbSummary(raw: RawZoneClimb): ClimbSummary {
+  const worldRank = toOptionalNumber(raw.worldRank);
   return {
     id: toNumber(raw.id),
     name: raw.title ?? "",
@@ -171,9 +176,7 @@ function toClimbSummary(raw: RawZoneClimb): ClimbSummary {
     avgGradePercent: toNumber(raw.avgGrad),
     fiets: toNumber(raw.fiets),
     pdi: toNumber(raw.pdi),
-    ...(toOptionalNumber(raw.worldRank) !== undefined
-      ? { worldRank: toOptionalNumber(raw.worldRank) }
-      : {}),
+    ...(worldRank !== undefined ? { worldRank } : {}),
   };
 }
 
@@ -220,9 +223,10 @@ function contains(bounds: BoundingBox, lat: number, lng: number): boolean {
 
 export async function searchClimbs(bounds: BoundingBox): Promise<ClimbSummary[]> {
   const zones = COUNTRY_ZONES.filter((zone) => intersects(zone.bounds, bounds));
+  const zoneClimbs = await Promise.all(zones.map((zone) => cachedZoneClimbs(zone.id)));
   const results = new Map<number, ClimbSummary>();
-  for (const zone of zones) {
-    for (const climb of await cachedZoneClimbs(zone.id)) {
+  for (const climbs of zoneClimbs) {
+    for (const climb of climbs) {
       if (contains(bounds, climb.lat, climb.lng)) {
         results.set(climb.id, climb);
       }

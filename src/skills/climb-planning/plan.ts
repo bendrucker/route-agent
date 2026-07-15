@@ -14,6 +14,9 @@ const MAX_ALTERNATES_PER_SIDE = 2;
 
 const TIER_ORDER: DifficultyTier[] = ["easy", "moderate", "hard", "epic"];
 
+// Cutoffs calibrated against PJAMM reference climbs: Hawk Hill 2.9 (easy),
+// the Mt. Tam routes 10-15 (moderate), Alpe d'Huez 24.6 (upper hard),
+// Haleakala 58 (epic). PJAMM publishes no official tier boundaries.
 export function difficultyTier(pdi: number): DifficultyTier {
   if (pdi < 8) return "easy";
   if (pdi < 15) return "moderate";
@@ -93,7 +96,7 @@ function selectAlternates(
 
 export function planClimbs(input: ClimbPlanningInput): ClimbPlanningOutput {
   const preferences = input.preferences ?? {};
-  const maxClimbs = preferences.maxClimbs ?? DEFAULT_MAX_CLIMBS;
+  const maxClimbs = Math.max(0, preferences.maxClimbs ?? DEFAULT_MAX_CLIMBS);
   const sequencing = preferences.sequencing ?? DEFAULT_SEQUENCING;
   const riddenIds = new Set(input.riddenClimbIds ?? []);
 

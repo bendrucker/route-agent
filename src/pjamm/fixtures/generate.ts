@@ -109,7 +109,7 @@ const alpeDHuez = {
 
 function page(state: Record<string, unknown>): string {
   const json = JSON.stringify(state);
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Fixture</title></head><body><app-root></app-root><script id="app-main-state" type="application/json">${json}</script></body></html>`;
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Fixture</title></head><body><app-root></app-root><script id="app-main-state" type="application/json">${json}</script></body></html>\n`;
 }
 
 const fixtures = [

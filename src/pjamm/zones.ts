@@ -7,15 +7,16 @@ export interface CountryZone {
 }
 
 /**
- * Country-level zone pages, enumerated from https://pjammcycling.com/sitemap.xml.
- * Every PJAMM climb belongs to a country zone (the pages query by country), so
- * these give complete coverage without crawling the site: a search fetches only
- * the zone page(s) whose bounds intersect the requested bounding box.
+ * Country-level zone pages. Ids and names come from
+ * https://pjammcycling.com/sitemap.xml. Every PJAMM climb belongs to a country
+ * zone (the pages query by country), so these give complete coverage without
+ * crawling the site: a search fetches only the zone page(s) whose bounds
+ * intersect the requested bounding box.
  *
- * Bounds are approximate and generous (including outlying islands where PJAMM
- * documents climbs there). Climbs are filtered by exact start coordinates after
- * the zone page is fetched, so overlap between neighboring boxes only costs an
- * extra page fetch.
+ * Bounds are hand-maintained approximate country bounding boxes, kept generous
+ * (including outlying islands where PJAMM documents climbs there). Climbs are
+ * filtered by exact start coordinates after the zone page is fetched, so
+ * overlap between neighboring boxes only costs an extra page fetch.
  */
 export const COUNTRY_ZONES: CountryZone[] = [
   { id: 1, name: "United States", bounds: { south: 18, west: -180, north: 72, east: -66 } },

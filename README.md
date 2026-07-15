@@ -73,7 +73,7 @@ See [docs/architecture.md](docs/architecture.md) for detailed design.
 | Places | Google Maps MCP | Available |
 | Weather | Apple WeatherKit | Selected |
 | Climb Data | PJAMM | Available |
-| Water/Infrastructure | OSM Overpass | To build |
+| Water/Infrastructure | OSM Overpass | Available |
 
 See [docs/tools.md](docs/tools.md) and [docs/skills.md](docs/skills.md) for details.
 
