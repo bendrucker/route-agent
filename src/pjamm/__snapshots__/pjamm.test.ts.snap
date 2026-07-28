@@ -1,0 +1,54 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`fetchClimb Alpe d'Huez detail 1`] = `
+{
+  "avgGradePercent": 7.73,
+  "city": "Le Bourg-d'Oisans",
+  "country": "France",
+  "distanceMi": 8.67,
+  "elevEndFt": 5906,
+  "elevGainFt": 3543,
+  "elevStartFt": 2375,
+  "endLat": 45.09457,
+  "endLng": 6.070955,
+  "fiets": 9.13,
+  "id": 118,
+  "lat": 45.060539,
+  "lng": 6.037691,
+  "name": "Alpe d'Huez",
+  "pdi": 24.56,
+  "ratings": {
+    "difficulty": 4.2,
+    "road": 4.2,
+    "scenery": 3.8,
+    "traffic": 3.2,
+  },
+  "state": "Auvergne-Rhône-Alpes",
+  "worldRank": 579,
+}
+`;
+
+exports[`fetchClimb Alpe d'Huez detail 2`] = `
+{
+  "comment": "Synthetic fixture photo",
+  "lat": 45.059477777778,
+  "lng": 6.0379583333333,
+  "url": "https://pjammcycling.com/images/rides/ride118/small_climb118picd10a.jpeg",
+}
+`;
+
+exports[`fetchClimb Alpe d'Huez detail 3`] = `"Synthetic fixture gradient notes: steady grades around 8% with brief steeper pitches."`;
+
+exports[`searchClimbs Marin County bounding box 1`] = `
+[
+  "Mt. Tam via Panoramic Hwy North",
+  "Mt. Tam via Fairfax-Bolinas Road",
+  "Mt. Tam from Miller Ave",
+  "Mt. Tam via  Hwy 1 South",
+  "Mt. Tam via Muir Woods",
+  "Mt. Tam from Marion Ave",
+  "Mt. Tam via Alpine Dam",
+  "Fairfax-Bolinas Road",
+  "Hawk Hill",
+]
+`;

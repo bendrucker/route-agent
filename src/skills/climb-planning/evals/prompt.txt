@@ -1,0 +1,13 @@
+{{climb_prompt}}
+
+## Climb Data
+
+```json
+{{climb_data}}
+```
+
+## Route Planning Request
+
+{{query}}
+
+Based on the climb data above, provide climbing guidance for this request. Cover the ride order, effort management, and what makes each climb notable.

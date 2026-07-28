@@ -4,14 +4,14 @@ Tools abstract access to external data sources. Each tool provides a consistent 
 
 ## Implementation Status
 
-Four data sources have code today. The rest are design specs on the roadmap.
+Five data sources have code today. The rest are design specs on the roadmap.
 
 | Tool | Status | Location |
 |------|--------|----------|
 | 1. Activity History (Strava) | ✅ Implemented | `src/strava/` |
 | 2. Routing Engine (GraphHopper) | ✅ Implemented | `src/graphhopper/` |
 | 3. Place Search (Google Maps) | ✅ Implemented | `src/google-places/` |
-| 4. Climb Data (PJAMM) | 🔜 Planned | - |
+| 4. Climb Data (PJAMM) | ✅ Implemented | `src/pjamm/` |
 | 5. Weather (WeatherKit) | 🔜 Planned | - |
 | 6. Water & Infrastructure (OSM) | ✅ Implemented | `src/osm/` |
 | 7. Elevation | 🔜 Planned | - |
@@ -124,20 +124,22 @@ graph LR
 
 **Purpose**: Detailed climb profiles, difficulty ratings, local intel
 
+**Implementation**: In-repo client + MCP server scraping prerendered climb and zone pages (`src/pjamm/`)
+
 **Used by**: [Climb Planning](skills.md#climb-planning), [Narrative Research](skills.md#narrative-research)
 
-### PJAMM/Sherpa Integration
+### Access: Prerendered Pages (No Auth)
 
-PJAMM has merged with [Sherpa Map](https://sherpa-map.com/):
+PJAMM's JSON function API is auth-gated, but everything this project needs is prerendered publicly in an Angular SSR state blob (`<script id="app-main-state">`) on every climb and zone page: narratives, profile stats (distance, elevation gain, grade, FIETS, PJAMM Difficulty Index, world rank), ratings, and photo lists. `robots.txt` disallows nothing.
 
-| Feature | Source |
-|---------|--------|
-| Climb narratives, photos, rankings | PJAMM |
-| AI surface classification (gravel) | Sherpa |
-| 28 routing profiles | Sherpa (GraphHopper backend) |
-| Weather integration | Sherpa |
+No account, credentials, or API keys are involved ([#15](https://github.com/bendrucker/route-agent/issues/15) concluded auth is unnecessary). The auth-gated features (GPX downloads, Street View tours, the profile tool, Sherpa route integration) are out of scope.
 
-**User has paid PJAMM account** - will reverse-engineer mobile API.
+`src/pjamm/` exposes two MCP tools:
+
+- `search-climbs`: bounding box → climb summaries. The box is matched against a static index of PJAMM's country-level zone pages (ids from the sitemap, bounds generated from Natural Earth country polygons by `src/pjamm/generate-zones.ts`), so a search fetches only the few zone pages whose bounds cover the area, then filters their embedded climbs by exact start coordinates. Zone pages are cached per process.
+- `get-climb`: climb id → full detail (narratives, ratings, photos) from that climb's page.
+
+Request discipline matters: a full planning session touches PJAMM about as much as one person browsing the site. Nothing enumerates pages, and tests replay committed fixtures with no network. The fixtures are synthetic (see `src/pjamm/fixtures/generate.ts`): PJAMM's narrative prose, photo captions, and full climb database are copyrighted, so only a small sample of factual stats plus placeholder text is committed.
 
 ### PJAMM Unique Value
 

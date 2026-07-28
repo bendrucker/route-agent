@@ -1,0 +1,101 @@
+- description: "Big Marin climbing day with three sequenced climbs"
+  vars:
+    climb_prompt: |-
+      Plan the climbing portion of this route around the selected climbs. Sequence the ride so it hits each climb in the recommended order.
+
+      1. Mt. Tam via Panoramic Hwy North — 6.6 mi at 6.9%, 2397 ft gain (PDI 14.7, moderate)
+         A steady climb from Stinson Beach through redwood groves to the shoulder of Mount Tamalpais, with long views over the Pacific.
+      2. Mt. Tam via Fairfax-Bolinas Road — 7.8 mi at 5.3%, 2210 ft gain (PDI 12.9, moderate)
+      3. Big Rock Ridge — 2.4 mi at 8.1%, 1050 ft gain (PDI 7.4, easy)
+
+      Sequenced hardest first: the toughest climb comes while your legs are fresh.
+
+      This is a big elevation day. Emphasize pacing, fueling before the big climbs, and recovery between them.
+
+      If the plan feels too hard, consider: Hawk Hill (PDI 4.6)
+    climb_data: |
+      {
+        "picks": [
+          { "order": 1, "climb": { "name": "Mt. Tam via Panoramic Hwy North", "distanceMi": 6.56, "elevGainFt": 2397, "avgGradePercent": 6.9, "pdi": 14.66 }, "alreadyRidden": false },
+          { "order": 2, "climb": { "name": "Mt. Tam via Fairfax-Bolinas Road", "distanceMi": 7.8, "elevGainFt": 2210, "avgGradePercent": 5.3, "pdi": 12.9 }, "alreadyRidden": false },
+          { "order": 3, "climb": { "name": "Big Rock Ridge", "distanceMi": 2.4, "elevGainFt": 1050, "avgGradePercent": 8.1, "pdi": 7.4 }, "alreadyRidden": false }
+        ],
+        "alternates": { "easier": [{ "name": "Hawk Hill", "pdi": 4.6 }], "harder": [] },
+        "totalElevGainFt": 5657,
+        "sequencing": "hardest-first"
+      }
+    query: "Plan a big climbing day in Marin County, around 50 miles"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Reference all three selected climbs by name, in the recommended order (Panoramic first, then Fairfax-Bolinas, then Big Rock Ridge)
+        - Explain the hardest-first sequencing (toughest climb on fresh legs)
+        - Address pacing, fueling, or recovery given the ~5,700 ft of total climbing
+        - Mention Hawk Hill only as an easier alternate, not as part of the main plan
+    - type: javascript
+      value: file://../../../../evals/scorers/cycling.ts:climbAwareness
+      config:
+        elevationGainFt: 5657
+        climbCount: 3
+
+- description: "Repeat climb flagged from ride history"
+  vars:
+    climb_prompt: |-
+      Plan the climbing portion of this route around the selected climbs. Sequence the ride so it hits each climb in the recommended order.
+
+      1. Mt. Tam via Panoramic Hwy North — 6.6 mi at 6.9%, 2397 ft gain (PDI 14.7, moderate) — ridden before
+         A steady climb from Stinson Beach through redwood groves to the shoulder of Mount Tamalpais, with long views over the Pacific.
+      2. Mt. Tam via Fairfax-Bolinas Road — 7.8 mi at 5.3%, 2210 ft gain (PDI 12.9, moderate)
+
+      Sequenced hardest first: the toughest climb comes while your legs are fresh.
+
+      This is a big elevation day. Emphasize pacing, fueling before the big climbs, and recovery between them.
+
+      If the plan feels too hard, consider: Big Rock Ridge (PDI 7.4), Hawk Hill (PDI 4.6)
+    climb_data: |
+      {
+        "picks": [
+          { "order": 1, "climb": { "name": "Mt. Tam via Panoramic Hwy North", "distanceMi": 6.56, "elevGainFt": 2397, "avgGradePercent": 6.9, "pdi": 14.66 }, "alreadyRidden": true },
+          { "order": 2, "climb": { "name": "Mt. Tam via Fairfax-Bolinas Road", "distanceMi": 7.8, "elevGainFt": 2210, "avgGradePercent": 5.3, "pdi": 12.9 }, "alreadyRidden": false }
+        ],
+        "alternates": { "easier": [{ "name": "Big Rock Ridge", "pdi": 7.4 }, { "name": "Hawk Hill", "pdi": 4.6 }], "harder": [] },
+        "totalElevGainFt": 4607,
+        "sequencing": "hardest-first"
+      }
+    query: "I want to climb Mt. Tam again but also try something new"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Acknowledge the rider has already ridden Mt. Tam via Panoramic Hwy North
+        - Present Mt. Tam via Fairfax-Bolinas Road as the new climb
+        - Reference both climbs in the recommended order
+    - type: javascript
+      value: file://../../../../evals/scorers/cycling.ts:climbAwareness
+      config:
+        elevationGainFt: 4607
+        climbCount: 2
+
+- description: "No documented climbs in the requested area"
+  vars:
+    climb_prompt: |-
+      Plan the climbing portion of this route around the selected climbs. Sequence the ride so it hits each climb in the recommended order.
+
+      No documented climbs matched the request. Advise widening the search area or relaxing the difficulty target.
+    climb_data: |
+      {
+        "picks": [],
+        "alternates": { "easier": [], "harder": [] },
+        "totalElevGainFt": 0,
+        "sequencing": "hardest-first",
+        "targetDifficulty": "epic"
+      }
+    query: "Find me an epic climb near downtown Sacramento"
+  assert:
+    - type: llm-rubric
+      value: |
+        The response should:
+        - Clearly state that no documented climbs matched the request
+        - Suggest widening the search area or relaxing the epic difficulty target
+        - NOT invent or recommend specific climbs as though they came from the climb data
